@@ -32,7 +32,7 @@ export function Settings({
             <p className="quiet-note">Тема интерфейса</p>
             <div className="theme-options">
               {[
-                ['club', 'Клуб'],
+                ['club', 'Графит'],
                 ['light', 'Светлая'],
                 ['evening', 'Вечер'],
               ].map(([id, name]) => (

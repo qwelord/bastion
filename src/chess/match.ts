@@ -37,6 +37,16 @@ export class Match {
   private anchor: number | null = null;
   private undoClocks: Record<Color, number>[] = [];
   constructor(config = defaultConfig, game = new ChessGame()) {
+    if (
+      !config ||
+      !['stockfish', 'local'].includes(config.opponent) ||
+      !['lite', 'full'].includes(config.engine) ||
+      !['w', 'b', 'random'].includes(config.color) ||
+      ![0, 1, 5, 10, 15, 30].includes(config.minutes) ||
+      ![0, 1, 2, 5, 10, 15].includes(config.increment) ||
+      !config.strength
+    )
+      throw new Error('Некорректные параметры партии.');
     this.config = { ...config, strength: normalizeStrength(config.strength) };
     this.human = config.color === 'random' ? (Math.random() < 0.5 ? 'w' : 'b') : config.color;
     this.game = game;

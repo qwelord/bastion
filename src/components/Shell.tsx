@@ -90,7 +90,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
         <header className="topbar">
           <span>{titles[route]}</span>
           <div className="topbar-right">
-            <span className="prototype-badge">Дизайн-прототип</span>
+            <span className="prototype-badge">Ранняя версия</span>
             <a className="appearance-link" href="#settings" aria-label="Оформление">
               <Palette size={17} />
               <span>Оформление</span>
@@ -102,7 +102,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
         </main>
         <footer className="workspace-footer">
           <span>
-            Bastion <span className="footer-version">/ 0.1</span>
+            Bastion <span className="footer-version">/ 0.2</span>
           </span>
           <span>Играйте вдумчиво.</span>
           <a href="https://github.com/qwelord/bastion" target="_blank" rel="noreferrer">

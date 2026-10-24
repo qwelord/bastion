@@ -14,6 +14,12 @@ export type MoveInput = { from: string; to: string; promotion?: Promotion };
 const key = (fen: string) => fen.split(' ').slice(0, 4).join(' ');
 
 export function validatePosition(fen: string): Chess {
+  if (
+    typeof fen !== 'string' ||
+    fen.length > 256 ||
+    !/^[prnbqkPRNBQK1-8/ wbKQkqa-h0-9-]+$/.test(fen.trim())
+  )
+    throw new Error('Некорректная запись FEN.');
   const chess = new Chess(fen.trim());
   const opposite: Color = chess.turn() === 'w' ? 'b' : 'w';
   const king = chess.findPiece({ type: 'k', color: opposite })[0];
@@ -50,7 +56,8 @@ export class ChessGame {
     this.chess = validatePosition(fen);
   }
   static fromPgn(pgn: string) {
-    if (pgn.length > 200_000) throw new Error('PGN слишком большой. Загрузите одну партию.');
+    if (typeof pgn !== 'string' || pgn.length > 200_000)
+      throw new Error('Некорректная или слишком большая запись партии.');
     const game = new ChessGame();
     const parsed = new Chess();
     parsed.loadPgn(pgn, { strict: false });
@@ -74,6 +81,10 @@ export class ChessGame {
   }
   position(ply = this.history().length): Position {
     const history = this.history();
+    ply = Math.max(
+      0,
+      Math.min(history.length, Number.isFinite(ply) ? Math.floor(ply) : history.length),
+    );
     const fen =
       ply === history.length
         ? this.fen()

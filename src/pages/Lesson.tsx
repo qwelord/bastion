@@ -61,9 +61,13 @@ export function Lesson({ settings }: { settings: Settings }) {
             selected={selected}
             highlight={answer === 'correct' ? ['e1', 'e8'] : []}
             onSquare={square}
+            onMove={(from, to) => {
+              if (answer !== 'correct' && from === 'e1') respond(to === 'e8');
+            }}
+            movableSquares={answer === 'correct' ? [] : ['e1']}
           />
           <p className="quiet-note board-caption">
-            Выберите ладью на e1 и поле назначения. Можно также выбрать ответ справа.
+            Перетащите ладью на поле назначения или выберите ответ справа.
           </p>
         </div>
         <article className="lesson-text">

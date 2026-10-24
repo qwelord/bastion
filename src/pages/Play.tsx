@@ -1,62 +1,109 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  RotateCcw,
+  ChevronsLeft,
+  ChevronsRight,
   Repeat2,
   Swords,
   SlidersHorizontal,
-  Check,
-  Circle,
+  Pause,
+  Play as PlayIcon,
+  Undo2,
+  Flag,
+  Plus,
 } from 'lucide-react';
 import { Board } from '../components/Board';
-import { demoPosition, moves } from '../data/demo';
+import { PromotionDialog } from '../components/GameDialogs';
+import { StrengthControl } from '../components/StrengthControl';
+import { MoveList } from '../components/MoveList';
+import { useMatch } from '../chess/useMatch';
+import { normalizeStrength, strengthLabel } from '../engine/strength';
+import type { MatchConfig } from '../chess/match';
 import type { Settings } from '../state';
+
+function clock(ms: number, unlimited: boolean) {
+  if (unlimited) return '∞';
+  const seconds = Math.ceil(Math.max(0, ms) / 1000);
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+}
 export function Play({ settings }: { settings: Settings }) {
-  const [color, setColor] = useState('white');
-  const [time, setTime] = useState('10 + 0');
-  const [level, setLevel] = useState(3);
-  const [started, setStarted] = useState(false);
-  const [ply, setPly] = useState(0);
-  const [flipped, setFlipped] = useState(false);
+  const api = useMatch();
+  const { match, now } = api;
+  const game = match.game;
+  const history = game.history();
+  const outcome = game.outcome();
+  const [setup, setSetup] = useState(!match.started);
+  const [draft, setDraft] = useState<MatchConfig>(match.config);
+  const [flipped, setFlipped] = useState(match.human === 'b');
   const [selected, setSelected] = useState<string>();
-  const [hint, setHint] = useState('');
-  const levels = ['Знакомство', 'Любитель', 'Клубный', 'Сильный', 'Максимум'];
-  const step = () => {
-    setPly((p) => Math.min(p + 1, moves.length));
+  const [viewPly, setViewPly] = useState<number | null>(null);
+  const [editStrength, setEditStrength] = useState(false);
+  useEffect(() => {
     setSelected(undefined);
-    setHint('');
-  };
-  const square = (s: string) => {
-    if (!started) {
-      setHint('Начните демонстрацию, чтобы пройти сценарий партии.');
-      return;
-    }
-    const m = moves[ply];
-    if (!m) {
-      setHint('Образец завершён. Можно открыть его разбор.');
-      return;
-    }
-    if (s === m[0]) {
-      setSelected(s);
-      setHint(`Теперь выберите поле ${m[1]}.`);
-    } else if (selected === m[0] && s === m[1]) step();
-    else {
+    setViewPly(null);
+  }, [api.version]);
+  const ply = Math.min(viewPly ?? history.length, history.length);
+  const interactive = !setup && viewPly === null && match.canInteract() && !api.promotion;
+  const selectedMoves = selected ? game.moves(selected) : [];
+  const movable: string[] = interactive ? [...new Set(game.moves().map((m) => m.from))] : [];
+  function square(s: string) {
+    if (!interactive) return;
+    if (selected && selectedMoves.some((m) => m.to === s)) {
+      api.play(selected, s);
       setSelected(undefined);
-      setHint(`В этом образце следующий ход: ${m[2]}. Выберите ${m[0]}, затем ${m[1]}.`);
+      return;
     }
-  };
+    setSelected(movable.includes(s) ? s : undefined);
+  }
+  function navigate(n: number) {
+    setViewPly(n === history.length ? null : n);
+    setSelected(undefined);
+  }
+  const clocks = match.clocks(now);
+  const top = flipped ? 'w' : 'b';
+  const bottom = flipped ? 'b' : 'w';
+  const name = (side: 'w' | 'b') =>
+    match.config.opponent === 'stockfish'
+      ? side === match.human
+        ? 'Вы'
+        : 'Stockfish 19'
+      : side === 'w'
+        ? 'Белые'
+        : 'Чёрные';
+  const subtitle = (side: 'w' | 'b') =>
+    match.config.opponent === 'stockfish' && side !== match.human
+      ? `${match.config.engine === 'lite' ? 'Lite' : 'Full'} · ${strengthLabel(match.config.strength)}`
+      : side === 'w'
+        ? 'Белые фигуры'
+        : 'Чёрные фигуры';
+  const status = outcome
+    ? `${outcome.result === '1/2-1/2' ? 'Ничья' : outcome.result === '1-0' ? 'Победа белых' : 'Победа чёрных'} · ${outcome.reason}`
+    : api.enginePhase === 'loading'
+      ? 'Загрузка Stockfish…'
+      : match.paused
+        ? 'Партия на паузе'
+        : api.enginePhase === 'thinking'
+          ? `Stockfish думает${api.depth ? ' · глубина ' + api.depth : ''}`
+          : (game.turn() === 'w' ? 'Ход белых' : 'Ход чёрных') + (game.inCheck() ? ' · Шах' : '');
   return (
     <>
       <div className="page-intro">
         <div>
-          <h1>Время для шахмат.</h1>
-          <p>Сосредоточьтесь на доске. Всё остальное подождёт.</p>
+          <h1>
+            {setup
+              ? 'Играть'
+              : match.config.opponent === 'stockfish'
+                ? 'Партия со Stockfish'
+                : 'Партия на одной доске'}
+          </h1>
+          <p>
+            {setup
+              ? 'Выберите соперника и начните партию.'
+              : 'Перетаскивайте фигуры или выбирайте поле назначения нажатием.'}
+          </p>
         </div>
-        <a href="#learn" className="text-button intro-link">
-          Сначала потренироваться <ArrowRight size={16} />
-        </a>
       </div>
       <div className="play-layout">
         <section className="board-column" aria-label="Игровое поле">
@@ -66,32 +113,81 @@ export function Play({ settings }: { settings: Settings }) {
                 <Swords size={20} />
               </span>
               <span>
-                Bastion
-                <small>{started ? 'Демонстрационный соперник' : 'Ваш будущий соперник'}</small>
+                {name(top)}
+                <small>{subtitle(top)}</small>
               </span>
             </div>
-            <span className="player-time">{time.split(' ')[0]}:00</span>
+            <span
+              className={
+                'player-time ' +
+                (!match.paused && game.turn() === top && !outcome ? 'clock-active' : '')
+              }
+            >
+              {clock(
+                setup ? draft.minutes * 60000 : clocks[top],
+                setup ? draft.minutes === 0 : match.config.minutes === 0,
+              )}
+            </span>
           </div>
-          <Board
-            settings={settings}
-            position={demoPosition(ply)}
-            flipped={flipped}
-            selected={selected}
-            onSquare={square}
-            highlight={ply ? moves[ply - 1].slice(0, 2) : []}
-          />
+          <div className="board-stage" aria-busy={api.enginePhase === 'loading'}>
+            <Board
+              settings={settings}
+              position={game.position(ply)}
+              flipped={flipped}
+              selected={selected}
+              onSquare={interactive ? square : undefined}
+              onMove={
+                interactive
+                  ? (from, to) => {
+                      api.play(from, to);
+                      setSelected(undefined);
+                    }
+                  : undefined
+              }
+              movableSquares={movable}
+              onDragStart={setSelected}
+              legalTargets={selectedMoves.map((m) => m.to)}
+              checkedSquare={viewPly === null ? game.checkedKing() : undefined}
+              highlight={ply ? [history[ply - 1].from, history[ply - 1].to] : []}
+            />
+            {api.enginePhase === 'loading' && (
+              <div className="engine-loading" role="status">
+                <span className="loading-ring" />
+                <strong>Загружаем Stockfish</strong>
+                <span>
+                  {match.config.engine === 'full'
+                    ? 'Полная версия · 99 МБ'
+                    : 'Компактная версия · 1,8 МБ'}
+                </span>
+                <button className="text-button" onClick={api.pause}>
+                  Отменить загрузку
+                </button>
+              </div>
+            )}
+          </div>
           <div className="player-row">
             <div className="player-identity">
-              <span className="player-avatar">Вы</span>
+              <span className="player-avatar">{bottom === 'w' ? 'Б' : 'Ч'}</span>
               <span>
-                Ваша сторона<small>{flipped ? 'Чёрные фигуры' : 'Белые фигуры'}</small>
+                {name(bottom)}
+                <small>{subtitle(bottom)}</small>
               </span>
             </div>
-            <span className="player-time yours">{time.split(' ')[0]}:00</span>
+            <span
+              className={
+                'player-time yours ' +
+                (!match.paused && game.turn() === bottom && !outcome ? 'clock-active' : '')
+              }
+            >
+              {clock(
+                setup ? draft.minutes * 60000 : clocks[bottom],
+                setup ? draft.minutes === 0 : match.config.minutes === 0,
+              )}
+            </span>
           </div>
           <div className="board-toolbar">
             <span>
-              {started ? `Образец партии · ${Math.ceil(ply / 2)} / 8 ходов` : 'Начальная позиция'}
+              {viewPly === null ? 'Текущая позиция' : `Просмотр: ${ply} / ${history.length}`}
             </span>
             <div>
               <button
@@ -104,190 +200,292 @@ export function Play({ settings }: { settings: Settings }) {
               <button
                 className="icon-button"
                 aria-label="К началу партии"
-                onClick={() => setPly(0)}
+                disabled={ply === 0}
+                onClick={() => navigate(0)}
               >
-                <RotateCcw size={16} />
+                <ChevronsLeft size={18} />
               </button>
               <button
                 className="icon-button"
                 aria-label="Предыдущий ход"
                 disabled={ply === 0}
-                onClick={() => setPly(ply - 1)}
+                onClick={() => navigate(ply - 1)}
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={19} />
               </button>
               <button
                 className="icon-button"
                 aria-label="Следующий ход"
-                disabled={!started || ply === moves.length}
-                onClick={step}
+                disabled={ply === history.length}
+                onClick={() => navigate(ply + 1)}
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={19} />
+              </button>
+              <button
+                className="icon-button"
+                aria-label="К текущей позиции"
+                disabled={viewPly === null}
+                onClick={() => navigate(history.length)}
+              >
+                <ChevronsRight size={18} />
               </button>
             </div>
           </div>
-          {hint && (
-            <p className="board-feedback" role="status">
-              {hint}
-            </p>
+          {viewPly !== null && (
+            <button className="text-button" onClick={() => navigate(history.length)}>
+              Вернуться к игре <ArrowRight size={15} />
+            </button>
           )}
         </section>
         <aside className="game-panel surface">
-          {!started ? (
+          {setup ? (
             <>
               <div className="panel-heading">
                 <h2>Новая партия</h2>
                 <SlidersHorizontal size={19} />
               </div>
-              <p className="panel-subtitle">Выберите свой ритм игры.</p>
               <div className="field-group">
-                <span className="field-label">За какую сторону?</span>
-                <div className="segmented color-choice">
-                  {[
-                    ['white', 'Белые'],
-                    ['random', 'Случайно'],
-                    ['black', 'Чёрные'],
-                  ].map(([id, label]) => (
-                    <button key={id} aria-pressed={color === id} onClick={() => setColor(id)}>
-                      {id === 'random' ? (
-                        <Swords size={20} />
-                      ) : (
-                        <Circle
-                          size={20}
-                          fill={id === 'white' ? '#eee5d2' : '#40382e'}
-                          stroke="#948b79"
-                        />
-                      )}
-                      {label}
-                    </button>
-                  ))}
-                </div>
+                <label className="field-label" htmlFor="opponent">
+                  Соперник
+                </label>
+                <select
+                  id="opponent"
+                  value={draft.opponent}
+                  onChange={(e) =>
+                    setDraft({ ...draft, opponent: e.target.value as MatchConfig['opponent'] })
+                  }
+                >
+                  <option value="stockfish">Stockfish 19</option>
+                  <option value="local">Два игрока на одной доске</option>
+                </select>
               </div>
+              {draft.opponent === 'stockfish' && (
+                <>
+                  <div className="field-group">
+                    <label className="field-label" htmlFor="engine-kind">
+                      Версия движка
+                    </label>
+                    <select
+                      id="engine-kind"
+                      value={draft.engine}
+                      onChange={(e) =>
+                        setDraft({ ...draft, engine: e.target.value as MatchConfig['engine'] })
+                      }
+                    >
+                      <option value="lite">Stockfish 19 Lite · 1,8 МБ</option>
+                      <option value="full">Stockfish 19 Full · 99 МБ</option>
+                    </select>
+                    <p className="quiet-note">
+                      {draft.engine === 'full'
+                        ? 'Полная нейросеть. Первая загрузка может занять больше времени.'
+                        : 'Компактная нейросеть. Быстро загружается и работает локально.'}
+                    </p>
+                  </div>
+                  <div className="field-group">
+                    <span className="field-label">Ваша сторона</span>
+                    <div className="segmented">
+                      {(
+                        [
+                          ['w', 'Белые'],
+                          ['random', 'Случайно'],
+                          ['b', 'Чёрные'],
+                        ] as const
+                      ).map(([id, label]) => (
+                        <button
+                          key={id}
+                          aria-pressed={draft.color === id}
+                          onClick={() => setDraft({ ...draft, color: id })}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <StrengthControl
+                    value={draft.strength}
+                    onChange={(strength) => setDraft({ ...draft, strength })}
+                  />
+                </>
+              )}
               <div className="field-group">
-                <span className="field-label">Время на партию</span>
-                <div className="segmented">
-                  {['5 + 0', '10 + 0', '15 + 10'].map((t) => (
-                    <button key={t} aria-pressed={time === t} onClick={() => setTime(t)}>
-                      {t}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="field-group strength">
-                <div>
-                  <label className="field-label" htmlFor="level">
-                    Сила соперника
-                  </label>
-                  <strong>{levels[level - 1]}</strong>
-                </div>
-                <input
-                  id="level"
-                  aria-label="Сила соперника"
-                  type="range"
-                  min="1"
-                  max="5"
-                  value={level}
-                  onChange={(e) => setLevel(Number(e.target.value))}
-                />
-                <div className="range-labels">
-                  <span>Легче</span>
-                  <span>Сильнее</span>
-                </div>
+                <label className="field-label" htmlFor="time-control">
+                  Контроль времени
+                </label>
+                <select
+                  id="time-control"
+                  value={`${draft.minutes}+${draft.increment}`}
+                  onChange={(e) => {
+                    const [minutes, increment] = e.target.value.split('+').map(Number);
+                    setDraft({ ...draft, minutes, increment });
+                  }}
+                >
+                  <option value="0+0">Без ограничения</option>
+                  <option value="1+0">1 минута</option>
+                  <option value="5+0">5 минут</option>
+                  <option value="10+0">10 минут</option>
+                  <option value="15+10">15 минут + 10 секунд за ход</option>
+                </select>
               </div>
               <button
                 className="primary full"
                 onClick={() => {
-                  setStarted(true);
-                  setPly(0);
-                  setHint('');
-                  setFlipped(color === 'black' || (color === 'random' && Math.random() > 0.5));
+                  const config = { ...draft, strength: normalizeStrength(draft.strength) };
+                  const side = api.start(config);
+                  setSetup(false);
+                  setViewPly(null);
+                  setFlipped(side === 'b');
                 }}
               >
-                Начать демонстрацию <ArrowRight size={17} />
+                Начать партию <ArrowRight size={17} />
               </button>
-              <p className="quiet-note demo-disclosure">
-                Сейчас доступен сценарий из 8 ходов. Компьютерный движок и часы появятся на
-                следующих этапах.
-              </p>
+              {match.started && (
+                <button
+                  className="text-button full"
+                  onClick={() => {
+                    setSetup(false);
+                    setFlipped(match.human === 'b');
+                  }}
+                >
+                  Вернуться к текущей партии
+                </button>
+              )}
+              <div className="panel-foot">
+                <span className="tiny-dot" />
+                Локально. Без регистрации.
+              </div>
             </>
           ) : (
             <>
               <div className="panel-heading">
-                <h2>Испанская партия</h2>
-                <span className="tag">Демо</span>
-              </div>
-              <p className="panel-subtitle">Пройдите первые ходы классического дебюта.</p>
-              <div className="move-list compact">
-                {Array.from({ length: Math.ceil(ply / 2) }, (_, i) => (
-                  <div key={i}>
-                    <span>{i + 1}.</span>
-                    <button onClick={() => setPly(i * 2 + 1)}>{moves[i * 2][2]}</button>
-                    <button disabled={i * 2 + 1 >= ply} onClick={() => setPly(i * 2 + 2)}>
-                      {i * 2 + 1 < ply ? moves[i * 2 + 1][2] : ''}
-                    </button>
-                  </div>
-                ))}
-                {ply === 0 && <p className="muted">Первый ход белых — e4.</p>}
-              </div>
-              <div className="notice">
-                <Check size={16} />{' '}
-                {ply === moves.length
-                  ? 'Демонстрация завершена. Переходите к разбору.'
-                  : `Следующий ход: ${moves[ply][2]}. Нажмите ${moves[ply][0]}, затем ${moves[ply][1]}.`}
-              </div>
-              <div className="game-actions">
-                {ply < moves.length ? (
-                  <button className="primary full" onClick={step}>
-                    Показать следующий ход <ArrowRight size={16} />
-                  </button>
-                ) : (
-                  <a className="primary full" href="#analysis">
-                    Открыть разбор <ArrowRight size={16} />
-                  </a>
-                )}
+                <h2>Партия</h2>
                 <button
-                  className="secondary full"
+                  className="icon-button"
+                  aria-label="Новая партия"
                   onClick={() => {
-                    setStarted(false);
-                    setPly(0);
-                    setSelected(undefined);
-                    setHint('');
+                    api.pause();
+                    setDraft(match.config);
+                    setEditStrength(false);
+                    setSetup(true);
                   }}
                 >
-                  Параметры партии
+                  <Plus size={20} />
                 </button>
               </div>
-              <p className="quiet-note">
-                Параметры сохранены для этого сеанса. В демо используются заданные ходы, часы не
-                идут.
+              <p className={'game-status ' + (outcome ? 'game-finished' : '')} role="status">
+                {status}
+              </p>
+              {api.error && (
+                <p className="form-error" role="alert">
+                  {api.error}
+                </p>
+              )}
+              {!outcome && api.enginePhase !== 'loading' && (
+                <button
+                  className="secondary full pause-control"
+                  onClick={() => (match.paused ? api.resume() : api.pause())}
+                >
+                  {match.paused ? <PlayIcon size={16} /> : <Pause size={16} />}{' '}
+                  {match.paused ? 'Продолжить партию' : 'Пауза'}
+                </button>
+              )}
+              <MoveList
+                moves={history}
+                ply={ply}
+                onNavigate={navigate}
+                empty={
+                  api.enginePhase === 'loading'
+                    ? 'Движок загружается…'
+                    : api.enginePhase === 'thinking'
+                      ? 'Stockfish делает первый ход…'
+                      : match.paused
+                        ? 'Нажмите «Продолжить партию».'
+                        : 'Сделайте первый ход.'
+                }
+              />
+              {!outcome && game.claimableDraw() && match.canInteract() && (
+                <button className="secondary full" onClick={api.claimDraw}>
+                  Заявить ничью · {game.claimableDraw()}
+                </button>
+              )}
+              <div className="match-actions">
+                <button
+                  className="secondary"
+                  disabled={!history.length || api.enginePhase === 'loading'}
+                  onClick={api.undo}
+                >
+                  <Undo2 size={15} />
+                  Вернуть ход
+                </button>
+
+                {!outcome && (
+                  <button className="secondary" onClick={api.resign}>
+                    <Flag size={15} />
+                    Сдаться
+                  </button>
+                )}
+                {!outcome && match.config.opponent === 'local' && (
+                  <button className="secondary" onClick={api.agreeDraw}>
+                    Ничья
+                  </button>
+                )}
+              </div>
+              {match.config.opponent === 'stockfish' && !outcome && (
+                <div className="in-game-strength">
+                  <button
+                    className="text-button"
+                    onClick={() => {
+                      api.pause();
+                      setDraft(match.config);
+                      setEditStrength(!editStrength);
+                    }}
+                  >
+                    <SlidersHorizontal size={15} />
+                    Изменить силу
+                  </button>
+                  {editStrength && (
+                    <>
+                      <StrengthControl
+                        value={draft.strength}
+                        onChange={(strength) => setDraft({ ...draft, strength })}
+                      />
+                      <button
+                        className="primary full"
+                        onClick={() => {
+                          api.updateStrength(draft.strength);
+                          setEditStrength(false);
+                        }}
+                      >
+                        Применить и продолжить
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+              {outcome && (
+                <button
+                  className="primary full"
+                  onClick={() => {
+                    setDraft(match.config);
+                    setSetup(true);
+                  }}
+                >
+                  Новая партия <ArrowRight size={16} />
+                </button>
+              )}
+              <p className="quiet-note session-note">
+                Партия сохраняется в этом браузере. После перезагрузки продолжите её с паузы.
               </p>
             </>
           )}
-          <div className="panel-foot">
-            <BookHint />
-          </div>
         </aside>
       </div>
-      <a className="learning-strip" href="#lesson">
-        <span className="strip-icon">
-          <Swords size={23} />
-        </span>
-        <span>
-          <strong>Один мотив. Много выигранных партий.</strong>
-          <small>Попробуйте урок о мате на последней горизонтали.</small>
-        </span>
-        <span className="strip-action">
-          Открыть урок <ArrowRight size={17} />
-        </span>
-      </a>
-    </>
-  );
-}
-function BookHint() {
-  return (
-    <>
-      <span className="tiny-dot" />
-      Локально. Без регистрации.
+      {api.promotion && !outcome && (
+        <PromotionDialog
+          color={game.turn()}
+          onChoose={api.promote}
+          onCancel={api.cancelPromotion}
+        />
+      )}
     </>
   );
 }

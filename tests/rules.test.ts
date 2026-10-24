@@ -188,3 +188,14 @@ test('corrupt saves do not become playable sessions', () => {
     Match.restore({ ...save, config: { ...save.config, engine: 'https://example.com/evil.js' } }),
   );
 });
+test('history review remains valid when undo removes the selected position', () => {
+  const game = new ChessGame();
+  sequence(game, ['e4', 'e5']);
+  game.undo();
+  assert.deepEqual(game.position(2), game.position());
+  assert.deepEqual(game.position(-1), game.position(0));
+});
+test('invalid clock parameters cannot create a running match', () => {
+  assert.throws(() => new Match({ ...defaultConfig, minutes: -1 }));
+  assert.throws(() => new Match({ ...defaultConfig, increment: Infinity }));
+});
