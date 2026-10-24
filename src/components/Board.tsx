@@ -63,6 +63,9 @@ export function Board({
 }) {
   const files = flipped ? 'hgfedcba' : 'abcdefgh';
   const ranks = flipped ? '12345678' : '87654321';
+  const [focusedSquare, setFocusedSquare] = useState(
+    movableSquares?.[0] ?? (flipped ? 'e7' : 'e2'),
+  );
   const boardRef = useRef<HTMLDivElement>(null);
   const gesture = useRef<{
     from: string;
@@ -235,7 +238,9 @@ export function Board({
                   onClick={() => {
                     if (!suppressClick.current) onSquare?.(square);
                   }}
-                  tabIndex={onSquare ? 0 : -1}
+                  tabIndex={onSquare && square === focusedSquare ? 0 : -1}
+                  onFocus={() => setFocusedSquare(square)}
+                  aria-disabled={!onSquare && !onMove}
                   aria-label={
                     square +
                     (piece

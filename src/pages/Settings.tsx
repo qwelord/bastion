@@ -17,8 +17,8 @@ export function Settings({
     <>
       <div className="page-intro">
         <div>
-          <h1>Ваша доска. Ваше настроение.</h1>
-          <p>Найдите оформление, с которым хочется играть дольше.</p>
+          <h1>Оформление</h1>
+          <p>Выберите тему, цвет доски и параметры отображения.</p>
         </div>
         <button className="text-button" onClick={() => setSettings(defaults)}>
           <RotateCcw size={15} />
@@ -114,11 +114,6 @@ export function Settings({
             <span>Предпросмотр</span>
             <span>Cburnett / Lichess</span>
           </div>
-          <p>
-            Читаемая позиция.
-            <br />
-            <span>Ничего лишнего между вами и игрой.</span>
-          </p>
         </div>
       </div>
     </>

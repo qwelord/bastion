@@ -62,14 +62,6 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <div className="sidebar-note">
-            <span className="small-rook">B</span>
-            <p>
-              Хорошая партия
-              <br />
-              начинается с мысли.
-            </p>
-          </div>
           <a
             className={'nav-link ' + (route === 'settings' ? 'active' : '')}
             href="#settings"
@@ -104,7 +96,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
           <span>
             Bastion <span className="footer-version">/ 0.2</span>
           </span>
-          <span>Играйте вдумчиво.</span>
+          <span>Локальная игра</span>
           <a href="https://github.com/qwelord/bastion" target="_blank" rel="noreferrer">
             О проекте <ArrowUpRight size={13} />
           </a>

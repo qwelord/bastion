@@ -50,6 +50,10 @@ export function Play({ settings }: { settings: Settings }) {
   const movable: string[] = interactive ? [...new Set(game.moves().map((m) => m.from))] : [];
   function square(s: string) {
     if (!interactive) return;
+    if (selected === s) {
+      setSelected(undefined);
+      return;
+    }
     if (selected && selectedMoves.some((m) => m.to === s)) {
       api.play(selected, s);
       setSelected(undefined);
@@ -129,7 +133,10 @@ export function Play({ settings }: { settings: Settings }) {
               )}
             </span>
           </div>
-          <div className="board-stage" aria-busy={api.enginePhase === 'loading'}>
+          <div
+            className={'board-stage' + (!settings.coordinates ? ' without-coordinates' : '')}
+            aria-busy={api.enginePhase === 'loading'}
+          >
             <Board
               settings={settings}
               position={game.position(ply)}
@@ -334,6 +341,14 @@ export function Play({ settings }: { settings: Settings }) {
                   setSetup(false);
                   setViewPly(null);
                   setFlipped(side === 'b');
+                  window.scrollTo({
+                    top: 0,
+                    behavior:
+                      settings.motion &&
+                      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                        ? 'smooth'
+                        : 'auto',
+                  });
                 }}
               >
                 Начать партию <ArrowRight size={17} />

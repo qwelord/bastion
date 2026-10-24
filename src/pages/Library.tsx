@@ -12,8 +12,8 @@ export function Library() {
     <>
       <div className="page-intro">
         <div>
-          <h1>Партии, к которым возвращаются.</h1>
-          <p>Место для ваших находок, заметок и важных позиций.</p>
+          <h1>Библиотека</h1>
+          <p>Сохранённые партии и позиции.</p>
         </div>
       </div>
       <div className="catalog-tools">

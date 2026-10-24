@@ -24,8 +24,8 @@ export function Learn({ settings }: { settings: Settings }) {
     <>
       <div className="page-intro">
         <div>
-          <h1>Понимать. Пробовать. Играть.</h1>
-          <p>От первого хода до решений, которые меняют партию.</p>
+          <h1>Обучение</h1>
+          <p>Курсы и практика от основ до сложных позиций.</p>
         </div>
         <span className="tag">
           <BookOpen size={14} /> Школа Bastion

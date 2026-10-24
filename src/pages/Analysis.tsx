@@ -38,7 +38,7 @@ export function Analysis({ settings }: { settings: Settings }) {
     <>
       <div className="page-intro">
         <div>
-          <h1>За каждым ходом — идея.</h1>
+          <h1>Анализ партии</h1>
           <p>Испанская партия. Классическое развитие фигур.</p>
         </div>
         <button className="secondary" aria-pressed={saved} onClick={save}>
@@ -107,7 +107,8 @@ export function Analysis({ settings }: { settings: Settings }) {
           <div className="analysis-disclosure">
             <Info size={16} />
             <p>
-              Это образец интерфейса разбора. Живой анализ Stockfish будет подключён на этапе 5.
+              Это образец интерфейса разбора. Stockfish уже работает в игре. Автоматический разбор
+              здесь появится на следующем этапе анализа.
             </p>
           </div>
         </div>

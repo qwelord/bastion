@@ -9,3 +9,9 @@
 - Run pnpm test and pnpm build for behavior changes. Check affected layouts in the browser.
 - Commit coherent changes with descriptive messages. Do not manufacture empty commits or rewrite existing history.
 - Never store credentials in tracked files. Remote repository is private unless the user changes that decision.
+
+- Product targets are the web and mobile. Keep core chess/match/engine modules reusable; do not add a desktop-only dependency without a reason.
+- The live game is implemented. Preserve numeric native Elo / Skill controls and clearly label the uncalibrated training scale.
+- Keep coordinates outside the squares. Preserve pointer, touch, keyboard and reduced-motion behavior.
+- Do not put file import/export controls back on the main game screen unless the owner asks.
+- Read docs/SECURITY.md before adding accounts, a database, remote APIs or user content. Never claim frontend validation protects a future server.
