@@ -1,6 +1,6 @@
 {
   "name": "bastion",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,20 +9,25 @@
     "preview": "vite preview --host 127.0.0.1",
     "check": "tsc -b",
     "test": "tsx --test tests/*.test.ts",
-    "format": "prettier --write src tests docs *.json *.ts *.html *.md"
+    "format": "prettier --write src tests docs *.json *.ts *.html *.md",
+    "prepare:engine": "node scripts/prepare-engine.mjs",
+    "postinstall": "node scripts/prepare-engine.mjs",
+    "predev": "node scripts/prepare-engine.mjs",
+    "prebuild": "node scripts/prepare-engine.mjs"
   },
   "dependencies": {
     "@fontsource/literata": "^5.2.0",
     "@fontsource/manrope": "^5.2.0",
     "lucide-react": "^0.468.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "stockfish": "19.0.1",
+    "chess.js": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
-    "chess.js": "^1.4.0",
     "prettier": "^3.9.10",
     "tsx": "^4.23.15",
     "typescript": "~5.9.3",

@@ -7,3 +7,4 @@ dist/
 coverage/
 test-results/
 *.tsbuildinfo
+/public/engine/
