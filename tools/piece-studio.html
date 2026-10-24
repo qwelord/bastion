@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+  <meta charset="UTF-8" /><title>Bastion piece studio</title>
+  <style>
+    body {
+      font: 16px sans-serif;
+      background: #aca99d;
+      padding: 24px;
+    }
+    #pieces {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    a {
+      display: grid;
+      color: #222;
+      text-align: center;
+      text-decoration: none;
+    }
+    img {
+      width: 160px;
+      height: 187px;
+    }
+  </style>
+  <h1>Staunton / исходные рендеры</h1>
+  <p>
+    Откройте через dev server: /tools/piece-studio.html. Нажмите на фигуру, чтобы сохранить PNG в
+    public/pieces.
+  </p>
+  <div id="pieces"></div>
+  <script type="module">
+    import { pieceImages } from '/src/graphics/pieces.ts';
+    const images = pieceImages();
+    for (const [name, src] of Object.entries(images)) {
+      const a = document.createElement('a');
+      a.href = src;
+      a.download = name + '.png';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = name;
+      a.append(img, name);
+      document.getElementById('pieces').append(a);
+    }
+  </script>
+</html>

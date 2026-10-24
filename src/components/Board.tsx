@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { pieceImages } from '../graphics/pieces';
 import type { Settings } from '../state';
 import { initialPosition, type Position } from '../data/position';
 const names: Record<string, string> = {
@@ -11,23 +9,13 @@ const names: Record<string, string> = {
   k: 'король',
 };
 export function Piece({ code, className = '' }: { code: string; className?: string }) {
-  const [images, setImages] = useState<Record<string, string>>({});
-  useEffect(() => {
-    try {
-      setImages(pieceImages());
-    } catch {
-      setImages({});
-    }
-  }, []);
-  return images[code] ? (
+  return (
     <img
       className={'piece ' + className}
-      src={images[code]}
+      src={'/pieces/' + code + '.png'}
       alt={(code[0] === 'w' ? 'Белые: ' : 'Чёрные: ') + names[code[1]]}
       draggable={false}
     />
-  ) : (
-    <span className="piece-fallback">{names[code[1]]}</span>
   );
 }
 export function Board({

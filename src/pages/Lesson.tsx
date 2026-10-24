@@ -3,11 +3,20 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb, RotateCcw } from 'lucid
 import { Board } from '../components/Board';
 import { exercisePosition } from '../data/demo';
 import type { Settings } from '../state';
+function wasCompleted() {
+  try {
+    return localStorage.getItem('bastion.lesson.backrank') === 'complete';
+  } catch {
+    return false;
+  }
+}
 export function Lesson({ settings }: { settings: Settings }) {
   const [selected, setSelected] = useState<string>();
-  const [answer, setAnswer] = useState<'correct' | 'wrong' | null>(null);
+  const [answer, setAnswer] = useState<'correct' | 'wrong' | null>(() =>
+    wasCompleted() ? 'correct' : null,
+  );
   const [hint, setHint] = useState(false);
-  const [complete, setComplete] = useState(false);
+  const [complete, setComplete] = useState(wasCompleted);
   const respond = (ok: boolean) => {
     setAnswer(ok ? 'correct' : 'wrong');
     setSelected(undefined);

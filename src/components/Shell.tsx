@@ -26,7 +26,14 @@ const titles: Record<Route, string> = {
 export function Shell({ route, children }: { route: Route; children: ReactNode }) {
   return (
     <div className="app-shell">
-      <a className="skip-link" href="#main-content">
+      <a
+        className="skip-link"
+        href="#main-content"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById('main-content')?.focus();
+        }}
+      >
         Перейти к содержимому
       </a>
       <aside className="sidebar">
@@ -41,6 +48,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
             <a
               key={id}
               href={'#' + id}
+              aria-label={label}
               className={
                 route === id || (id === 'learn' && route === 'lesson')
                   ? 'nav-link active'
@@ -62,7 +70,11 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
               начинается с мысли.
             </p>
           </div>
-          <a className={'nav-link ' + (route === 'settings' ? 'active' : '')} href="#settings">
+          <a
+            className={'nav-link ' + (route === 'settings' ? 'active' : '')}
+            href="#settings"
+            aria-label="Настройки"
+          >
             <Settings2 size={19} />
             Настройки
           </a>
@@ -79,7 +91,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
           <span>{titles[route]}</span>
           <div className="topbar-right">
             <span className="prototype-badge">Дизайн-прототип</span>
-            <a className="appearance-link" href="#settings">
+            <a className="appearance-link" href="#settings" aria-label="Оформление">
               <Palette size={17} />
               <span>Оформление</span>
             </a>
