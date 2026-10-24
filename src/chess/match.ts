@@ -1,3 +1,4 @@
+import { validTime } from './time';
 import { ChessGame, type Color, type MoveInput, type Outcome } from './rules';
 import { normalizeStrength, type EngineKind, type Strength } from '../engine/strength';
 
@@ -42,8 +43,8 @@ export class Match {
       !['stockfish', 'local'].includes(config.opponent) ||
       !['lite', 'full'].includes(config.engine) ||
       !['w', 'b', 'random'].includes(config.color) ||
-      ![0, 1, 5, 10, 15, 30].includes(config.minutes) ||
-      ![0, 1, 2, 5, 10, 15].includes(config.increment) ||
+      !validTime(config.minutes, config.increment) ||
+
       !config.strength
     )
       throw new Error('Некорректные параметры партии.');
@@ -159,8 +160,8 @@ export class Match {
       !['w', 'b', 'random'].includes(s.config.color) ||
       !s.config.strength ||
       !['elo', 'skill', 'training'].includes(s.config.strength.mode) ||
-      ![0, 1, 5, 10, 15, 30].includes(s.config.minutes) ||
-      ![0, 1, 2, 5, 10, 15].includes(s.config.increment) ||
+      !validTime(s.config.minutes, s.config.increment) ||
+
       !['w', 'b'].includes(s.human) ||
       !s.remaining ||
       !Number.isFinite(s.remaining.w) ||
@@ -187,3 +188,4 @@ export class Match {
     return match;
   }
 }
+
