@@ -2,7 +2,8 @@
 
 - Read docs/ROADMAP.md and docs/ARCHITECTURE.md before implementing the next stage.
 - Work only on the stage requested by the user. Keep unfinished features visibly identified.
-- Preserve the board-first design, Russian interface, original raster pieces, and keyboard access.
+- Preserve the board-first design, Russian interface, the unmodified classic Lichess Cburnett 2D pieces, and keyboard access.
+- Do not introduce 3D pieces, homemade replacement artwork, decorative board textures, or screenshot galleries.
 - Keep chess rules and engine communication out of view components.
 - Never represent scripted playback as a live engine or planned courses as published lessons.
 - Run pnpm test and pnpm build for behavior changes. Check affected layouts in the browser.
