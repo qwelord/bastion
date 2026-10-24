@@ -18,8 +18,10 @@ type Request = {
   kind: EngineKind;
   moveTime?: number;
   onDepth?: (depth: number) => void;
+  analysis?: { lines: number; depth?: number };
 };
-export type EngineReply = { move: string; name: string; depth: number; training: boolean };
+export type AnalysisLine = { move: string; score: number; mate?: number; depth: number; pv: string[] };
+export type EngineReply = { move: string; name: string; depth: number; training: boolean; lines: AnalysisLine[] };
 const aborted = () => new DOMException('Поиск отменён', 'AbortError');
 export class StockfishClient {
   private worker: Transport | null = null;
@@ -39,6 +41,7 @@ export class StockfishClient {
     reject: (error: Error) => void;
     timer: ReturnType<typeof setTimeout>;
     candidates: Map<number, Candidate>;
+    lines: Map<number, AnalysisLine>;
     depth: number;
   } | null = null;
   constructor(
@@ -140,6 +143,13 @@ export class StockfishClient {
     );
     if (info) {
       const score = Number(info[3]);
+      if (!line.includes('lowerbound') && !line.includes('upperbound')) {
+        p.lines.set(Number(info[1]), {
+          move: info[4], score: info[2] === 'mate' ? Math.sign(score) * (100000 - Math.abs(score)) : score,
+          ...(info[2] === 'mate' ? { mate: score } : {}), depth: Number(depth?.[1] ?? 0),
+          pv: (line.split(' pv ')[1] ?? '').trim().split(/\s+/).filter(m => /^[a-h][1-8][a-h][1-8][qrbn]?$/.test(m)).slice(0, 24),
+        });
+      }
       p.candidates.set(Number(info[1]), {
         move: info[4],
         score: info[2] === 'mate' ? Math.sign(score) * (100000 - Math.abs(score)) : score,
@@ -164,6 +174,7 @@ export class StockfishClient {
         name: this.name,
         depth: p.depth,
         training: p.request.strength.mode === 'training',
+        lines: [...p.lines.entries()].sort((a,b) => a[0] - b[0]).map(([,v]) => v),
       });
     }
   }
@@ -195,15 +206,17 @@ export class StockfishClient {
           ),
         20_000,
       );
-      this.pending = { request, resolve, reject, timer, candidates: new Map(), depth: 0 };
+      this.pending = { request, resolve, reject, timer, candidates: new Map(), lines: new Map(), depth: 0 };
       for (const command of strengthCommands(request.strength, request.legalCount))
         worker.postMessage(command);
+      if (request.analysis) worker.postMessage(`setoption name MultiPV value ${Math.max(1, Math.min(3, Math.round(request.analysis.lines)))}`);
       worker.postMessage(request.position);
       worker.postMessage(
-        request.strength.mode === 'training'
+        request.analysis?.depth ? go depth  : request.strength.mode === 'training'
           ? 'go depth 2'
           : `go movetime ${Math.max(50, Math.min(3000, request.moveTime ?? 700))}`,
       );
     });
   }
 }
+
