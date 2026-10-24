@@ -33,7 +33,7 @@ export function pieceImages():Record<string,string> {
   const key=new T.DirectionalLight(0xfff3db,4.2);key.position.set(-3,6,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);scene.add(key);
   const rim=new T.DirectionalLight(0xffffff,2.5);rim.position.set(3,3,-3);scene.add(rim);
   const floor=new T.Mesh(new T.PlaneGeometry(8,8),new T.ShadowMaterial({opacity:.24}));floor.rotation.x=-Math.PI/2;floor.position.y=-.015;floor.receiveShadow=true;scene.add(floor);
-  const camera=new T.OrthographicCamera(-.87,.87,2.25,.22,.1,50);camera.position.set(0,3.25,8);camera.lookAt(0,.7,0);camera.updateProjectionMatrix();
+  const camera=new T.OrthographicCamera(-.9,.9,1.22,-1.22,.1,50);camera.position.set(0,3.25,8);camera.lookAt(0,1,0);camera.updateProjectionMatrix();
   cache={};
   for(const side of ['w','b'])for(const kind of ['p','n','b','r','q','k']){
     const material=new T.MeshStandardMaterial({color:side==='w'?0xe4cda4:0x40352e,roughness:.32,metalness:.12});
@@ -42,3 +42,4 @@ export function pieceImages():Record<string,string> {
   }
   floor.geometry.dispose();(floor.material as T.Material).dispose();renderer.dispose();renderer.forceContextLoss();return cache;
 }
+
