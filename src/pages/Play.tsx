@@ -1,3 +1,4 @@
+import { openReview } from '../data/games';
 import { useRef } from 'react';
 import { moveSound, unlockSound } from '../chess/sound';
 import { TimeControl } from '../components/TimeControl';
@@ -472,6 +473,8 @@ export function Play({ settings }: { settings: Settings }) {
                   )}
                 </div>
               )}
+              {history.length > 0 && <button className="secondary full" onClick={() => { api.pause(); openReview(api.gameId); }}>Разобрать партию бесплатно</button>}
+              {outcome && <button className="secondary full" onClick={() => { const side = api.start({ ...match.config, color: match.human === 'w' ? 'b' : 'w' }); setFlipped(side === 'b'); setViewPly(null); }}>Реванш · сменить цвет</button>}
               {outcome && (
                 <button
                   className="primary full"
@@ -500,5 +503,6 @@ export function Play({ settings }: { settings: Settings }) {
     </>
   );
 }
+
 
 

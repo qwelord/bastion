@@ -1,3 +1,4 @@
+import { archiveGame } from '../data/games';
 import { useEffect, useRef, useState } from 'react';
 import { type MoveInput, type Promotion } from './rules';
 import { Match, defaultConfig, type MatchConfig } from './match';
@@ -18,7 +19,7 @@ function persist(match: Match) {
   try {
     localStorage.setItem(STORAGE, JSON.stringify(match.save(performance.now())));
   } catch {
-    /* Export remains available when storage is full. */
+    throw new Error('Не удалось сохранить партию. Проверьте доступ браузера к хранилищу.');
   }
 }
 export function useMatch() {
@@ -34,6 +35,20 @@ export function useMatch() {
   const [depth, setDepth] = useState(0);
   const [error, setError] = useState('');
   const [promotion, setPromotion] = useState<{ from: string; to: string } | null>(null);
+  const [storageError, setStorageError] = useState('');
+  const [gameId] = useState(() => {
+    try { const id = localStorage.getItem('bastion.match.id'); if (id && /^[\w-]{1,80}$/.test(id)) return id; } catch { /* Use session ID. */ }
+    return crypto.randomUUID();
+  });
+  const idRef = useRef<string>(gameId);
+  const save = () => {
+    try {
+      persist(matchRef.current);
+      localStorage.setItem('bastion.match.id', idRef.current);
+      archiveGame(idRef.current, matchRef.current.save(performance.now()));
+      setStorageError('');
+    } catch (e) { setStorageError((e as Error).message); }
+  };
   const intent = useRef(0);
   const publish = () => {
     setVersion((v) => v + 1);
@@ -56,13 +71,13 @@ export function useMatch() {
     }, 100);
     return () => {
       clearInterval(timer);
-      persist(matchRef.current);
+      try { persist(matchRef.current); archiveGame(idRef.current, matchRef.current.save(performance.now())); } catch { /* Reported during normal saves. */ }
       intent.current++;
       client.dispose();
     };
   }, [client]);
   useEffect(() => {
-    persist(matchRef.current);
+    save();
   }, [version]);
   useEffect(() => {
     const match = matchRef.current;
@@ -160,6 +175,8 @@ export function useMatch() {
   function start(config: MatchConfig) {
     stop();
     client.dispose();
+    save();
+    idRef.current = crypto.randomUUID();
     const match = new Match(config);
     match.game.setPlayers(
       match.human === 'w' ? 'Вы' : 'Stockfish 19',
@@ -239,7 +256,8 @@ export function useMatch() {
     enginePhase,
     engineName,
     depth,
-    error,
+    error: error || storageError,
+    gameId: idRef.current,
     promotion,
     start,
     pause,
@@ -255,3 +273,4 @@ export function useMatch() {
     defaultConfig,
   };
 }
+
