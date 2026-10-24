@@ -14,7 +14,7 @@ export default function App() {
       {route === 'play' ? (
         <Play settings={settings} />
       ) : route === 'learn' ? (
-        <Learn />
+        <Learn settings={settings} />
       ) : route === 'lesson' ? (
         <Lesson settings={settings} />
       ) : route === 'analysis' ? (

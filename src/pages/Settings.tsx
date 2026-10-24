@@ -55,13 +55,13 @@ export function Settings({
             </div>
           </section>
           <section>
-            <h2>Материал доски</h2>
+            <h2>Цвет доски</h2>
             <p className="quiet-note">Сочетание светлых и тёмных полей</p>
             <div className="board-options">
               {[
-                ['walnut', 'Орех'],
-                ['slate', 'Сланец'],
-                ['olive', 'Олива'],
+                ['walnut', 'Классическая'],
+                ['slate', 'Серая'],
+                ['olive', 'Зелёная'],
               ].map(([id, name]) => (
                 <button
                   key={id}
@@ -105,15 +105,14 @@ export function Settings({
             </label>
           </section>
           <p className="quiet-note">
-            Настройки сохраняются в этом браузере. Набор фигур: авторский Staunton, светлое дерево и
-            тёмное дерево.
+            Настройки сохраняются в этом браузере. Классический набор Cburnett из Lichess.
           </p>
         </div>
         <div className="settings-preview">
           <Board settings={settings} position={demoPosition(10)} />
           <div className="preview-caption">
             <span>Предпросмотр</span>
-            <span>Staunton / дерево</span>
+            <span>Cburnett / Lichess</span>
           </div>
           <p>
             Читаемая позиция.

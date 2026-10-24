@@ -12,7 +12,7 @@ export function Piece({ code, className = '' }: { code: string; className?: stri
   return (
     <img
       className={'piece ' + className}
-      src={'/pieces/' + code + '.png'}
+      src={'/pieces/' + code + '.svg'}
       alt={(code[0] === 'w' ? 'Белые: ' : 'Чёрные: ') + names[code[1]]}
       draggable={false}
     />

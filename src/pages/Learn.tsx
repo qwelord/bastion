@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Search, Clock3, BookOpen, X, Check } from 'lucide-react';
-import { Piece } from '../components/Board';
-import { courses } from '../data/demo';
-export function Learn() {
+import { Board, Piece } from '../components/Board';
+import { courses, exercisePosition } from '../data/demo';
+import type { Settings } from '../state';
+export function Learn({ settings }: { settings: Settings }) {
   const [level, setLevel] = useState('Все');
   const [query, setQuery] = useState('');
   const [detail, setDetail] = useState<string>();
@@ -33,14 +34,10 @@ export function Learn() {
       <section className="featured-lesson">
         <div className="featured-copy">
           <span className="featured-label">Открытый урок</span>
-          <h2>
-            Заметьте мат.
-            <br />
-            Прежде чем его заметит соперник.
-          </h2>
+          <h2>Мат на последней горизонтали</h2>
           <p>
-            Одна ладья, закрытый король и ход, который решает всё. Разберите мат на последней
-            горизонтали.
+            Найдите мат в один ход и разберитесь, почему собственные пешки иногда мешают защитить
+            короля.
           </p>
           <div className="featured-meta">
             <span>
@@ -52,10 +49,9 @@ export function Learn() {
             Начать урок <ArrowRight size={17} />
           </a>
         </div>
-        <div className="featured-art" aria-hidden="true">
-          <div className="art-board" />
-          <Piece code="wk" className="art-king" />
-          <Piece code="br" className="art-rook" />
+        <div className="featured-position" aria-hidden="true">
+          <Board settings={{ ...settings, coordinates: false }} position={exercisePosition} />
+          <span>Ход белых · Мат в один ход</span>
         </div>
       </section>
       <section className="curriculum">
