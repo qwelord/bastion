@@ -3,12 +3,16 @@ export type Route = 'play' | 'learn' | 'lesson' | 'analysis' | 'library' | 'sett
 export type Settings = {
   theme: 'club' | 'light' | 'evening';
   board: 'walnut' | 'slate' | 'olive';
+  sound: boolean;
+  volume: number;
   motion: boolean;
   coordinates: boolean;
 };
 export const defaults: Settings = {
   theme: 'club',
   board: 'walnut',
+  sound: false,
+  volume: 0.5,
   motion: true,
   coordinates: true,
 };
@@ -18,6 +22,8 @@ export function readSettings(): Settings {
     return {
       theme: ['club', 'light', 'evening'].includes(s.theme) ? s.theme : defaults.theme,
       board: ['walnut', 'slate', 'olive'].includes(s.board) ? s.board : defaults.board,
+      sound: s.sound === true,
+      volume: Number.isFinite(s.volume) ? Math.max(0, Math.min(1, s.volume)) : 0.5,
       motion: typeof s.motion === 'boolean' ? s.motion : true,
       coordinates: typeof s.coordinates === 'boolean' ? s.coordinates : true,
     };
@@ -56,3 +62,4 @@ export function useRoute() {
   }, []);
   return route;
 }
+

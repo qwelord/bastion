@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { moveSound, unlockSound } from '../chess/sound';
 import { TimeControl } from '../components/TimeControl';
 import { useEffect, useState } from 'react';
 import {
@@ -35,6 +37,14 @@ export function Play({ settings }: { settings: Settings }) {
   const game = match.game;
   const history = game.history();
   const outcome = game.outcome();
+  const heard = useRef(game.fen());
+  useEffect(() => {
+    if (heard.current !== game.fen() && settings.sound) {
+      const last = game.history().at(-1);
+      if (last) moveSound(!!last.captured, game.inCheck(), !!game.outcome(), settings.volume);
+    }
+    heard.current = game.fen();
+  }, [api.version, settings.sound, settings.volume, game]);
   const [setup, setSetup] = useState(!match.started);
   const [draft, setDraft] = useState<MatchConfig>(match.config);
   const [flipped, setFlipped] = useState(match.human === 'b');
@@ -51,6 +61,7 @@ export function Play({ settings }: { settings: Settings }) {
   const movable: string[] = interactive ? [...new Set(game.moves().map((m) => m.from))] : [];
   function square(s: string) {
     if (!interactive) return;
+    if (settings.sound) unlockSound();
     if (selected === s) {
       setSelected(undefined);
       return;
@@ -147,6 +158,7 @@ export function Play({ settings }: { settings: Settings }) {
               onMove={
                 interactive
                   ? (from, to) => {
+                      if (settings.sound) unlockSound();
                       api.play(from, to);
                       setSelected(undefined);
                     }
@@ -319,6 +331,7 @@ export function Play({ settings }: { settings: Settings }) {
               <button
                 className="primary full"
                 onClick={() => {
+                  if (settings.sound) unlockSound();
                   const config = { ...draft, strength: normalizeStrength(draft.strength) };
                   const side = api.start(config);
                   setSetup(false);
@@ -487,4 +500,5 @@ export function Play({ settings }: { settings: Settings }) {
     </>
   );
 }
+
 

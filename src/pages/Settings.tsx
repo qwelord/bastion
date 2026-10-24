@@ -1,3 +1,4 @@
+import { unlockSound, moveSound } from '../chess/sound';
 import type { Dispatch, SetStateAction } from 'react';
 import { Check, RotateCcw, Eye, Sparkles } from 'lucide-react';
 import { Board } from '../components/Board';
@@ -77,6 +78,8 @@ export function Settings({
           </section>
           <section className="display-options">
             <h2>Детали</h2>
+            <label className="toggle-row"><span>Звуки ходов<small>Тихий отклик на ход, взятие и шах</small></span><input type="checkbox" checked={settings.sound} onChange={e => { update('sound', e.target.checked); if (e.target.checked) { unlockSound(); moveSound(false, false, false, settings.volume); } }} /></label>
+            {settings.sound && <label className="volume-control">Громкость<input aria-label="Громкость" type="range" min="0" max="1" step="0.05" value={settings.volume} onChange={e => update('volume', +e.target.value)} /></label>}
             <label className="toggle-row">
               <span>
                 <Eye size={18} />
@@ -119,3 +122,4 @@ export function Settings({
     </>
   );
 }
+
