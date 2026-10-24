@@ -5,8 +5,9 @@ export class DragMotion {
   private latest: DragPoint | null = null;
   constructor(
     private draw: (point: DragPoint) => void,
-    private request: (callback: FrameRequestCallback) => number = requestAnimationFrame,
-    private cancelFrame: (id: number) => void = cancelAnimationFrame,
+    private request: (callback: FrameRequestCallback) => number = (callback) =>
+      window.requestAnimationFrame(callback),
+    private cancelFrame: (id: number) => void = (id) => window.cancelAnimationFrame(id),
   ) {}
   move(x: number, y: number) {
     this.latest = { x, y };

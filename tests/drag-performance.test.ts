@@ -73,3 +73,36 @@ test('history and result caches invalidate on moves undo finish and PGN result r
   restored.undo();
   assert.equal(restored.outcome(), null);
 });
+
+test('default frame scheduler preserves the browser Window receiver for request and cancellation', (t) => {
+  const previous = Object.getOwnPropertyDescriptor(globalThis, 'window');
+  let callback: FrameRequestCallback | undefined;
+  let cancelled = 0;
+  const host = {
+    requestAnimationFrame(this: unknown, frame: FrameRequestCallback) {
+      assert.equal(this, host, 'browser requestAnimationFrame requires its Window receiver');
+      callback = frame;
+      return 17;
+    },
+    cancelAnimationFrame(this: unknown, id: number) {
+      assert.equal(this, host, 'browser cancelAnimationFrame requires its Window receiver');
+      assert.equal(id, 17);
+      cancelled++;
+    },
+  };
+  Object.defineProperty(globalThis, 'window', { configurable: true, value: host });
+  t.after(() => {
+    if (previous) Object.defineProperty(globalThis, 'window', previous);
+    else Reflect.deleteProperty(globalThis, 'window');
+  });
+  const positions: { x: number; y: number }[] = [];
+  const motion = new DragMotion((point) => positions.push(point));
+  motion.move(50, 80);
+  callback!(0);
+  assert.deepEqual(positions, [{ x: 50, y: 80 }]);
+  motion.move(60, 90);
+  motion.cancel();
+  assert.equal(cancelled, 1);
+  callback!(16);
+  assert.equal(positions.length, 1);
+});
