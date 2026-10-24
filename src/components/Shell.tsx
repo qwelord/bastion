@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { readProfile } from '../data/profile';
 import {
   BookOpen,
   Compass,
@@ -24,6 +26,12 @@ const titles: Record<Route, string> = {
   settings: 'Оформление',
 };
 export function Shell({ route, children }: { route: Route; children: ReactNode }) {
+  const [profile, setProfile] = useState(readProfile);
+  useEffect(() => {
+    const refresh = () => setProfile(readProfile());
+    window.addEventListener('bastion:profile', refresh);
+    return () => window.removeEventListener('bastion:profile', refresh);
+  }, []);
   return (
     <div className="app-shell">
       <a
@@ -71,9 +79,10 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
             Настройки
           </a>
           <div className="profile">
-            <span className="avatar">Г</span>
+            <span className="avatar">{profile.charAt(0).toUpperCase()}</span>
             <span>
-              Гость<small>Локальный профиль</small>
+              {profile}
+              <small>Локальный профиль</small>
             </span>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { readProfile } from '../data/profile';
+import { ReviewService } from '../engine/review';
 import { archiveGame } from '../data/games';
 import { useEffect, useRef, useState } from 'react';
 import { type MoveInput, type Promotion } from './rules';
@@ -37,7 +39,12 @@ export function useMatch() {
   const [promotion, setPromotion] = useState<{ from: string; to: string } | null>(null);
   const [storageError, setStorageError] = useState('');
   const [gameId] = useState(() => {
-    try { const id = localStorage.getItem('bastion.match.id'); if (id && /^[\w-]{1,80}$/.test(id)) return id; } catch { /* Use session ID. */ }
+    try {
+      const id = localStorage.getItem('bastion.match.id');
+      if (id && /^[\w-]{1,80}$/.test(id)) return id;
+    } catch {
+      /* Use session ID. */
+    }
     return crypto.randomUUID();
   });
   const idRef = useRef<string>(gameId);
@@ -47,7 +54,9 @@ export function useMatch() {
       localStorage.setItem('bastion.match.id', idRef.current);
       archiveGame(idRef.current, matchRef.current.save(performance.now()));
       setStorageError('');
-    } catch (e) { setStorageError((e as Error).message); }
+    } catch (e) {
+      setStorageError((e as Error).message);
+    }
   };
   const intent = useRef(0);
   const publish = () => {
@@ -61,6 +70,19 @@ export function useMatch() {
     setError('');
   };
   useEffect(() => {
+    const checkpoint = () => {
+      try {
+        persist(matchRef.current);
+        archiveGame(idRef.current, matchRef.current.save(performance.now()));
+      } catch {
+        setStorageError('Не удалось сохранить партию. Проверьте свободное место.');
+      }
+    };
+    const visibility = () => {
+      if (document.visibilityState === 'hidden') checkpoint();
+    };
+    window.addEventListener('pagehide', checkpoint);
+    document.addEventListener('visibilitychange', visibility);
     const timer = setInterval(() => {
       const n = performance.now();
       if (matchRef.current.checkTimeout(n)) {
@@ -71,7 +93,14 @@ export function useMatch() {
     }, 100);
     return () => {
       clearInterval(timer);
-      try { persist(matchRef.current); archiveGame(idRef.current, matchRef.current.save(performance.now())); } catch { /* Reported during normal saves. */ }
+      window.removeEventListener('pagehide', checkpoint);
+      document.removeEventListener('visibilitychange', visibility);
+      try {
+        persist(matchRef.current);
+        archiveGame(idRef.current, matchRef.current.save(performance.now()));
+      } catch {
+        /* Reported during normal saves. */
+      }
       intent.current++;
       client.dispose();
     };
@@ -179,8 +208,8 @@ export function useMatch() {
     idRef.current = crypto.randomUUID();
     const match = new Match(config);
     match.game.setPlayers(
-      match.human === 'w' ? 'Вы' : 'Stockfish 19',
-      match.human === 'b' ? 'Вы' : 'Stockfish 19',
+      match.human === 'w' ? readProfile() : 'Stockfish 19',
+      match.human === 'b' ? readProfile() : 'Stockfish 19',
     );
     if (config.opponent === 'local') match.game.setPlayers('Белые', 'Чёрные');
     match.started = true;
@@ -241,6 +270,33 @@ export function useMatch() {
     matchRef.current.agreeDraw(performance.now());
     publish();
   }
+  const [drawMessage, setDrawMessage] = useState('');
+  const [drawBusy, setDrawBusy] = useState(false);
+  const [drawEngine] = useState(() => new ReviewService());
+  useEffect(() => () => drawEngine.dispose(), [drawEngine]);
+  async function offerDraw() {
+    const match = matchRef.current;
+    if (!match.canInteract() || match.game.outcome() || drawBusy) return;
+    pause();
+    const token = intent.current;
+    setDrawBusy(true);
+    setDrawMessage('Stockfish оценивает предложение…');
+    try {
+      const result = await drawEngine.evaluate(match.game, match.config.engine, 700);
+      if (intent.current !== token || matchRef.current !== match) return;
+      if (match.game.history().length >= 20 && Math.abs(result.score) <= 35) {
+        match.game.finish({ result: '1/2-1/2', reason: 'Ничья по соглашению' });
+        setDrawMessage('Stockfish принял предложение.');
+        publish();
+      } else {
+        setDrawMessage('Stockfish продолжит борьбу. Нажмите «Продолжить партию».');
+      }
+    } catch (e) {
+      if (intent.current === token) setDrawMessage((e as Error).message);
+    } finally {
+      setDrawBusy(false);
+    }
+  }
   function updateStrength(strength: Strength) {
     stop();
     const match = matchRef.current;
@@ -270,7 +326,9 @@ export function useMatch() {
     claimDraw,
     agreeDraw,
     updateStrength,
+    offerDraw,
+    drawMessage,
+    drawBusy,
     defaultConfig,
   };
 }
-

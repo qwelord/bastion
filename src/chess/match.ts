@@ -44,7 +44,6 @@ export class Match {
       !['lite', 'full'].includes(config.engine) ||
       !['w', 'b', 'random'].includes(config.color) ||
       !validTime(config.minutes, config.increment) ||
-
       !config.strength
     )
       throw new Error('Некорректные параметры партии.');
@@ -161,7 +160,6 @@ export class Match {
       !s.config.strength ||
       !['elo', 'skill', 'training'].includes(s.config.strength.mode) ||
       !validTime(s.config.minutes, s.config.increment) ||
-
       !['w', 'b'].includes(s.human) ||
       !s.remaining ||
       !Number.isFinite(s.remaining.w) ||
@@ -188,4 +186,3 @@ export class Match {
     return match;
   }
 }
-

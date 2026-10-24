@@ -328,7 +328,11 @@ export function Play({ settings }: { settings: Settings }) {
                   />
                 </>
               )}
-              <TimeControl minutes={draft.minutes} increment={draft.increment} onChange={(minutes, increment) => setDraft({ ...draft, minutes, increment })} />
+              <TimeControl
+                minutes={draft.minutes}
+                increment={draft.increment}
+                onChange={(minutes, increment) => setDraft({ ...draft, minutes, increment })}
+              />
               <button
                 className="primary full"
                 onClick={() => {
@@ -419,6 +423,20 @@ export function Play({ settings }: { settings: Settings }) {
                   Заявить ничью · {game.claimableDraw()}
                 </button>
               )}
+              {api.drawMessage && (
+                <p className="quiet-note" role="status">
+                  {api.drawMessage}
+                </p>
+              )}
+              {!outcome && match.config.opponent === 'stockfish' && (
+                <button
+                  className="text-button full"
+                  disabled={!match.canInteract() || api.drawBusy}
+                  onClick={api.offerDraw}
+                >
+                  {api.drawBusy ? 'Оценка предложения…' : 'Предложить ничью'}
+                </button>
+              )}
               <div className="match-actions">
                 <button
                   className="secondary"
@@ -473,8 +491,32 @@ export function Play({ settings }: { settings: Settings }) {
                   )}
                 </div>
               )}
-              {history.length > 0 && <button className="secondary full" onClick={() => { api.pause(); openReview(api.gameId); }}>Разобрать партию бесплатно</button>}
-              {outcome && <button className="secondary full" onClick={() => { const side = api.start({ ...match.config, color: match.human === 'w' ? 'b' : 'w' }); setFlipped(side === 'b'); setViewPly(null); }}>Реванш · сменить цвет</button>}
+              {history.length > 0 && (
+                <button
+                  className="secondary full"
+                  onClick={() => {
+                    api.pause();
+                    openReview(api.gameId);
+                  }}
+                >
+                  Разобрать партию бесплатно
+                </button>
+              )}
+              {outcome && (
+                <button
+                  className="secondary full"
+                  onClick={() => {
+                    const side = api.start({
+                      ...match.config,
+                      color: match.human === 'w' ? 'b' : 'w',
+                    });
+                    setFlipped(side === 'b');
+                    setViewPly(null);
+                  }}
+                >
+                  Реванш · сменить цвет
+                </button>
+              )}
               {outcome && (
                 <button
                   className="primary full"
@@ -503,6 +545,3 @@ export function Play({ settings }: { settings: Settings }) {
     </>
   );
 }
-
-
-
