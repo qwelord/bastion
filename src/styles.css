@@ -2242,3 +2242,12 @@ main {
 .custom-time label { display:flex; justify-content:space-between; font-size:12px; }
 .custom-time output { color:var(--accent); }
 .custom-time input { width:100%; accent-color:var(--accent); }
+.game-library { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:20px; }
+.saved-game { padding:22px; min-width:0; }
+.saved-game-heading,.saved-game-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.saved-game-heading { color:var(--muted); font-size:12px; }
+.game-title { width:100%; font:600 19px inherit; color:var(--ink); border:0; border-bottom:1px solid transparent; background:transparent; padding:12px 0; }
+.game-title:focus { border-color:var(--accent); }
+.saved-game p { font-size:13px; color:var(--muted); }
+.saved-game textarea { resize:vertical; min-height:80px; width:100%; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:12px; color:var(--ink); margin:12px 0; font:inherit; font-size:13px; }
+.delete-confirm { padding-top:12px; border-top:1px solid var(--line); margin-top:12px; }
