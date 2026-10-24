@@ -1,4 +1,5 @@
 import { openReview } from '../data/games';
+import { initialPosition } from '../data/position';
 import { useRef } from 'react';
 import { moveSound, unlockSound } from '../chess/sound';
 import { TimeControl } from '../components/TimeControl';
@@ -81,17 +82,19 @@ export function Play({ settings }: { settings: Settings }) {
   const clocks = match.clocks(now);
   const top = flipped ? 'w' : 'b';
   const bottom = flipped ? 'b' : 'w';
+  const displayConfig = setup ? draft : match.config;
+  const displayHuman = setup && draft.color !== 'random' ? draft.color : match.human;
   const name = (side: 'w' | 'b') =>
-    match.config.opponent === 'stockfish'
-      ? side === match.human
+    displayConfig.opponent === 'stockfish'
+      ? side === displayHuman
         ? 'Вы'
         : 'Stockfish 19'
       : side === 'w'
         ? 'Белые'
         : 'Чёрные';
   const subtitle = (side: 'w' | 'b') =>
-    match.config.opponent === 'stockfish' && side !== match.human
-      ? `${match.config.engine === 'lite' ? 'Lite' : 'Full'} · ${strengthLabel(match.config.strength)}`
+    displayConfig.opponent === 'stockfish' && side !== displayHuman
+      ? `${displayConfig.engine === 'lite' ? 'Lite' : 'Full'} · ${strengthLabel(displayConfig.strength)}`
       : side === 'w'
         ? 'Белые фигуры'
         : 'Чёрные фигуры';
@@ -152,7 +155,7 @@ export function Play({ settings }: { settings: Settings }) {
           >
             <Board
               settings={settings}
-              position={game.position(ply)}
+              position={setup ? initialPosition : game.position(ply)}
               flipped={flipped}
               selected={selected}
               onSquare={interactive ? square : undefined}
@@ -168,8 +171,8 @@ export function Play({ settings }: { settings: Settings }) {
               movableSquares={movable}
               onDragStart={setSelected}
               legalTargets={selectedMoves.map((m) => m.to)}
-              checkedSquare={viewPly === null ? game.checkedKing() : undefined}
-              highlight={ply ? [history[ply - 1].from, history[ply - 1].to] : []}
+              checkedSquare={!setup && viewPly === null ? game.checkedKing() : undefined}
+              highlight={!setup && ply ? [history[ply - 1].from, history[ply - 1].to] : []}
             />
             {api.enginePhase === 'loading' && (
               <div className="engine-loading" role="status">
@@ -315,7 +318,10 @@ export function Play({ settings }: { settings: Settings }) {
                         <button
                           key={id}
                           aria-pressed={draft.color === id}
-                          onClick={() => setDraft({ ...draft, color: id })}
+                          onClick={() => {
+                            setDraft({ ...draft, color: id });
+                            if (id !== 'random') setFlipped(id === 'b');
+                          }}
                         >
                           {label}
                         </button>
@@ -394,6 +400,11 @@ export function Play({ settings }: { settings: Settings }) {
                 <p className="form-error" role="alert">
                   {api.error}
                 </p>
+              )}
+              {api.storageConflict && (
+                <button className="secondary full" onClick={() => location.reload()}>
+                  Открыть актуальную партию
+                </button>
               )}
               {!outcome && api.enginePhase !== 'loading' && (
                 <button

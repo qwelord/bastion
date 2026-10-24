@@ -10,43 +10,59 @@ export type StoredGame = {
 };
 const key = 'bastion.games.v1';
 export const selectedGameKey = 'bastion.review.selected';
+export function decodeGames(raw: string, strict = false): StoredGame[] {
+  if (raw.length > 8_000_000) throw new Error('Слишком большая библиотека.');
+  const list: unknown = JSON.parse(raw);
+  if (!Array.isArray(list) || list.length > 200) throw new Error('Неверный формат библиотеки.');
+  const valid = list.flatMap((value): StoredGame[] => {
+    try {
+      if (
+        !value ||
+        typeof value.id !== 'string' ||
+        !/^[\w-]{1,80}$/.test(value.id) ||
+        !Number.isFinite(value.created) ||
+        !Number.isFinite(value.updated)
+      )
+        return [];
+      const restored = Match.restore(value.match);
+      return [
+        {
+          id: value.id,
+          created: value.created,
+          updated: value.updated,
+          title: typeof value.title === 'string' ? value.title.slice(0, 120) : 'Партия',
+          note: typeof value.note === 'string' ? value.note.slice(0, 4000) : '',
+          favorite: value.favorite === true,
+          match: restored.save(0),
+        },
+      ];
+    } catch {
+      return [];
+    }
+  });
+  if (
+    strict &&
+    (valid.length !== list.length || new Set(valid.map((g) => g.id)).size !== valid.length)
+  )
+    throw new Error('Копия содержит повреждённые или повторяющиеся партии.');
+  return valid;
+}
 export function readGames(): StoredGame[] {
   try {
     const raw = localStorage.getItem(key);
     if (!raw || raw.length > 8_000_000) return [];
-    const list: unknown = JSON.parse(raw);
-    if (!Array.isArray(list)) return [];
-    return list.slice(0, 200).flatMap((value) => {
-      try {
-        if (
-          !value ||
-          typeof value.id !== 'string' ||
-          !/^[\w-]{1,80}$/.test(value.id) ||
-          !Number.isFinite(value.created) ||
-          !Number.isFinite(value.updated)
-        )
-          return [];
-        Match.restore(value.match);
-        return [
-          {
-            id: value.id,
-            created: value.created,
-            updated: value.updated,
-            title: typeof value.title === 'string' ? value.title.slice(0, 120) : 'Партия',
-            note: typeof value.note === 'string' ? value.note.slice(0, 4000) : '',
-            favorite: value.favorite === true,
-            match: value.match,
-          },
-        ];
-      } catch {
-        return [];
-      }
-    });
+    return decodeGames(raw);
   } catch {
     return [];
   }
 }
 export function writeGames(games: StoredGame[]) {
+  const old = localStorage.getItem(key);
+  if (old) decodeGames(old, true);
+  if (games.length > 200)
+    throw new Error(
+      'В библиотеке уже 200 партий. Удалите ненужные партии перед добавлением новых.',
+    );
   const data = JSON.stringify(games.slice(0, 200));
   if (data.length > 8_000_000) throw new Error('Библиотека заполнена. Удалите ненужные партии.');
   try {
@@ -59,7 +75,7 @@ export function writeGames(games: StoredGame[]) {
   window.dispatchEvent(new Event('bastion:games'));
 }
 export function archiveGame(id: string, match: SavedMatch) {
-  if (!match.started || !match.pgn.includes('1.')) return;
+  if (!match.started || !Match.restore(match).game.history().length) return;
   const games = readGames();
   const old = games.find((g) => g.id === id);
   const now = Date.now();

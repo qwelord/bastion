@@ -1,8 +1,9 @@
+import { LibraryBackup } from '../components/LibraryBackup';
 import { useState } from 'react';
 import { readProfile, saveProfile } from '../data/profile';
 import { unlockSound, moveSound } from '../chess/sound';
 import type { Dispatch, SetStateAction } from 'react';
-import { Check, RotateCcw, Eye, Sparkles } from 'lucide-react';
+import { Check, RotateCcw, Eye, Sparkles, Volume2 } from 'lucide-react';
 import { Board } from '../components/Board';
 import { defaults, type Settings as SettingsType } from '../state';
 import { demoPosition } from '../data/demo';
@@ -40,6 +41,7 @@ export function Settings({
             </label>
             <input
               id="profile-name"
+              type="text"
               maxLength={40}
               value={profile}
               onChange={(e) => setProfile(e.target.value)}
@@ -106,7 +108,10 @@ export function Settings({
             <h2>Детали</h2>
             <label className="toggle-row">
               <span>
-                Звуки ходов<small>Тихий отклик на ход, взятие и шах</small>
+                <Volume2 size={18} />
+                <span>
+                  Звуки ходов<small>Тихий отклик на ход, взятие и шах</small>
+                </span>
               </span>
               <input
                 type="checkbox"
@@ -161,6 +166,7 @@ export function Settings({
               />
             </label>
           </section>
+          <LibraryBackup />
           <p className="quiet-note">
             Настройки сохраняются в этом браузере. Классический набор Cburnett из Lichess.
           </p>

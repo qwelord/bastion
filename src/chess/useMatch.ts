@@ -48,7 +48,9 @@ export function useMatch() {
     return crypto.randomUUID();
   });
   const idRef = useRef<string>(gameId);
+  const conflict = useRef(false);
   const save = () => {
+    if (conflict.current) return;
     try {
       persist(matchRef.current);
       localStorage.setItem('bastion.match.id', idRef.current);
@@ -66,11 +68,15 @@ export function useMatch() {
   const stop = () => {
     intent.current++;
     client.cancel();
+    drawEngine.cancel();
+    setDrawBusy(false);
+    setDrawMessage('');
     setPromotion(null);
     setError('');
   };
   useEffect(() => {
     const checkpoint = () => {
+      if (conflict.current) return;
       try {
         persist(matchRef.current);
         archiveGame(idRef.current, matchRef.current.save(performance.now()));
@@ -81,6 +87,15 @@ export function useMatch() {
     const visibility = () => {
       if (document.visibilityState === 'hidden') checkpoint();
     };
+    const externalSave = (event: StorageEvent) => {
+      if (event.key !== STORAGE || event.newValue === event.oldValue) return;
+      conflict.current = true;
+      stop();
+      matchRef.current.pause(performance.now());
+      setEnginePhase('idle');
+      publish();
+    };
+    window.addEventListener('storage', externalSave);
     window.addEventListener('pagehide', checkpoint);
     document.addEventListener('visibilitychange', visibility);
     const timer = setInterval(() => {
@@ -95,9 +110,12 @@ export function useMatch() {
       clearInterval(timer);
       window.removeEventListener('pagehide', checkpoint);
       document.removeEventListener('visibilitychange', visibility);
+      window.removeEventListener('storage', externalSave);
       try {
-        persist(matchRef.current);
-        archiveGame(idRef.current, matchRef.current.save(performance.now()));
+        if (!conflict.current) {
+          persist(matchRef.current);
+          archiveGame(idRef.current, matchRef.current.save(performance.now()));
+        }
       } catch {
         /* Reported during normal saves. */
       }
@@ -179,6 +197,7 @@ export function useMatch() {
     };
   }, [version, client]);
   async function activate(match: Match) {
+    if (conflict.current) return;
     const token = ++intent.current;
     setError('');
     setPromotion(null);
@@ -205,6 +224,7 @@ export function useMatch() {
     stop();
     client.dispose();
     save();
+    conflict.current = false;
     idRef.current = crypto.randomUUID();
     const match = new Match(config);
     match.game.setPlayers(
@@ -294,7 +314,7 @@ export function useMatch() {
     } catch (e) {
       if (intent.current === token) setDrawMessage((e as Error).message);
     } finally {
-      setDrawBusy(false);
+      if (intent.current === token && matchRef.current === match) setDrawBusy(false);
     }
   }
   function updateStrength(strength: Strength) {
@@ -312,7 +332,10 @@ export function useMatch() {
     enginePhase,
     engineName,
     depth,
-    error: error || storageError,
+    error: conflict.current
+      ? 'Партия изменилась в другой вкладке. Перезагрузите страницу, чтобы открыть актуальное сохранение, или начните новую партию.'
+      : error || storageError,
+    storageConflict: conflict.current,
     gameId: idRef.current,
     promotion,
     start,

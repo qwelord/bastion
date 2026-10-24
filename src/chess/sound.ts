@@ -8,7 +8,7 @@ export function unlockSound() {
   }
 }
 export function moveSound(capture: boolean, check: boolean, finished: boolean, volume: number) {
-  if (!context || context.state !== 'running') return;
+  if (!context || context.state !== 'running' || !Number.isFinite(volume) || volume <= 0) return;
   const t = context.currentTime;
   for (let n = 0; n < (finished ? 3 : 1); n++) {
     const oscillator = context.createOscillator();

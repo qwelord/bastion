@@ -157,3 +157,35 @@ test('cancelled startup cannot leak an old bestmove into a new request', async (
   assert.equal((await fresh).move, 'e2e4');
   client.dispose();
 });
+
+test(
+  'real Stockfish analysis returns three legal scored variations at bounded depth',
+  { timeout: 25000 },
+  async (t) => {
+    const client = new StockfishClient((kind) => nodeEngine(kind));
+    t.after(() => client.dispose());
+    const game = new ChessGame();
+    const reply = await client.search({
+      kind: 'lite',
+      position: game.enginePosition(),
+      strength: { mode: 'skill', value: 20 },
+      legalCount: 20,
+      analysis: { lines: 3, depth: 6 },
+    });
+    assert.equal(reply.lines.length, 3);
+    assert.ok(reply.depth >= 6);
+    for (const line of reply.lines) {
+      assert.ok(Number.isFinite(line.score));
+      assert.ok(line.depth >= 5);
+      const variation = new ChessGame();
+      for (const move of line.pv)
+        assert.ok(
+          variation.play({
+            from: move.slice(0, 2),
+            to: move.slice(2, 4),
+            ...(move[4] ? { promotion: move[4] as 'q' } : {}),
+          }),
+        );
+    }
+  },
+);

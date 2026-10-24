@@ -1281,25 +1281,28 @@ input[type='range'] {
   font-size: 16px;
 }
 :root[data-theme='light'] {
-  --bg: #f7f8f5;
+  color-scheme: light;
+  --bg: #f5f4f1;
   --surface: #fff;
-  --side: #fff;
-  --ink: #252e29;
-  --muted: #656f67;
-  --line: #dce1da;
-  --accent: #425d4c;
-  --soft: #edf1e9;
+  --side: #efede8;
+  --ink: #292622;
+  --muted: #70695f;
+  --line: #dbd6ce;
+  --accent: #755331;
+  --accent-ink: #fff;
+  --soft: #eee8dd;
 }
 :root[data-theme='evening'] {
-  --bg: #242b27;
-  --surface: #303932;
-  --side: #202722;
-  --ink: #ebede4;
-  --muted: #b0bbaf;
-  --line: #465146;
-  --accent: #bdccad;
-  --accent-ink: #253023;
-  --soft: #3b493d;
+  color-scheme: dark;
+  --bg: #1c1c1d;
+  --surface: #272629;
+  --side: #171719;
+  --ink: #eee9e3;
+  --muted: #afa6a0;
+  --line: #3f3a39;
+  --accent: #d2b17a;
+  --accent-ink: #241f19;
+  --soft: #34302d;
   --shadow: 0 16px 50px #0002;
 }
 [data-theme='evening'] .nav-link.active {
@@ -2336,7 +2339,9 @@ main {
 }
 .game-title {
   width: 100%;
-  font: 600 19px inherit;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 600;
   color: var(--ink);
   border: 0;
   border-bottom: 1px solid transparent;
@@ -2449,14 +2454,17 @@ main {
 }
 .chart-steps button {
   flex: 1;
-  min-width: 12px;
-  height: 20px;
+  min-width: 42px;
+  height: 36px;
+  color: var(--ink);
+  font-size: 11px;
   background: var(--soft);
   border: 1px solid var(--bg);
   border-radius: 3px;
 }
 .chart-steps button[aria-pressed='true'] {
   background: var(--accent);
+  color: var(--accent-ink);
 }
 .critical-moves {
   display: grid;
@@ -2497,4 +2505,54 @@ main {
 .volume-control input {
   accent-color: var(--accent);
   width: 100%;
+}
+.library-backup {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+}
+.library-backup summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+.backup-file {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+  font-size: 13px;
+}
+.backup-file input {
+  width: 100%;
+  font-size: 12px;
+}
+#profile-name {
+  width: 100%;
+  max-width: 360px;
+  font: inherit;
+  padding: 12px 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-top: 8px;
+}
+.board-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.board-options button {
+  position: relative;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 10px;
+  gap: 10px;
+}
+.board-options button svg {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+}
+.board-options button span:last-of-type {
+  overflow-wrap: anywhere;
 }

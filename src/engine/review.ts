@@ -94,6 +94,7 @@ export class ReviewService {
     onRow: (row: ReviewRow, total: number) => void,
     signal: AbortSignal,
   ) {
+    if (signal.aborted) throw new DOMException('Отменено', 'AbortError');
     const original = ChessGame.fromPgn(pgn);
     const moves = original.history();
     if (!moves.length) throw new Error('Сначала сыграйте несколько ходов.');

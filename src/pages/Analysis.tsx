@@ -27,6 +27,7 @@ export function Analysis({ settings }: { settings: Settings }) {
   const [flipped, setFlipped] = useState(false);
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [busy, setBusy] = useState(false);
+  const [stopped, setStopped] = useState(false);
   const [error, setError] = useState('');
   const [kind, setKind] = useState<EngineKind>('lite');
   const [budget, setBudget] = useState(700);
@@ -43,6 +44,7 @@ export function Analysis({ settings }: { settings: Settings }) {
     abort.current?.abort();
     service.cancel();
     setBusy(false);
+    setStopped(true);
   }
   async function review() {
     if (!stored) return;
@@ -52,6 +54,7 @@ export function Analysis({ settings }: { settings: Settings }) {
     setRows([]);
     setError('');
     setBusy(true);
+    setStopped(false);
     try {
       await service.review(
         stored.match.pgn,
@@ -174,7 +177,9 @@ export function Analysis({ settings }: { settings: Settings }) {
                     aria-pressed={ply === r.ply}
                     title={`${r.san}: ${r.label}`}
                     onClick={() => setPly(r.ply)}
-                  />
+                  >
+                    {r.san}
+                  </button>
                 ))}
               </div>
             </div>
@@ -250,7 +255,9 @@ export function Analysis({ settings }: { settings: Settings }) {
                   ? 'Разбор завершён'
                   : rows.length
                     ? 'Разбор остановлен. Готовые оценки доступны.'
-                    : 'Расчёт начнётся по нажатию кнопки.'}
+                    : stopped
+                      ? 'Расчёт остановлен.'
+                      : 'Расчёт начнётся по нажатию кнопки.'}
             </span>
             <progress max={history.length || 1} value={rows.length} />
           </div>
@@ -268,8 +275,12 @@ export function Analysis({ settings }: { settings: Settings }) {
                 {current.best ? `Сильнейшее продолжение: ${current.best}.` : ''} Глубина{' '}
                 {current.depth}.
               </p>
-              {current.loss >= 25 && (
-                <p>Потеря оценки: {Math.min(999, current.loss / 100).toFixed(2)} пешки.</p>
+              {Math.abs(current.before) > 90000 || Math.abs(current.after) > 90000 ? (
+                <p>В позиции есть форсированный мат. Сравните варианты движка.</p>
+              ) : (
+                current.loss >= 25 && (
+                  <p>Потеря оценки: {Math.min(999, current.loss / 100).toFixed(2)} пешки.</p>
+                )
               )}
               <details>
                 <summary>Варианты Stockfish</summary>
