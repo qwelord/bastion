@@ -2556,3 +2556,14 @@ main {
 .board-options button span:last-of-type {
   overflow-wrap: anywhere;
 }
+.drag-piece {
+  top: 0;
+  left: 0;
+  will-change: transform;
+  contain: layout style paint;
+  transition: none;
+}
+.drag-piece .piece {
+  animation: none !important;
+  transition: none !important;
+}

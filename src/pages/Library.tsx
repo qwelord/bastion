@@ -11,8 +11,16 @@ export function Library() {
   const [deleting, setDeleting] = useState<string>();
   function save(next: StoredGame[]) {
     try {
-      writeGames(next);
-      setGames(next);
+      const existing = new Map(readGames().map((game) => [game.id, game]));
+      const stamped = next.map((game) => {
+        const old = existing.get(game.id);
+        return old &&
+          (old.title !== game.title || old.note !== game.note || old.favorite !== game.favorite)
+          ? { ...game, updated: Date.now() }
+          : game;
+      });
+      writeGames(stamped);
+      setGames(stamped);
       setError('');
     } catch (e) {
       setError((e as Error).message);

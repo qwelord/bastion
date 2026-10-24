@@ -1,3 +1,4 @@
+import { MatchClock } from '../components/MatchClock';
 import { openReview } from '../data/games';
 import { initialPosition } from '../data/position';
 import { useRef } from 'react';
@@ -28,14 +29,9 @@ import { normalizeStrength, strengthLabel } from '../engine/strength';
 import type { MatchConfig } from '../chess/match';
 import type { Settings } from '../state';
 
-function clock(ms: number, unlimited: boolean) {
-  if (unlimited) return '∞';
-  const seconds = Math.ceil(Math.max(0, ms) / 1000);
-  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
-}
 export function Play({ settings }: { settings: Settings }) {
   const api = useMatch();
-  const { match, now } = api;
+  const { match } = api;
   const game = match.game;
   const history = game.history();
   const outcome = game.outcome();
@@ -79,7 +75,7 @@ export function Play({ settings }: { settings: Settings }) {
     setViewPly(n === history.length ? null : n);
     setSelected(undefined);
   }
-  const clocks = match.clocks(now);
+
   const top = flipped ? 'w' : 'b';
   const bottom = flipped ? 'b' : 'w';
   const displayConfig = setup ? draft : match.config;
@@ -137,17 +133,7 @@ export function Play({ settings }: { settings: Settings }) {
                 <small>{subtitle(top)}</small>
               </span>
             </div>
-            <span
-              className={
-                'player-time ' +
-                (!match.paused && game.turn() === top && !outcome ? 'clock-active' : '')
-              }
-            >
-              {clock(
-                setup ? draft.minutes * 60000 : clocks[top],
-                setup ? draft.minutes === 0 : match.config.minutes === 0,
-              )}
-            </span>
+            <MatchClock match={match} side={top} setupMinutes={setup ? draft.minutes : undefined} />
           </div>
           <div
             className={'board-stage' + (!settings.coordinates ? ' without-coordinates' : '')}
@@ -197,17 +183,12 @@ export function Play({ settings }: { settings: Settings }) {
                 <small>{subtitle(bottom)}</small>
               </span>
             </div>
-            <span
-              className={
-                'player-time yours ' +
-                (!match.paused && game.turn() === bottom && !outcome ? 'clock-active' : '')
-              }
-            >
-              {clock(
-                setup ? draft.minutes * 60000 : clocks[bottom],
-                setup ? draft.minutes === 0 : match.config.minutes === 0,
-              )}
-            </span>
+            <MatchClock
+              match={match}
+              side={bottom}
+              setupMinutes={setup ? draft.minutes : undefined}
+              yours
+            />
           </div>
           <div className="board-toolbar">
             <span>

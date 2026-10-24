@@ -9,6 +9,7 @@ import {
   type CSSProperties,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { DragMotion } from './dragMotion';
 const names: Record<string, string> = {
   p: 'пешка',
   r: 'ладья',
@@ -67,6 +68,8 @@ export function Board({
     movableSquares?.[0] ?? (flipped ? 'e7' : 'e2'),
   );
   const boardRef = useRef<HTMLDivElement>(null);
+  const ghostRef = useRef<HTMLDivElement | null>(null);
+  const overRef = useRef<HTMLElement | null>(null);
   const gesture = useRef<{
     from: string;
     code: string;
@@ -78,6 +81,10 @@ export function Board({
     capture: HTMLElement;
     pointerId: number;
     active: boolean;
+    rect: DOMRect;
+    files: string;
+    ranks: string;
+    cells: Map<string, HTMLElement>;
   } | null>(null);
   const suppressClick = useRef(false);
   const lastDrag = useRef('');
@@ -88,28 +95,63 @@ export function Board({
   const [drag, setDrag] = useState<{
     from: string;
     code: string;
-    x: number;
-    y: number;
     size: number;
-    over?: string;
   } | null>(null);
+  const [motion] = useState(
+    () =>
+      new DragMotion(({ x, y }) => {
+        const g = gesture.current;
+        if (!g) return;
+        if (ghostRef.current)
+          ghostRef.current.style.transform = `translate3d(${x - g.offsetX}px, ${y - g.offsetY}px, 0)`;
+        const square = squareAt(x, y, g.rect, g.files, g.ranks);
+        const next = square ? (g.cells.get(square) ?? null) : null;
+        if (next !== overRef.current) {
+          overRef.current?.classList.remove('drop-target');
+          next?.classList.add('drop-target');
+          overRef.current = next;
+        }
+      }),
+  );
+  function cancelDrag() {
+    const g = gesture.current;
+    gesture.current = null;
+    motion.cancel();
+    overRef.current?.classList.remove('drop-target');
+    overRef.current = null;
+    if (g?.capture.hasPointerCapture(g.pointerId)) g.capture.releasePointerCapture(g.pointerId);
+    setDrag(null);
+  }
   const positionKey = JSON.stringify(position);
   useEffect(() => {
-    gesture.current = null;
-    setDrag(null);
-  }, [positionKey, flipped]);
-  function squareAt(x: number, y: number) {
-    const rect = boardRef.current?.getBoundingClientRect();
-    if (!rect || x < rect.left || x >= rect.right || y < rect.top || y >= rect.bottom)
-      return undefined;
+    cancelDrag();
+  }, [positionKey, flipped, !!onMove]);
+  useEffect(() => {
+    window.addEventListener('blur', cancelDrag);
+    window.addEventListener('resize', cancelDrag);
+    window.addEventListener('scroll', cancelDrag, true);
+    return () => {
+      window.removeEventListener('blur', cancelDrag);
+      window.removeEventListener('resize', cancelDrag);
+      window.removeEventListener('scroll', cancelDrag, true);
+      motion.cancel();
+      const g = gesture.current;
+      gesture.current = null;
+      if (g?.capture.hasPointerCapture(g.pointerId)) g.capture.releasePointerCapture(g.pointerId);
+    };
+  }, [motion]);
+  function squareAt(x: number, y: number, rect: DOMRect, boardFiles: string, boardRanks: string) {
+    if (x < rect.left || x >= rect.right || y < rect.top || y >= rect.bottom) return undefined;
     return (
-      files[Math.floor(((x - rect.left) / rect.width) * 8)] +
-      ranks[Math.floor(((y - rect.top) / rect.height) * 8)]
+      boardFiles[Math.floor(((x - rect.left) / rect.width) * 8)] +
+      boardRanks[Math.floor(((y - rect.top) / rect.height) * 8)]
     );
   }
   function down(event: PointerEvent<HTMLButtonElement>, square: string) {
     if (
       event.button !== 0 ||
+      !event.isPrimary ||
+      gesture.current ||
       !onMove ||
       !position[square] ||
       (movableSquares && !movableSquares.includes(square))
@@ -127,6 +169,15 @@ export function Board({
       capture: event.currentTarget,
       pointerId: event.pointerId,
       active: false,
+      rect: boardRef.current!.getBoundingClientRect(),
+      files,
+      ranks,
+      cells: new Map(
+        Array.from(boardRef.current!.querySelectorAll<HTMLElement>('[data-square]')).map((cell) => [
+          cell.dataset.square!,
+          cell,
+        ]),
+      ),
     };
     event.currentTarget.setPointerCapture(event.pointerId);
   }
@@ -134,31 +185,24 @@ export function Board({
     const g = gesture.current;
     if (!g || g.pointerId !== event.pointerId) return;
     if (!g.active && Math.hypot(event.clientX - g.startX, event.clientY - g.startY) < 5) return;
-    if (!g.active) onDragStart?.(g.from);
-    g.active = true;
+    if (!g.active) {
+      g.active = true;
+      onDragStart?.(g.from);
+      setDrag({ from: g.from, code: g.code, size: g.size });
+    }
     event.preventDefault();
-    setDrag({
-      from: g.from,
-      code: g.code,
-      x: event.clientX - g.offsetX,
-      y: event.clientY - g.offsetY,
-      size: g.size,
-      over: squareAt(event.clientX, event.clientY),
-    });
+    motion.move(event.clientX, event.clientY);
   }
   function end(event: PointerEvent<HTMLDivElement>, cancel = false) {
     const g = gesture.current;
     if (!g || g.pointerId !== event.pointerId) return;
-    gesture.current = null;
-    setDrag(null);
-    if (g.capture.hasPointerCapture(event.pointerId))
-      g.capture.releasePointerCapture(event.pointerId);
+    cancelDrag();
     if (g.active) {
       suppressClick.current = true;
       setTimeout(() => {
         suppressClick.current = false;
       }, 0);
-      const to = squareAt(event.clientX, event.clientY);
+      const to = squareAt(event.clientX, event.clientY, g.rect, g.files, g.ranks);
       if (!cancel && to && to !== g.from) {
         lastDrag.current = g.from + to;
         onMove?.(g.from, to);
@@ -212,6 +256,7 @@ export function Board({
           onPointerMove={moving}
           onPointerUp={(event) => end(event)}
           onPointerCancel={(event) => end(event, true)}
+          onLostPointerCapture={(event) => end(event, true)}
           onKeyDown={keyboard}
         >
           {[...ranks].flatMap((rank, row) =>
@@ -227,7 +272,6 @@ export function Board({
                     (highlight.includes(square) ? ' last-move' : '') +
                     (selected === square ? ' selected' : '') +
                     (drag?.from === square ? ' drag-source' : '') +
-                    (drag?.over === square ? ' drop-target' : '') +
                     (checkedSquare === square ? ' in-check' : '')
                   }
                   data-square={square}
@@ -296,8 +340,12 @@ export function Board({
         createPortal(
           <div
             className="drag-piece"
+            ref={(node) => {
+              ghostRef.current = node;
+              if (node) motion.flush();
+            }}
             aria-hidden="true"
-            style={{ left: drag.x, top: drag.y, width: drag.size, height: drag.size }}
+            style={{ width: drag.size, height: drag.size }}
           >
             <Piece code={drag.code} />
           </div>,

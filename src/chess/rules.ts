@@ -52,6 +52,12 @@ export function validatePosition(fen: string): Chess {
 export class ChessGame {
   private chess: Chess;
   private forced: Outcome | null = null;
+  private cachedHistory: Move[] | null = null;
+  private cachedOutcome: Outcome | null | undefined;
+  private invalidate() {
+    this.cachedHistory = null;
+    this.cachedOutcome = undefined;
+  }
   constructor(fen = DEFAULT_POSITION) {
     this.chess = validatePosition(fen);
   }
@@ -67,7 +73,7 @@ export class ChessGame {
     game.chess = parsed;
     const result = parsed.getHeaders().Result;
     if (!game.outcome() && ['1-0', '0-1', '1/2-1/2'].includes(result))
-      game.forced = { result: result as Outcome['result'], reason: 'Результат из PGN' };
+      game.finish({ result: result as Outcome['result'], reason: 'Результат из PGN' });
     return game;
   }
   fen() {
@@ -77,7 +83,7 @@ export class ChessGame {
     return this.chess.turn();
   }
   history() {
-    return this.chess.history({ verbose: true });
+    return (this.cachedHistory ??= this.chess.history({ verbose: true })).slice();
   }
   position(ply = this.history().length): Position {
     const history = this.history();
@@ -109,12 +115,15 @@ export class ChessGame {
   play(move: MoveInput | string): Move | null {
     if (this.outcome()) return null;
     try {
-      return this.chess.move(move);
+      const result = this.chess.move(move);
+      this.invalidate();
+      return result;
     } catch {
       return null;
     }
   }
   undo() {
+    this.invalidate();
     this.forced = null;
     this.chess.removeHeader('Result');
     return this.chess.undo();
@@ -127,8 +136,9 @@ export class ChessGame {
   }
   repetitionCount() {
     const history = this.history();
+    const current = key(this.fen());
     return [history[0]?.before ?? this.fen(), ...history.map((m) => m.after)].filter(
-      (fen) => key(fen) === key(this.fen()),
+      (fen) => key(fen) === current,
     ).length;
   }
   claimableDraw(): string | null {
@@ -138,6 +148,10 @@ export class ChessGame {
     return null;
   }
   outcome(): Outcome | null {
+    if (this.cachedOutcome === undefined) this.cachedOutcome = this.computeOutcome();
+    return this.cachedOutcome;
+  }
+  private computeOutcome(): Outcome | null {
     if (this.forced) return this.forced;
     if (this.chess.isCheckmate())
       return { result: this.turn() === 'w' ? '0-1' : '1-0', reason: 'Мат' };
@@ -150,9 +164,11 @@ export class ChessGame {
     return null;
   }
   finish(outcome: Outcome) {
+    this.cachedOutcome = undefined;
     this.forced = outcome;
   }
   restoreOutcome(outcome: Outcome | null) {
+    this.cachedOutcome = undefined;
     this.forced = outcome;
   }
   claimDraw() {

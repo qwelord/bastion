@@ -29,7 +29,7 @@ export function useMatch() {
   const matchRef = useRef(initial);
   const [client] = useState(() => new StockfishClient());
   const [version, setVersion] = useState(0);
-  const [now, setNow] = useState(() => performance.now());
+
   const [enginePhase, setEnginePhase] = useState<
     'idle' | 'loading' | 'thinking' | 'ready' | 'error'
   >('idle');
@@ -63,7 +63,6 @@ export function useMatch() {
   const intent = useRef(0);
   const publish = () => {
     setVersion((v) => v + 1);
-    setNow(performance.now());
   };
   const stop = () => {
     intent.current++;
@@ -104,7 +103,6 @@ export function useMatch() {
         client.cancel();
         publish();
       }
-      setNow(n);
     }, 100);
     return () => {
       clearInterval(timer);
@@ -327,7 +325,7 @@ export function useMatch() {
   }
   return {
     match: matchRef.current,
-    now,
+
     version,
     enginePhase,
     engineName,
