@@ -1,23 +1,293 @@
 import { useState } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, RotateCcw, Repeat2, Swords, SlidersHorizontal, Check, Circle } from 'lucide-react';
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Repeat2,
+  Swords,
+  SlidersHorizontal,
+  Check,
+  Circle,
+} from 'lucide-react';
 import { Board } from '../components/Board';
 import { demoPosition, moves } from '../data/demo';
 import type { Settings } from '../state';
-export function Play({settings}:{settings:Settings}){
- const [color,setColor]=useState('white');const [time,setTime]=useState('10 + 0');const [level,setLevel]=useState(3);const [started,setStarted]=useState(false);const [ply,setPly]=useState(0);const [flipped,setFlipped]=useState(false);const [selected,setSelected]=useState<string>();const [hint,setHint]=useState('');
- const levels=['Знакомство','Любитель','Клубный','Сильный','Максимум'];
- const step=()=>{setPly(p=>Math.min(p+1,moves.length));setSelected(undefined);setHint('');};
- const square=(s:string)=>{if(!started){setHint('Начните демонстрацию, чтобы пройти сценарий партии.');return;}const m=moves[ply];if(!m){setHint('Образец завершён. Можно открыть его разбор.');return;}if(s===m[0]){setSelected(s);setHint(`Теперь выберите поле ${m[1]}.`);}else if(selected===m[0]&&s===m[1])step();else{setSelected(undefined);setHint(`В этом образце следующий ход: ${m[2]}. Выберите ${m[0]}, затем ${m[1]}.`);}};
- return <><div className="page-intro"><div><h1>Время для шахмат.</h1><p>Сосредоточьтесь на доске. Всё остальное подождёт.</p></div><a href="#learn" className="text-button intro-link">Сначала потренироваться <ArrowRight size={16}/></a></div>
- <div className="play-layout"><section className="board-column" aria-label="Игровое поле"><div className="player-row"><div className="player-identity"><span className="opponent-icon"><Swords size={20}/></span><span>Bastion<small>{started?'Демонстрационный соперник':'Ваш будущий соперник'}</small></span></div><span className="player-time">{time.split(' ')[0]}:00</span></div>
- <Board settings={settings} position={demoPosition(ply)} flipped={flipped} selected={selected} onSquare={square} highlight={ply?moves[ply-1].slice(0,2):[]}/>
- <div className="player-row"><div className="player-identity"><span className="player-avatar">Вы</span><span>Ваша сторона<small>{flipped?'Чёрные фигуры':'Белые фигуры'}</small></span></div><span className="player-time yours">{time.split(' ')[0]}:00</span></div>
- <div className="board-toolbar"><span>{started?`Образец партии · ${Math.ceil(ply/2)} / 8 ходов`:'Начальная позиция'}</span><div><button className="icon-button" aria-label="Перевернуть доску" onClick={()=>setFlipped(!flipped)}><Repeat2 size={17}/></button><button className="icon-button" aria-label="К началу партии" onClick={()=>setPly(0)}><RotateCcw size={16}/></button><button className="icon-button" aria-label="Предыдущий ход" disabled={ply===0} onClick={()=>setPly(ply-1)}><ChevronLeft size={20}/></button><button className="icon-button" aria-label="Следующий ход" disabled={!started||ply===moves.length} onClick={step}><ChevronRight size={20}/></button></div></div>{hint&&<p className="board-feedback" role="status">{hint}</p>}</section>
- <aside className="game-panel surface">{!started?<><div className="panel-heading"><h2>Новая партия</h2><SlidersHorizontal size={19}/></div><p className="panel-subtitle">Выберите свой ритм игры.</p><div className="field-group"><span className="field-label">За какую сторону?</span><div className="segmented color-choice">{[['white','Белые'],['random','Случайно'],['black','Чёрные']].map(([id,label])=><button key={id} aria-pressed={color===id} onClick={()=>setColor(id)}>{id==='random'?<Swords size={20}/>:<Circle size={20} fill={id==='white'?'#eee5d2':'#40382e'} stroke="#948b79"/>}{label}</button>)}</div></div>
- <div className="field-group"><span className="field-label">Время на партию</span><div className="segmented">{['5 + 0','10 + 0','15 + 10'].map(t=><button key={t} aria-pressed={time===t} onClick={()=>setTime(t)}>{t}</button>)}</div></div>
- <div className="field-group strength"><div><label className="field-label" htmlFor="level">Сила соперника</label><strong>{levels[level-1]}</strong></div><input id="level" aria-label="Сила соперника" type="range" min="1" max="5" value={level} onChange={e=>setLevel(Number(e.target.value))}/><div className="range-labels"><span>Легче</span><span>Сильнее</span></div></div><button className="primary full" onClick={()=>{setStarted(true);setPly(0);setHint('');setFlipped(color==='black'||(color==='random'&&Math.random()>.5));}}>Начать демонстрацию <ArrowRight size={17}/></button><p className="quiet-note demo-disclosure">Сейчас доступен сценарий из 8 ходов. Компьютерный движок и часы появятся на следующих этапах.</p>
- </>:<><div className="panel-heading"><h2>Испанская партия</h2><span className="tag">Демо</span></div><p className="panel-subtitle">Пройдите первые ходы классического дебюта.</p><div className="move-list compact">{Array.from({length:Math.ceil(ply/2)},(_,i)=><div key={i}><span>{i+1}.</span><button onClick={()=>setPly(i*2+1)}>{moves[i*2][2]}</button><button disabled={i*2+1>=ply} onClick={()=>setPly(i*2+2)}>{i*2+1<ply?moves[i*2+1][2]:''}</button></div>)}{ply===0&&<p className="muted">Первый ход белых — e4.</p>}</div><div className="notice"><Check size={16}/> {ply===moves.length?'Демонстрация завершена. Переходите к разбору.':`Следующий ход: ${moves[ply][2]}. Нажмите ${moves[ply][0]}, затем ${moves[ply][1]}.`}</div><div className="game-actions">{ply<moves.length?<button className="primary full" onClick={step}>Показать следующий ход <ArrowRight size={16}/></button>:<a className="primary full" href="#analysis">Открыть разбор <ArrowRight size={16}/></a>}<button className="secondary full" onClick={()=>{setStarted(false);setPly(0);setSelected(undefined);setHint('');}}>Параметры партии</button></div><p className="quiet-note">Параметры сохранены для этого сеанса. В демо используются заданные ходы, часы не идут.</p></>}
- <div className="panel-foot"><BookHint/></div></aside></div>
- <a className="learning-strip" href="#lesson"><span className="strip-icon"><Swords size={23}/></span><span><strong>Один мотив. Много выигранных партий.</strong><small>Попробуйте урок о мате на последней горизонтали.</small></span><span className="strip-action">Открыть урок <ArrowRight size={17}/></span></a></>;
+export function Play({ settings }: { settings: Settings }) {
+  const [color, setColor] = useState('white');
+  const [time, setTime] = useState('10 + 0');
+  const [level, setLevel] = useState(3);
+  const [started, setStarted] = useState(false);
+  const [ply, setPly] = useState(0);
+  const [flipped, setFlipped] = useState(false);
+  const [selected, setSelected] = useState<string>();
+  const [hint, setHint] = useState('');
+  const levels = ['Знакомство', 'Любитель', 'Клубный', 'Сильный', 'Максимум'];
+  const step = () => {
+    setPly((p) => Math.min(p + 1, moves.length));
+    setSelected(undefined);
+    setHint('');
+  };
+  const square = (s: string) => {
+    if (!started) {
+      setHint('Начните демонстрацию, чтобы пройти сценарий партии.');
+      return;
+    }
+    const m = moves[ply];
+    if (!m) {
+      setHint('Образец завершён. Можно открыть его разбор.');
+      return;
+    }
+    if (s === m[0]) {
+      setSelected(s);
+      setHint(`Теперь выберите поле ${m[1]}.`);
+    } else if (selected === m[0] && s === m[1]) step();
+    else {
+      setSelected(undefined);
+      setHint(`В этом образце следующий ход: ${m[2]}. Выберите ${m[0]}, затем ${m[1]}.`);
+    }
+  };
+  return (
+    <>
+      <div className="page-intro">
+        <div>
+          <h1>Время для шахмат.</h1>
+          <p>Сосредоточьтесь на доске. Всё остальное подождёт.</p>
+        </div>
+        <a href="#learn" className="text-button intro-link">
+          Сначала потренироваться <ArrowRight size={16} />
+        </a>
+      </div>
+      <div className="play-layout">
+        <section className="board-column" aria-label="Игровое поле">
+          <div className="player-row">
+            <div className="player-identity">
+              <span className="opponent-icon">
+                <Swords size={20} />
+              </span>
+              <span>
+                Bastion
+                <small>{started ? 'Демонстрационный соперник' : 'Ваш будущий соперник'}</small>
+              </span>
+            </div>
+            <span className="player-time">{time.split(' ')[0]}:00</span>
+          </div>
+          <Board
+            settings={settings}
+            position={demoPosition(ply)}
+            flipped={flipped}
+            selected={selected}
+            onSquare={square}
+            highlight={ply ? moves[ply - 1].slice(0, 2) : []}
+          />
+          <div className="player-row">
+            <div className="player-identity">
+              <span className="player-avatar">Вы</span>
+              <span>
+                Ваша сторона<small>{flipped ? 'Чёрные фигуры' : 'Белые фигуры'}</small>
+              </span>
+            </div>
+            <span className="player-time yours">{time.split(' ')[0]}:00</span>
+          </div>
+          <div className="board-toolbar">
+            <span>
+              {started ? `Образец партии · ${Math.ceil(ply / 2)} / 8 ходов` : 'Начальная позиция'}
+            </span>
+            <div>
+              <button
+                className="icon-button"
+                aria-label="Перевернуть доску"
+                onClick={() => setFlipped(!flipped)}
+              >
+                <Repeat2 size={17} />
+              </button>
+              <button
+                className="icon-button"
+                aria-label="К началу партии"
+                onClick={() => setPly(0)}
+              >
+                <RotateCcw size={16} />
+              </button>
+              <button
+                className="icon-button"
+                aria-label="Предыдущий ход"
+                disabled={ply === 0}
+                onClick={() => setPly(ply - 1)}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                className="icon-button"
+                aria-label="Следующий ход"
+                disabled={!started || ply === moves.length}
+                onClick={step}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+          {hint && (
+            <p className="board-feedback" role="status">
+              {hint}
+            </p>
+          )}
+        </section>
+        <aside className="game-panel surface">
+          {!started ? (
+            <>
+              <div className="panel-heading">
+                <h2>Новая партия</h2>
+                <SlidersHorizontal size={19} />
+              </div>
+              <p className="panel-subtitle">Выберите свой ритм игры.</p>
+              <div className="field-group">
+                <span className="field-label">За какую сторону?</span>
+                <div className="segmented color-choice">
+                  {[
+                    ['white', 'Белые'],
+                    ['random', 'Случайно'],
+                    ['black', 'Чёрные'],
+                  ].map(([id, label]) => (
+                    <button key={id} aria-pressed={color === id} onClick={() => setColor(id)}>
+                      {id === 'random' ? (
+                        <Swords size={20} />
+                      ) : (
+                        <Circle
+                          size={20}
+                          fill={id === 'white' ? '#eee5d2' : '#40382e'}
+                          stroke="#948b79"
+                        />
+                      )}
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="field-group">
+                <span className="field-label">Время на партию</span>
+                <div className="segmented">
+                  {['5 + 0', '10 + 0', '15 + 10'].map((t) => (
+                    <button key={t} aria-pressed={time === t} onClick={() => setTime(t)}>
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="field-group strength">
+                <div>
+                  <label className="field-label" htmlFor="level">
+                    Сила соперника
+                  </label>
+                  <strong>{levels[level - 1]}</strong>
+                </div>
+                <input
+                  id="level"
+                  aria-label="Сила соперника"
+                  type="range"
+                  min="1"
+                  max="5"
+                  value={level}
+                  onChange={(e) => setLevel(Number(e.target.value))}
+                />
+                <div className="range-labels">
+                  <span>Легче</span>
+                  <span>Сильнее</span>
+                </div>
+              </div>
+              <button
+                className="primary full"
+                onClick={() => {
+                  setStarted(true);
+                  setPly(0);
+                  setHint('');
+                  setFlipped(color === 'black' || (color === 'random' && Math.random() > 0.5));
+                }}
+              >
+                Начать демонстрацию <ArrowRight size={17} />
+              </button>
+              <p className="quiet-note demo-disclosure">
+                Сейчас доступен сценарий из 8 ходов. Компьютерный движок и часы появятся на
+                следующих этапах.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="panel-heading">
+                <h2>Испанская партия</h2>
+                <span className="tag">Демо</span>
+              </div>
+              <p className="panel-subtitle">Пройдите первые ходы классического дебюта.</p>
+              <div className="move-list compact">
+                {Array.from({ length: Math.ceil(ply / 2) }, (_, i) => (
+                  <div key={i}>
+                    <span>{i + 1}.</span>
+                    <button onClick={() => setPly(i * 2 + 1)}>{moves[i * 2][2]}</button>
+                    <button disabled={i * 2 + 1 >= ply} onClick={() => setPly(i * 2 + 2)}>
+                      {i * 2 + 1 < ply ? moves[i * 2 + 1][2] : ''}
+                    </button>
+                  </div>
+                ))}
+                {ply === 0 && <p className="muted">Первый ход белых — e4.</p>}
+              </div>
+              <div className="notice">
+                <Check size={16} />{' '}
+                {ply === moves.length
+                  ? 'Демонстрация завершена. Переходите к разбору.'
+                  : `Следующий ход: ${moves[ply][2]}. Нажмите ${moves[ply][0]}, затем ${moves[ply][1]}.`}
+              </div>
+              <div className="game-actions">
+                {ply < moves.length ? (
+                  <button className="primary full" onClick={step}>
+                    Показать следующий ход <ArrowRight size={16} />
+                  </button>
+                ) : (
+                  <a className="primary full" href="#analysis">
+                    Открыть разбор <ArrowRight size={16} />
+                  </a>
+                )}
+                <button
+                  className="secondary full"
+                  onClick={() => {
+                    setStarted(false);
+                    setPly(0);
+                    setSelected(undefined);
+                    setHint('');
+                  }}
+                >
+                  Параметры партии
+                </button>
+              </div>
+              <p className="quiet-note">
+                Параметры сохранены для этого сеанса. В демо используются заданные ходы, часы не
+                идут.
+              </p>
+            </>
+          )}
+          <div className="panel-foot">
+            <BookHint />
+          </div>
+        </aside>
+      </div>
+      <a className="learning-strip" href="#lesson">
+        <span className="strip-icon">
+          <Swords size={23} />
+        </span>
+        <span>
+          <strong>Один мотив. Много выигранных партий.</strong>
+          <small>Попробуйте урок о мате на последней горизонтали.</small>
+        </span>
+        <span className="strip-action">
+          Открыть урок <ArrowRight size={17} />
+        </span>
+      </a>
+    </>
+  );
 }
-function BookHint(){return <><span className="tiny-dot"/>Локально. Без регистрации.</>;}
+function BookHint() {
+  return (
+    <>
+      <span className="tiny-dot" />
+      Локально. Без регистрации.
+    </>
+  );
+}

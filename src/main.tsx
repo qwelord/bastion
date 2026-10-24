@@ -9,4 +9,8 @@ import '@fontsource/manrope/latin-600.css';
 import '@fontsource/literata/cyrillic-400.css';
 import '@fontsource/literata/latin-400.css';
 import './styles.css';
-createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
+createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);

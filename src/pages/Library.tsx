@@ -1,4 +1,76 @@
 import { useState } from 'react';
 import { ArrowRight, Bookmark, FolderOpen, Search } from 'lucide-react';
 import { isSaved } from './Analysis';
-export function Library(){const [filter,setFilter]=useState('Все партии');const [query,setQuery]=useState('');const saved=isSaved();const visible=(filter!=='Избранное'||saved)&&'испанская партия учебный образец'.includes(query.toLowerCase());return <><div className="page-intro"><div><h1>Партии, к которым возвращаются.</h1><p>Место для ваших находок, заметок и важных позиций.</p></div></div><div className="catalog-tools"><div className="filter-tabs">{['Все партии','Избранное'].map(f=><button key={f} aria-pressed={f===filter} onClick={()=>setFilter(f)}>{f}</button>)}</div><label className="search-box"><Search size={17}/><input aria-label="Поиск партии" placeholder="Найти партию" value={query} onChange={e=>setQuery(e.target.value)}/></label></div>{visible?<a href="#analysis" className="library-game surface"><div className="library-game-symbol"><FolderOpen size={33}/></div><div><span className="tag">Учебный образец</span><h2>Испанская партия</h2><p>Классическое развитие / 8 ходов / C84</p></div>{saved&&<Bookmark size={18} fill="currentColor"/>}<span className="library-open">Открыть разбор <ArrowRight size={18}/></span></a>:<div className="empty-state surface"><Bookmark size={32}/><h2>{query?'Ничего не найдено':'Здесь будут ваши находки'}</h2><p>{query?'Попробуйте другое название.':'Сохраните учебную партию на экране анализа.'}</p><a href="#analysis" className="primary">Открыть анализ <ArrowRight size={16}/></a></div>}<section className="library-next"><FolderOpen size={24}/><div><h3>Ваша коллекция начинается здесь</h3><p>Импорт PGN, собственные партии и резервное копирование запланированы на этап 7. Сейчас можно исследовать образец и добавить его в избранное.</p></div></section></>;}
+export function Library() {
+  const [filter, setFilter] = useState('Все партии');
+  const [query, setQuery] = useState('');
+  const saved = isSaved();
+  const visible =
+    (filter !== 'Избранное' || saved) &&
+    'испанская партия учебный образец'.includes(query.toLowerCase());
+  return (
+    <>
+      <div className="page-intro">
+        <div>
+          <h1>Партии, к которым возвращаются.</h1>
+          <p>Место для ваших находок, заметок и важных позиций.</p>
+        </div>
+      </div>
+      <div className="catalog-tools">
+        <div className="filter-tabs">
+          {['Все партии', 'Избранное'].map((f) => (
+            <button key={f} aria-pressed={f === filter} onClick={() => setFilter(f)}>
+              {f}
+            </button>
+          ))}
+        </div>
+        <label className="search-box">
+          <Search size={17} />
+          <input
+            aria-label="Поиск партии"
+            placeholder="Найти партию"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </label>
+      </div>
+      {visible ? (
+        <a href="#analysis" className="library-game surface">
+          <div className="library-game-symbol">
+            <FolderOpen size={33} />
+          </div>
+          <div>
+            <span className="tag">Учебный образец</span>
+            <h2>Испанская партия</h2>
+            <p>Классическое развитие / 8 ходов / C84</p>
+          </div>
+          {saved && <Bookmark size={18} fill="currentColor" />}
+          <span className="library-open">
+            Открыть разбор <ArrowRight size={18} />
+          </span>
+        </a>
+      ) : (
+        <div className="empty-state surface">
+          <Bookmark size={32} />
+          <h2>{query ? 'Ничего не найдено' : 'Здесь будут ваши находки'}</h2>
+          <p>
+            {query ? 'Попробуйте другое название.' : 'Сохраните учебную партию на экране анализа.'}
+          </p>
+          <a href="#analysis" className="primary">
+            Открыть анализ <ArrowRight size={16} />
+          </a>
+        </div>
+      )}
+      <section className="library-next">
+        <FolderOpen size={24} />
+        <div>
+          <h3>Ваша коллекция начинается здесь</h3>
+          <p>
+            Импорт PGN, собственные партии и резервное копирование запланированы на этап 7. Сейчас
+            можно исследовать образец и добавить его в избранное.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
