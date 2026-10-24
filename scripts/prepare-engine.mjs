@@ -30,7 +30,9 @@ await writeFile(
       version: '19.0.1',
       license: 'GPL-3.0',
       upstream: 'https://github.com/nmrugg/stockfish.js',
-      source: 'https://github.com/nmrugg/stockfish.js/tree/v19.0.1',
+      source:
+        'https://github.com/nmrugg/stockfish.js/archive/0d5dd7944f88c817c07a26bc4fb1905d5f9c46d6.tar.gz',
+      sourceCommit: '0d5dd7944f88c817c07a26bc4fb1905d5f9c46d6',
       files,
     },
     null,
