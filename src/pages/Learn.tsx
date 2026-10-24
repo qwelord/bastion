@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Search, Clock3, BookOpen, X, Check } from 'lucide-react';
 import { Piece } from '../components/Board';
 import { courses } from '../data/demo';
@@ -6,6 +6,13 @@ export function Learn() {
   const [level, setLevel] = useState('Все');
   const [query, setQuery] = useState('');
   const [detail, setDetail] = useState<string>();
+  const detailRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (detail) {
+      detailRef.current?.focus({ preventScroll: true });
+      detailRef.current?.scrollIntoView({ block: 'center' });
+    }
+  }, [detail]);
   const shown = courses.filter(
     (c) =>
       (level === 'Все' || c.level === level) &&
@@ -80,7 +87,14 @@ export function Learn() {
         </div>
         <div className="course-list">
           {shown.map((c) => (
-            <button className="course-row" key={c.id} onClick={() => setDetail(c.id)}>
+            <button
+              id={'course-' + c.id}
+              className="course-row"
+              key={c.id}
+              aria-expanded={detail === c.id}
+              aria-controls={detail === c.id ? 'course-description' : undefined}
+              onClick={() => setDetail(c.id)}
+            >
               <span className={'course-mark mark-' + c.id}>
                 <Piece code={['wp', 'wn', 'wb', 'wr', 'wq', 'wk'][courses.indexOf(c)]} />
               </span>
@@ -114,10 +128,20 @@ export function Learn() {
         )}
       </section>
       {course && (
-        <div className="course-detail surface" role="region" aria-label="Описание курса">
+        <div
+          ref={detailRef}
+          id="course-description"
+          tabIndex={-1}
+          className="course-detail surface"
+          role="region"
+          aria-label="Описание курса"
+        >
           <button
             className="icon-button close-detail"
-            onClick={() => setDetail(undefined)}
+            onClick={() => {
+              setDetail(undefined);
+              document.getElementById('course-' + course.id)?.focus();
+            }}
             aria-label="Закрыть описание курса"
           >
             <X size={18} />
