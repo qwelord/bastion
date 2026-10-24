@@ -1,3 +1,4 @@
+import { TimeControl } from '../components/TimeControl';
 import { useEffect, useState } from 'react';
 import {
   ArrowRight,
@@ -314,25 +315,7 @@ export function Play({ settings }: { settings: Settings }) {
                   />
                 </>
               )}
-              <div className="field-group">
-                <label className="field-label" htmlFor="time-control">
-                  Контроль времени
-                </label>
-                <select
-                  id="time-control"
-                  value={`${draft.minutes}+${draft.increment}`}
-                  onChange={(e) => {
-                    const [minutes, increment] = e.target.value.split('+').map(Number);
-                    setDraft({ ...draft, minutes, increment });
-                  }}
-                >
-                  <option value="0+0">Без ограничения</option>
-                  <option value="1+0">1 минута</option>
-                  <option value="5+0">5 минут</option>
-                  <option value="10+0">10 минут</option>
-                  <option value="15+10">15 минут + 10 секунд за ход</option>
-                </select>
-              </div>
+              <TimeControl minutes={draft.minutes} increment={draft.increment} onChange={(minutes, increment) => setDraft({ ...draft, minutes, increment })} />
               <button
                 className="primary full"
                 onClick={() => {
@@ -504,3 +487,4 @@ export function Play({ settings }: { settings: Settings }) {
     </>
   );
 }
+
