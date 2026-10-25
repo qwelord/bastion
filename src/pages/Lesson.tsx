@@ -25,6 +25,7 @@ import {
   recordStep,
   updateLearning,
   applyStepRecord,
+  hasOpenAttempt,
 } from '../learning/progress';
 import { ChessGame, type Promotion } from '../chess/rules';
 import { moveSound, unlockSound } from '../chess/sound';
@@ -79,7 +80,10 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
   );
   const [, paint] = useState(0);
   const [summary, setSummary] = useState(
-    () => !reviewMode && lessonStats(lesson, progress.entries[lesson.id]).finished,
+    () =>
+      !reviewMode &&
+      lessonStats(lesson, progress.entries[lesson.id]).finished &&
+      !hasOpenAttempt(lesson, progress.entries[lesson.id]),
   );
   const [selected, setSelected] = useState<string>();
   const [flipped, setFlipped] = useState(false);
@@ -304,6 +308,25 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
           {entry.favorite ? 'В избранном' : 'Сохранить урок'}
         </button>
       </div>
+      {lesson.prerequisites.length > 0 && (
+        <details className="study-prerequisites">
+          <summary>Какие темы пригодятся</summary>
+          <div>
+            {lesson.prerequisites.map((id) => {
+              const prerequisite = findLesson(id);
+              return prerequisite ? (
+                <a className="text-button" key={id} href={lessonLink(id)}>
+                  {prerequisite.title}
+                  <ArrowRight size={13} />
+                </a>
+              ) : null;
+            })}
+          </div>
+          <p className="quiet-note">
+            Это рекомендации. Текущий урок открыт независимо от предыдущего прогресса.
+          </p>
+        </details>
+      )}
       {error && (
         <div className="learning-save-error" role="alert">
           <p>{error}</p>

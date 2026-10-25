@@ -40,6 +40,10 @@ export function lessonStats(lesson: LessonDefinition, entry?: LessonProgress) {
     finished: complete === lesson.steps.length,
   };
 }
+export function hasOpenAttempt(lesson: LessonDefinition, entry?: LessonProgress) {
+  const step = lesson.steps[entry?.cursor ?? 0];
+  return !!entry?.visited && entry.steps[step.id]?.snapshot.complete === false;
+}
 export function readLearning(
   catalog: LessonDefinition[],
   storage: StoragePort = localStorage,

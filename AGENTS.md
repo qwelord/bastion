@@ -15,3 +15,7 @@
 - Keep coordinates outside the squares. Preserve pointer, touch, keyboard and reduced-motion behavior.
 - Do not put file import/export controls back on the main game screen unless the owner asks.
 - Read docs/SECURITY.md before adding accounts, a database, remote APIs or user content. Never claim frontend validation protects a future server.
+
+- Lesson content lives in src/learning/lessons.json. Run pnpm lessons:validate after edits; bump a lesson revision for changes that invalidate saved solutions.
+- Keep StepSession and learning progress independent from React. Never identify a scripted teaching reply as a live engine decision.
+- Distinguish completed with assistance from independently solved. Preserve the repeat queue, resume cursor, notes and accessibility when changing lesson UI.

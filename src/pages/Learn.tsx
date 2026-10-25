@@ -9,6 +9,7 @@ import {
   lessonLink,
   updateLearning,
   emptyLessonProgress,
+  hasOpenAttempt,
 } from '../learning/progress';
 import type { Settings } from '../state';
 export function Learn({ settings }: { settings: Settings }) {
@@ -29,7 +30,10 @@ export function Learn({ settings }: { settings: Settings }) {
   const done = lessons.filter((l) => lessonStats(l, progress.entries[l.id]).finished).length;
   const review = lessons.filter((l) => lessonStats(l, progress.entries[l.id]).review > 0);
   const last = lessons.find(
-    (l) => l.id === progress.lastLesson && !lessonStats(l, progress.entries[l.id]).finished,
+    (l) =>
+      l.id === progress.lastLesson &&
+      (!lessonStats(l, progress.entries[l.id]).finished ||
+        hasOpenAttempt(l, progress.entries[l.id])),
   );
   const next =
     last ?? lessons.find((l) => !lessonStats(l, progress.entries[l.id]).finished) ?? lessons[0];
