@@ -10,7 +10,10 @@ try {
   const input = JSON.parse(await readFile(url, 'utf8'));
   const lessons = validateCurriculum(input);
   if (!process.argv[2]) {
-    const courses = validateCourses(JSON.parse(await readFile(new URL('../src/learning/courses.json', import.meta.url), 'utf8')), lessons);
+    const courses = validateCourses(
+      JSON.parse(await readFile(new URL('../src/learning/courses.json', import.meta.url), 'utf8')),
+      lessons,
+    );
     console.log(`Course validation passed: ${courses.length} courses.`);
   }
   console.log(
