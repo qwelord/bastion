@@ -1,0 +1,738 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "board-map",
+    "title": "Ориентироваться на доске",
+    "track": "Первые ходы",
+    "outcome": "Читать адреса полей и находить линии без подсказки.",
+    "lessonIds": [
+      "board-map-1",
+      "board-map-2",
+      "board-map-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "line-pieces",
+    "title": "Ладья и слон: видеть путь",
+    "track": "Первые ходы",
+    "outcome": "Различать прямые линии, диагонали и препятствия.",
+    "lessonIds": [
+      "line-pieces-1",
+      "line-pieces-2",
+      "line-pieces-3"
+    ],
+    "prerequisites": [
+      "board-map"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "queen-lines",
+    "title": "Ферзь без лишнего риска",
+    "track": "Первые ходы",
+    "outcome": "Видеть линии ферзя и проверять безопасность взятия.",
+    "lessonIds": [
+      "queen-lines-1",
+      "queen-lines-2",
+      "queen-lines-3"
+    ],
+    "prerequisites": [
+      "line-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "knight-route",
+    "title": "Конь: прыжки и маршруты",
+    "track": "Первые ходы",
+    "outcome": "Находить ходы коня и промежуточные поля.",
+    "lessonIds": [
+      "knight-route-1",
+      "knight-route-2",
+      "knight-route-3"
+    ],
+    "prerequisites": [
+      "queen-lines"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "king-space",
+    "title": "Король и опасные поля",
+    "track": "Первые ходы",
+    "outcome": "Отличать геометрически близкое поле от законного хода короля.",
+    "lessonIds": [
+      "king-space-1",
+      "king-space-2",
+      "king-space-3"
+    ],
+    "prerequisites": [
+      "knight-route"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-basics",
+    "title": "Пешки: ход и удар",
+    "track": "Первые ходы",
+    "outcome": "Различать продвижение пешки, взятие и блокаду.",
+    "lessonIds": [
+      "pawn-basics-1",
+      "pawn-basics-2",
+      "pawn-basics-3"
+    ],
+    "prerequisites": [
+      "king-space"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "material-count",
+    "title": "Материал и безопасные взятия",
+    "track": "Первые ходы",
+    "outcome": "Считать простые обмены и находить незащищённые фигуры.",
+    "lessonIds": [
+      "material-count-1",
+      "material-count-2",
+      "material-count-3"
+    ],
+    "prerequisites": [
+      "pawn-basics"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "defend-piece",
+    "title": "Четыре способа защититься",
+    "track": "Первые ходы",
+    "outcome": "Распознавать отход, защиту, взятие атакующего и перекрытие.",
+    "lessonIds": [
+      "defend-piece-1",
+      "defend-piece-2",
+      "defend-piece-3"
+    ],
+    "prerequisites": [
+      "material-count"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "escape-check",
+    "title": "Как отвечать на шах",
+    "track": "Первые ходы",
+    "outcome": "Проверять уход, взятие и перекрытие при шахе.",
+    "lessonIds": [
+      "escape-check-1",
+      "escape-check-2",
+      "escape-check-3"
+    ],
+    "prerequisites": [
+      "defend-piece"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mate-draw",
+    "title": "Мат, пат и результат партии",
+    "track": "Первые ходы",
+    "outcome": "Проверять шах и законные ходы перед объявлением результата.",
+    "lessonIds": [
+      "mate-draw-1",
+      "mate-draw-2",
+      "mate-draw-3"
+    ],
+    "prerequisites": [
+      "escape-check"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "castle-safely",
+    "title": "Рокировка без ошибок",
+    "track": "Правила и старт",
+    "outcome": "Проверять права, путь ладьи и безопасность короля.",
+    "lessonIds": [
+      "castle-safely-1",
+      "castle-safely-2",
+      "castle-safely-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "en-passant-rule",
+    "title": "Взятие на проходе",
+    "track": "Правила и старт",
+    "outcome": "Находить момент и конечное поле специального взятия.",
+    "lessonIds": [
+      "en-passant-rule-1",
+      "en-passant-rule-2",
+      "en-passant-rule-3"
+    ],
+    "prerequisites": [
+      "castle-safely"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-promotion",
+    "title": "Превращение: выбрать фигуру",
+    "track": "Правила и старт",
+    "outcome": "Выполнять превращение и учитывать пат после выбора.",
+    "lessonIds": [
+      "pawn-promotion-1",
+      "pawn-promotion-2",
+      "pawn-promotion-3"
+    ],
+    "prerequisites": [
+      "en-passant-rule"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "notation-read",
+    "title": "Понимать запись партии",
+    "track": "Правила и старт",
+    "outcome": "Связывать запись хода с действием на доске.",
+    "lessonIds": [
+      "notation-read-1",
+      "notation-read-2",
+      "notation-read-3"
+    ],
+    "prerequisites": [
+      "pawn-promotion"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-center",
+    "title": "Дебют: бороться за центр",
+    "track": "Правила и старт",
+    "outcome": "Различать занятие центра и давление на него.",
+    "lessonIds": [
+      "opening-center-1",
+      "opening-center-2",
+      "opening-center-3"
+    ],
+    "prerequisites": [
+      "notation-read"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "develop-pieces",
+    "title": "Развитие без лишних ходов",
+    "track": "Правила и старт",
+    "outcome": "Выводить лёгкие фигуры и связывать развитие с конкретной задачей.",
+    "lessonIds": [
+      "develop-pieces-1",
+      "develop-pieces-2",
+      "develop-pieces-3"
+    ],
+    "prerequisites": [
+      "opening-center"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-king",
+    "title": "Безопасность короля в дебюте",
+    "track": "Правила и старт",
+    "outcome": "Готовить рокировку и видеть ослабленные поля у короля.",
+    "lessonIds": [
+      "opening-king-1",
+      "opening-king-2",
+      "opening-king-3"
+    ],
+    "prerequisites": [
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-tempo",
+    "title": "Темп и ранний выход ферзя",
+    "track": "Правила и старт",
+    "outcome": "Отличать полезное нападение от погони с потерей времени.",
+    "lessonIds": [
+      "opening-tempo-1",
+      "opening-tempo-2",
+      "opening-tempo-3"
+    ],
+    "prerequisites": [
+      "opening-king"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "threat-scan",
+    "title": "Не зевать фигуры",
+    "track": "Практическая тактика",
+    "outcome": "После чужого хода проверять шахи, взятия и новые угрозы.",
+    "lessonIds": [
+      "threat-scan-1",
+      "threat-scan-2",
+      "threat-scan-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "exchange-math",
+    "title": "Выгодные и невыгодные размены",
+    "track": "Практическая тактика",
+    "outcome": "Считать последовательность и оценивать позицию после размена.",
+    "lessonIds": [
+      "exchange-math-1",
+      "exchange-math-2",
+      "exchange-math-3"
+    ],
+    "prerequisites": [
+      "threat-scan"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "knight-forks",
+    "title": "Коневые вилки",
+    "track": "Практическая тактика",
+    "outcome": "Находить двойной удар с шахом и забирать вторую цель.",
+    "lessonIds": [
+      "knight-forks-1",
+      "knight-forks-2",
+      "knight-forks-3"
+    ],
+    "prerequisites": [
+      "exchange-math"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-forks",
+    "title": "Пешечный двойной удар",
+    "track": "Практическая тактика",
+    "outcome": "Замечать поля пешечной вилки и учитывать взятие самой пешки.",
+    "lessonIds": [
+      "pawn-forks-1",
+      "pawn-forks-2",
+      "pawn-forks-3"
+    ],
+    "prerequisites": [
+      "knight-forks"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "absolute-pin",
+    "title": "Связка к королю",
+    "track": "Практическая тактика",
+    "outcome": "Находить фигуру, которая не может открыть шах своему королю.",
+    "lessonIds": [
+      "absolute-pin-1",
+      "absolute-pin-2",
+      "absolute-pin-3"
+    ],
+    "prerequisites": [
+      "pawn-forks"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "relative-pin",
+    "title": "Связка к ферзю",
+    "track": "Практическая тактика",
+    "outcome": "Отличать материальную угрозу от запрета правилами.",
+    "lessonIds": [
+      "relative-pin-1",
+      "relative-pin-2",
+      "relative-pin-3"
+    ],
+    "prerequisites": [
+      "absolute-pin"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "skewer-lines",
+    "title": "Сквозной удар",
+    "track": "Практическая тактика",
+    "outcome": "Находить дорогую переднюю цель и фигуру за ней.",
+    "lessonIds": [
+      "skewer-lines-1",
+      "skewer-lines-2",
+      "skewer-lines-3"
+    ],
+    "prerequisites": [
+      "relative-pin"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "discovered-attack",
+    "title": "Вскрытое нападение",
+    "track": "Практическая тактика",
+    "outcome": "Видеть линию, которая откроется после ухода своей фигуры.",
+    "lessonIds": [
+      "discovered-attack-1",
+      "discovered-attack-2",
+      "discovered-attack-3"
+    ],
+    "prerequisites": [
+      "skewer-lines"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "double-check",
+    "title": "Двойной шах",
+    "track": "Практическая тактика",
+    "outcome": "Распознавать два источника шаха и обязательный ход короля.",
+    "lessonIds": [
+      "double-check-1",
+      "double-check-2",
+      "double-check-3"
+    ],
+    "prerequisites": [
+      "discovered-attack"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "remove-guard",
+    "title": "Уничтожение защитника",
+    "track": "Практическая тактика",
+    "outcome": "Перед взятием цели находить фигуру, которая её защищает.",
+    "lessonIds": [
+      "remove-guard-1",
+      "remove-guard-2",
+      "remove-guard-3"
+    ],
+    "prerequisites": [
+      "double-check"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "overload-deflect",
+    "title": "Перегрузка и отвлечение",
+    "track": "Практическая тактика",
+    "outcome": "Считать обязанности защитника и искать несовместимые ответы.",
+    "lessonIds": [
+      "overload-deflect-1",
+      "overload-deflect-2",
+      "overload-deflect-3"
+    ],
+    "prerequisites": [
+      "remove-guard"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "zwischenzug",
+    "title": "Промежуточный ход",
+    "track": "Практическая тактика",
+    "outcome": "Не отвечать автоматически, пока не проверены форсирующие ходы.",
+    "lessonIds": [
+      "zwischenzug-1",
+      "zwischenzug-2",
+      "zwischenzug-3"
+    ],
+    "prerequisites": [
+      "overload-deflect"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "back-rank-mate",
+    "title": "Мат по последней горизонтали",
+    "track": "Мат и расчёт",
+    "outcome": "Узнавать запертого короля и проверять защиту последней линии.",
+    "lessonIds": [
+      "back-rank-mate-1",
+      "back-rank-mate-2",
+      "back-rank-mate-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "ladder-checkmate",
+    "title": "Линейный мат двумя ладьями",
+    "track": "Мат и расчёт",
+    "outcome": "Разделять функции отсечения и шаха двумя тяжёлыми фигурами.",
+    "lessonIds": [
+      "ladder-checkmate-1",
+      "ladder-checkmate-2",
+      "ladder-checkmate-3"
+    ],
+    "prerequisites": [
+      "back-rank-mate"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "queen-king-mate",
+    "title": "Мат ферзём при поддержке короля",
+    "track": "Мат и расчёт",
+    "outcome": "Согласовывать ферзя с королём и избегать пата.",
+    "lessonIds": [
+      "queen-king-mate-1",
+      "queen-king-mate-2",
+      "queen-king-mate-3"
+    ],
+    "prerequisites": [
+      "ladder-checkmate"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mating-net",
+    "title": "Матовая сеть и поля отхода",
+    "track": "Мат и расчёт",
+    "outcome": "Сначала считать выходы короля, затем выбирать шах.",
+    "lessonIds": [
+      "mating-net-1",
+      "mating-net-2",
+      "mating-net-3"
+    ],
+    "prerequisites": [
+      "queen-king-mate"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "candidate-moves",
+    "title": "Выбирать ходы-кандидаты",
+    "track": "Мат и расчёт",
+    "outcome": "Сравнивать форсирующие ходы и учитывать ответ соперника.",
+    "lessonIds": [
+      "candidate-moves-1",
+      "candidate-moves-2",
+      "candidate-moves-3"
+    ],
+    "prerequisites": [
+      "mating-net"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "visualize-lines",
+    "title": "Держать вариант в голове",
+    "track": "Мат и расчёт",
+    "outcome": "Отслеживать освободившиеся поля и новые линии после обмена.",
+    "lessonIds": [
+      "visualize-lines-1",
+      "visualize-lines-2",
+      "visualize-lines-3"
+    ],
+    "prerequisites": [
+      "candidate-moves"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "defensive-thinking",
+    "title": "Защита и встречные угрозы",
+    "track": "Мат и расчёт",
+    "outcome": "Отличать срочную обязанность от возможности контратаки.",
+    "lessonIds": [
+      "defensive-thinking-1",
+      "defensive-thinking-2",
+      "defensive-thinking-3"
+    ],
+    "prerequisites": [
+      "visualize-lines"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "open-files",
+    "title": "Открытые вертикали для ладей",
+    "track": "Позиционная игра",
+    "outcome": "Находить линии без пешек и выбирать точку входа.",
+    "lessonIds": [
+      "open-files-1",
+      "open-files-2",
+      "open-files-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "seventh-rank",
+    "title": "Ладья на седьмой горизонтали",
+    "track": "Позиционная игра",
+    "outcome": "Связывать вторжение с пешечными целями и ограничением короля.",
+    "lessonIds": [
+      "seventh-rank-1",
+      "seventh-rank-2",
+      "seventh-rank-3"
+    ],
+    "prerequisites": [
+      "open-files"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "knight-outpost",
+    "title": "Опорный пункт для коня",
+    "track": "Позиционная игра",
+    "outcome": "Искать защищённое передовое поле и проверять пешечное вытеснение.",
+    "lessonIds": [
+      "knight-outpost-1",
+      "knight-outpost-2",
+      "knight-outpost-3"
+    ],
+    "prerequisites": [
+      "seventh-rank"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "bishop-activity",
+    "title": "Хороший и ограниченный слон",
+    "track": "Позиционная игра",
+    "outcome": "Оценивать диагонали и влияние собственных пешек.",
+    "lessonIds": [
+      "bishop-activity-1",
+      "bishop-activity-2",
+      "bishop-activity-3"
+    ],
+    "prerequisites": [
+      "knight-outpost"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-structure",
+    "title": "Пешечные слабости и цепи",
+    "track": "Позиционная игра",
+    "outcome": "Узнавать изолированные и сдвоенные пешки без автоматических оценок.",
+    "lessonIds": [
+      "pawn-structure-1",
+      "pawn-structure-2",
+      "pawn-structure-3"
+    ],
+    "prerequisites": [
+      "bishop-activity"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "passed-pawn",
+    "title": "Проходная пешка и блокада",
+    "track": "Позиционная игра",
+    "outcome": "Находить проходную и поле её остановки.",
+    "lessonIds": [
+      "passed-pawn-1",
+      "passed-pawn-2",
+      "passed-pawn-3"
+    ],
+    "prerequisites": [
+      "pawn-structure"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "active-king",
+    "title": "Король в окончании",
+    "track": "Основы окончаний",
+    "outcome": "Активизировать короля, сохраняя проверку шахов и пешечных ударов.",
+    "lessonIds": [
+      "active-king-1",
+      "active-king-2",
+      "active-king-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "king-opposition",
+    "title": "Прямая оппозиция",
+    "track": "Основы окончаний",
+    "outcome": "Узнавать противостояние королей и учитывать очередь хода.",
+    "lessonIds": [
+      "king-opposition-1",
+      "king-opposition-2",
+      "king-opposition-3"
+    ],
+    "prerequisites": [
+      "active-king"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-square",
+    "title": "Правило квадрата пешки",
+    "track": "Основы окончаний",
+    "outcome": "Быстро оценивать погоню короля с учётом очереди хода.",
+    "lessonIds": [
+      "pawn-square-1",
+      "pawn-square-2",
+      "pawn-square-3"
+    ],
+    "prerequisites": [
+      "king-opposition"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "rook-endgame-basics",
+    "title": "Ладейное окончание: активность",
+    "track": "Основы окончаний",
+    "outcome": "Ставить ладью за проходной и отличать активность от пассивной защиты.",
+    "lessonIds": [
+      "rook-endgame-basics-1",
+      "rook-endgame-basics-2",
+      "rook-endgame-basics-3"
+    ],
+    "prerequisites": [
+      "pawn-square"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "underpromotion",
+    "title": "Когда ферзь — не лучший выбор",
+    "track": "Основы окончаний",
+    "outcome": "Замечать шах конём и превращение, избегающее пата.",
+    "lessonIds": [
+      "underpromotion-1",
+      "underpromotion-2",
+      "underpromotion-3"
+    ],
+    "prerequisites": [
+      "rook-endgame-basics"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "clock-decisions",
+    "title": "Решения в блице и рапиде",
+    "track": "Практика игрока",
+    "outcome": "Распределять время по сложности позиции и сохранять проверку угроз.",
+    "lessonIds": [
+      "clock-decisions-1",
+      "clock-decisions-2",
+      "clock-decisions-3"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "learn-from-games",
+    "title": "Учиться на собственных партиях",
+    "track": "Практика игрока",
+    "outcome": "Находить причину ошибки и превращать её в повторяемый навык.",
+    "lessonIds": [
+      "learn-from-games-1",
+      "learn-from-games-2",
+      "learn-from-games-3"
+    ],
+    "prerequisites": [
+      "clock-decisions"
+    ]
+  }
+]
