@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/prepare-engine.mjs && vite --host 127.0.0.1",
-    "build": "node scripts/prepare-engine.mjs && tsc -b && vite build",
+    "build": "node scripts/prepare-engine.mjs && tsx scripts/validate-lessons.ts && tsc -b && vite build",
+    "lessons:validate": "tsx scripts/validate-lessons.ts",
     "preview": "vite preview --host 127.0.0.1",
     "check": "tsc -b",
     "test": "tsx --test tests/*.test.ts",
