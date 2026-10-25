@@ -46,7 +46,7 @@ export function useSettings() {
 }
 export function useRoute() {
   const resolve = (): Route => {
-    const r = location.hash.slice(1);
+    const r = location.hash.slice(1).split('/')[0].split('?')[0];
     return ['play', 'learn', 'lesson', 'analysis', 'library', 'settings'].includes(r)
       ? (r as Route)
       : 'play';
@@ -62,3 +62,4 @@ export function useRoute() {
   }, []);
   return route;
 }
+

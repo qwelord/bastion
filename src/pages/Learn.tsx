@@ -1,158 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Search, Clock3, BookOpen, X, Check } from 'lucide-react';
-import { Board, Piece } from '../components/Board';
-import { courses, exercisePosition } from '../data/demo';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Bookmark, BookOpen, Check, Search, RotateCcw } from 'lucide-react';
+import { Board } from '../components/Board';
+import { ChessGame } from '../chess/rules';
+import { lessons } from '../learning/catalog';
+import { readLearning, lessonStats, lessonLink, updateLearning, emptyLessonProgress } from '../learning/progress';
 import type { Settings } from '../state';
 export function Learn({ settings }: { settings: Settings }) {
-  const [level, setLevel] = useState('Все');
-  const [query, setQuery] = useState('');
-  const [detail, setDetail] = useState<string>();
-  const detailRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (detail) {
-      detailRef.current?.focus({ preventScroll: true });
-      detailRef.current?.scrollIntoView({ block: 'center' });
-    }
-  }, [detail]);
-  const shown = courses.filter(
-    (c) =>
-      (level === 'Все' || c.level === level) &&
-      (c.title + ' ' + c.topic).toLowerCase().includes(query.toLowerCase()),
-  );
-  const course = courses.find((c) => c.id === detail);
-  return (
-    <>
-      <div className="page-intro">
-        <div>
-          <h1>Обучение</h1>
-          <p>Курсы и практика от основ до сложных позиций.</p>
-        </div>
-        <span className="tag">
-          <BookOpen size={14} /> Школа Bastion
-        </span>
-      </div>
-      <section className="featured-lesson">
-        <div className="featured-copy">
-          <span className="featured-label">Открытый урок</span>
-          <h2>Мат на последней горизонтали</h2>
-          <p>
-            Найдите мат в один ход и разберитесь, почему собственные пешки иногда мешают защитить
-            короля.
-          </p>
-          <div className="featured-meta">
-            <span>
-              <Clock3 size={14} /> 5 минут
-            </span>
-            <span>Основы тактики</span>
-          </div>
-          <a href="#lesson" className="primary">
-            Начать урок <ArrowRight size={17} />
-          </a>
-        </div>
-        <div className="featured-position" aria-hidden="true">
-          <Board settings={{ ...settings, coordinates: false }} position={exercisePosition} />
-          <span>Ход белых · Мат в один ход</span>
-        </div>
-      </section>
-      <section className="curriculum">
-        <div className="section-title">
-          <div>
-            <h2>Программа обучения</h2>
-            <p className="quiet-note">
-              План библиотеки: 1 080 уроков. Сейчас доступен один демонстрационный урок.
-            </p>
-          </div>
-        </div>
-        <div className="catalog-tools">
-          <div className="filter-tabs" aria-label="Уровень курса">
-            {['Все', 'Основы', 'Практика', 'Мастерство'].map((l) => (
-              <button key={l} aria-pressed={level === l} onClick={() => setLevel(l)}>
-                {l}
-              </button>
-            ))}
-          </div>
-          <label className="search-box">
-            <Search size={17} />
-            <input
-              aria-label="Поиск курса"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Найти тему"
-            />
-          </label>
-        </div>
-        <div className="course-list">
-          {shown.map((c) => (
-            <button
-              id={'course-' + c.id}
-              className="course-row"
-              key={c.id}
-              aria-expanded={detail === c.id}
-              aria-controls={detail === c.id ? 'course-description' : undefined}
-              onClick={() => setDetail(c.id)}
-            >
-              <span className={'course-mark mark-' + c.id}>
-                <Piece code={['wp', 'wn', 'wb', 'wr', 'wq', 'wk'][courses.indexOf(c)]} />
-              </span>
-              <span className="course-info">
-                <span className="course-title">{c.title}</span>
-                <span className="course-topic">{c.topic}</span>
-              </span>
-              <span className="course-level">{c.level}</span>
-              <span className="course-count">
-                {c.lessons} уроков <small>в плане</small>
-              </span>
-              <ArrowRight size={18} />
-            </button>
-          ))}
-        </div>
-        {!shown.length && (
-          <div className="empty-state">
-            <Search size={28} />
-            <h3>Такой темы пока нет</h3>
-            <p>Попробуйте другое слово или сбросьте фильтры.</p>
-            <button
-              className="secondary"
-              onClick={() => {
-                setLevel('Все');
-                setQuery('');
-              }}
-            >
-              Сбросить фильтры
-            </button>
-          </div>
-        )}
-      </section>
-      {course && (
-        <div
-          ref={detailRef}
-          id="course-description"
-          tabIndex={-1}
-          className="course-detail surface"
-          role="region"
-          aria-label="Описание курса"
-        >
-          <button
-            className="icon-button close-detail"
-            onClick={() => {
-              setDetail(undefined);
-              document.getElementById('course-' + course.id)?.focus();
-            }}
-            aria-label="Закрыть описание курса"
-          >
-            <X size={18} />
-          </button>
-          <span className="tag">{course.level}</span>
-          <h2>{course.title}</h2>
-          <p>{course.description}</p>
-          <p className="quiet-note">
-            <Check size={14} /> Раздел включён в план разработки. Полный курс пока недоступен.
-          </p>
-          <a className="primary" href="#lesson">
-            Попробовать открытый урок <ArrowRight size={16} />
-          </a>
-        </div>
-      )}
-    </>
-  );
+  const [progress,setProgress]=useState(()=>readLearning(lessons));
+  const [query,setQuery]=useState('');
+  const [filter,setFilter]=useState('Все');
+  const [topic,setTopic]=useState('Все темы');
+  const [error,setError]=useState('');
+  useEffect(()=>{const refresh=()=>setProgress(readLearning(lessons));window.addEventListener('storage',refresh);window.addEventListener('focus',refresh);return()=>{window.removeEventListener('storage',refresh);window.removeEventListener('focus',refresh);};},[]);
+  const done=lessons.filter(l=>lessonStats(l,progress.entries[l.id]).finished).length;
+  const review=lessons.filter(l=>lessonStats(l,progress.entries[l.id]).review>0);
+  const last=lessons.find(l=>l.id===progress.lastLesson&&!lessonStats(l,progress.entries[l.id]).finished);
+  const next=last??lessons.find(l=>!lessonStats(l,progress.entries[l.id]).finished)??lessons[0];
+  const nextEntry=progress.entries[next.id];
+  const visible=lessons.filter(l=>{
+    const entry=progress.entries[l.id];const stats=lessonStats(l,entry);
+    return (topic==='Все темы'||l.topic===topic)&&`${l.title} ${l.summary} ${l.topic} ${l.objective}`.toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))&&(filter==='Все'||filter==='Избранное'&&entry?.favorite||filter==='В процессе'&&!!entry?.visited&&!stats.finished||filter==='Пройдено'&&stats.finished||filter==='Повторить'&&stats.review>0);
+  });
+  return <>
+    <div className="page-intro"><div><h1>Учиться, делая ходы</h1><p>Короткое объяснение, практика на доске и понятный разбор ответа.</p></div><span className="tag"><BookOpen size={14}/>{lessons.length} уроков доступны</span></div>
+    <section className="learning-hero">
+      <div><span className="learning-kicker">{nextEntry?.visited?'Продолжить обучение':'С чего начать'}</span><h2>{next.title}</h2><p>{next.summary}</p><div className="learning-meta"><span>{next.minutes} минут</span><span>{next.level}</span><span>{next.steps.length} шага</span></div><a className="primary" href={lessonLink(next.id)}>{nextEntry?.visited?'Продолжить урок':'Начать учиться'}<ArrowRight size={17}/></a></div>
+      <div className="learning-preview" aria-hidden="true"><Board settings={{...settings,coordinates:false}} position={new ChessGame(next.steps[nextEntry?.cursor??0].fen).position()} highlight={next.steps[nextEntry?.cursor??0].focus??[]}/></div>
+    </section>
+    <div className="learning-overview"><span>Пройдено <strong>{done} из {lessons.length}</strong> уроков</span><progress max={lessons.length} value={done} aria-label="Пройденные уроки"/>{review.length>0&&<a className="text-button" href={lessonLink(review[0].id)+'?review=1'}><RotateCcw size={15}/>Повторить трудные задания</a>}</div>
+    <section aria-label="Каталог уроков" className="learning-catalog">
+      <div className="section-title"><div><h2>Ваша учебная программа</h2><p className="quiet-note">Проходите по порядку или выберите тему. Любой урок можно открыть сразу.</p></div></div>
+      <div className="catalog-tools"><div className="filter-tabs" aria-label="Статус урока">{['Все','В процессе','Пройдено','Избранное','Повторить'].map(f=><button key={f} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f}</button>)}</div><label className="search-box"><Search size={17}/><input maxLength={120} aria-label="Поиск урока" placeholder="Тема или навык" value={query} onChange={e=>setQuery(e.target.value)}/></label></div>
+      <div className="learning-catalog-heading"><label>Тема<select aria-label="Тема обучения" value={topic} onChange={e=>setTopic(e.target.value)}>{['Все темы',...new Set(lessons.map(l=>l.topic))].map(t=><option key={t}>{t}</option>)}</select></label><span aria-live="polite">Показано {visible.length} из {lessons.length}</span></div>
+      {error&&<p className="form-error" role="alert">{error}</p>}
+      <div className="learning-list">{visible.map(l=>{const entry=progress.entries[l.id];const stats=lessonStats(l,entry);return <article className="learning-row" key={l.id}>
+        <a href={lessonLink(l.id)} className="learning-row-link"><span className={'lesson-state-icon'+(stats.finished?' finished':'')}>{stats.finished?<Check size={20}/>:<BookOpen size={20}/>}</span><span className="learning-row-copy"><strong>{l.title}</strong><span>{l.summary}</span><small>{l.topic} · {l.level}{stats.review>0?' · Есть задания для повторения':''}</small></span><span className="learning-row-meta"><span>{l.minutes} мин.</span><span>{stats.complete}/{stats.total} шагов</span></span><ArrowRight size={18}/></a>
+        <button className="icon-button" aria-label={`${entry?.favorite?'Убрать из избранного':'В избранное'}: ${l.title}`} aria-pressed={!!entry?.favorite} onClick={()=>{try{setProgress(updateLearning(lessons,data=>{const value=data.entries[l.id]??=emptyLessonProgress(l);value.favorite=!value.favorite;}));setError('');}catch(e){setError((e as Error).message);}}}><Bookmark size={17} fill={entry?.favorite?'currentColor':'none'}/></button>
+      </article>;})}</div>
+      {!visible.length&&<div className="empty-state"><Search size={26}/><h3>Подходящих уроков нет</h3><p>Измените тему, статус или поисковый запрос.</p><button className="secondary" onClick={()=>{setQuery('');setFilter('Все');setTopic('Все темы');}}>Сбросить фильтры</button></div>}
+    </section>
+    <p className="quiet-note learning-footnote">Это первые 12 законченных миниуроков новой системы. Большие курсы и библиотека из 1000+ уроков остаются следующими этапами. Прогресс сохраняется в этом браузере.</p>
+  </>;
 }
