@@ -59,7 +59,7 @@ for (const [courseIndex, course] of material.entries()) {
     lessons.push({
       schemaVersion: 1,
       id: lessonIds[index],
-      revision: 1,
+      revision: unit.revision ?? 1,
       title: unit.title,
       summary: unit.question,
       objective: unit.question,

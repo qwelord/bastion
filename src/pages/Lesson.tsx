@@ -304,7 +304,7 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
         <div>
           <h1>{lesson.title}</h1>
           <p>
-            {lesson.topic} · {lesson.level} · {lesson.minutes} минут
+            {lesson.topic} · {lesson.level} · {lesson.minutes} мин.
           </p>
         </div>
         <button className="secondary" aria-pressed={entry.favorite} onClick={favorite}>
@@ -396,6 +396,17 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
             <button className="secondary" onClick={() => go(0, true)}>
               Пройти ещё раз
             </button>
+            {stats.review > 0 && following && (
+              <a className="secondary" href={lessonLink(following.id)}>
+                Следующий урок
+                <ArrowRight size={16} />
+              </a>
+            )}
+            {stats.review > 0 && !following && course && (
+              <a className="secondary" href={courseLink(course.id)}>
+                К итогам курса
+              </a>
+            )}
             <a className="text-button" href="#learn">
               Все уроки
             </a>

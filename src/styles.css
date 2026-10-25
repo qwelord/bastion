@@ -3144,7 +3144,7 @@ main {
     padding-inline: 12px;
   }
   .sidebar .nav-link {
-    padding: 12px 5px;
+    padding: 12px 4px;
     gap: 5px;
     font-size: 10px;
   }
@@ -3259,4 +3259,14 @@ main {
   .course-program .learning-row-meta {
     margin-left: 44px;
   }
+}
+
+.learning-loading {
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 14px;
 }

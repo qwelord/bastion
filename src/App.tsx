@@ -35,7 +35,7 @@ export default function App() {
 function LearningLoading() {
   return (
     <div className="learning-loading" role="status">
-      <span className="engine-spinner" aria-hidden="true" />
+      <span className="loading-ring" aria-hidden="true" />
       Открываем учебную доску…
     </div>
   );
