@@ -1,173 +1,593 @@
-import { useState } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb, RotateCcw } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  Lightbulb,
+  RotateCcw,
+  Repeat2,
+  ChevronLeft,
+  ChevronRight,
+  Bookmark,
+  List,
+  Eye,
+} from 'lucide-react';
 import { Board } from '../components/Board';
-import { exercisePosition } from '../data/demo';
+import { PromotionDialog } from '../components/GameDialogs';
+import { lessons, findLesson } from '../learning/catalog';
+import { applyUci, type LessonDefinition } from '../learning/schema';
+import { StepSession } from '../learning/session';
+import {
+  emptyLessonProgress,
+  lessonLink,
+  lessonStats,
+  readLearning,
+  recordStep,
+  updateLearning,
+} from '../learning/progress';
+import { ChessGame, type Promotion } from '../chess/rules';
+import { moveSound, unlockSound } from '../chess/sound';
 import type { Settings } from '../state';
-function wasCompleted() {
-  try {
-    return localStorage.getItem('bastion.lesson.backrank') === 'complete';
-  } catch {
-    return false;
-  }
+function routeLesson() {
+  const route = location.hash.slice(1).split('/')[1]?.split('?')[0];
+  return route && /^[a-z][a-z0-9-]{0,63}$/.test(route) ? route : 'backrank';
 }
 export function Lesson({ settings }: { settings: Settings }) {
-  const [selected, setSelected] = useState<string>();
-  const [answer, setAnswer] = useState<'correct' | 'wrong' | null>(() =>
-    wasCompleted() ? 'correct' : null,
+  const [id, setId] = useState(routeLesson);
+  useEffect(() => {
+    const update = () => setId(routeLesson());
+    window.addEventListener('hashchange', update);
+    return () => window.removeEventListener('hashchange', update);
+  }, []);
+  const lesson = findLesson(id);
+  if (!lesson)
+    return (
+      <>
+        <a className="back-link" href="#learn">
+          <ArrowLeft size={15} />К урокам
+        </a>
+        <div className="empty-state surface">
+          <h1>Урок не найден</h1>
+          <p>Возможно, ссылка устарела. Выберите урок в каталоге.</p>
+          <a className="primary" href="#learn">
+            Открыть обучение
+          </a>
+        </div>
+      </>
+    );
+  return <LessonPlayer key={id} lesson={lesson} settings={settings} />;
+}
+function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings: Settings }) {
+  const [progress, setProgress] = useState(() => readLearning(lessons));
+  const reviewMode = useRef(location.hash.endsWith('?review=1')).current;
+  const initial = reviewMode
+    ? Math.max(
+        0,
+        lesson.steps.findIndex((s) => progress.entries[lesson.id]?.steps[s.id]?.needsReview),
+      )
+    : (progress.entries[lesson.id]?.cursor ?? 0);
+  const [index, setIndex] = useState(initial);
+  const [session, setSession] = useState(
+    () =>
+      new StepSession(
+        lesson.steps[initial],
+        reviewMode
+          ? undefined
+          : progress.entries[lesson.id]?.steps[lesson.steps[initial].id]?.snapshot,
+      ),
   );
-  const [hint, setHint] = useState(false);
-  const [complete, setComplete] = useState(wasCompleted);
-  const respond = (ok: boolean) => {
-    setAnswer(ok ? 'correct' : 'wrong');
+  const [, paint] = useState(0);
+  const [summary, setSummary] = useState(
+    () => !reviewMode && lessonStats(lesson, progress.entries[lesson.id]).finished,
+  );
+  const [selected, setSelected] = useState<string>();
+  const [flipped, setFlipped] = useState(false);
+  const [demoPly, setDemoPly] = useState(0);
+  const [showOutline, setShowOutline] = useState(false);
+  const [showMoves, setShowMoves] = useState(true);
+  const [error, setError] = useState('');
+  const [promotion, setPromotion] = useState<{ from: string; to: string } | null>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const step = lesson.steps[index];
+  const entry = progress.entries[lesson.id] ?? emptyLessonProgress(lesson);
+  const stats = lessonStats(lesson, entry);
+  function save(active = session, cursor = index) {
+    try {
+      const next = recordStep(lessons, lesson, cursor, active.snapshot());
+      setProgress(next);
+      setError('');
+      return next;
+    } catch (e) {
+      setError((e as Error).message);
+      return progress;
+    }
+  }
+  useEffect(() => {
+    save();
+  }, [session]);
+  useEffect(() => {
+    titleRef.current?.focus({ preventScroll: true });
+  }, [index, summary]);
+  function changed() {
+    paint((v) => v + 1);
+    save();
+  }
+  function go(next: number, fresh = false) {
+    save();
+    const stored = readLearning(lessons);
+    setIndex(next);
+    setSession(
+      new StepSession(
+        lesson.steps[next],
+        fresh ? undefined : stored.entries[lesson.id]?.steps[lesson.steps[next].id]?.snapshot,
+      ),
+    );
     setSelected(undefined);
-  };
-  const square = (s: string) => {
-    if (answer === 'correct') return;
-    if (s === 'e1') {
+    setPromotion(null);
+    setDemoPly(0);
+    setShowOutline(false);
+    setSummary(false);
+  }
+  function move(from: string, to: string, piece?: Promotion) {
+    if (step.kind !== 'move' || session.state.complete) return;
+    if (!piece && session.game.needsPromotion(from, to)) {
+      setPromotion({ from, to });
+      return;
+    }
+    if (settings.sound) unlockSound();
+    const accepted = session.move(from + to + (piece ?? ''));
+    setPromotion(null);
+    setSelected(undefined);
+    if (accepted && settings.sound) {
+      const last = session.game.history().at(-1);
+      moveSound(!!last?.captured, session.game.inCheck(), session.state.complete, settings.volume);
+    }
+    changed();
+  }
+  const movable: string[] =
+    step.kind === 'move' && !session.state.complete
+      ? [...new Set(session.game.moves().map((m) => m.from))]
+      : [];
+  function square(s: string) {
+    if (step.kind === 'squares') {
+      session.toggleSquare(s);
+      changed();
+      return;
+    }
+    if (step.kind !== 'move' || session.state.complete) return;
+    if (s === selected) {
+      setSelected(undefined);
+      return;
+    }
+    if (movable.includes(s)) {
       setSelected(s);
       return;
     }
-    if (selected === 'e1') respond(s === 'e8');
-  };
-  const reset = () => {
-    setAnswer(null);
-    setSelected(undefined);
-    setHint(false);
-    setComplete(false);
-  };
+    if (selected) move(selected, s);
+  }
+  function advance() {
+    if (step.kind === 'explain') session.read();
+    if (!session.state.complete) return;
+    const nextProgress = save();
+    if (reviewMode) {
+      const nextIndex = lesson.steps.findIndex(
+        (s, i) => i > index && nextProgress.entries[lesson.id]?.steps[s.id]?.needsReview,
+      );
+      if (nextIndex >= 0) {
+        go(nextIndex, true);
+        return;
+      }
+      setSummary(true);
+      return;
+    }
+    if (index < lesson.steps.length - 1) go(index + 1);
+    else if (lessonStats(lesson, nextProgress.entries[lesson.id]).finished) setSummary(true);
+    else
+      go(lesson.steps.findIndex((s) => !nextProgress.entries[lesson.id]?.steps[s.id]?.completed));
+  }
+  function favorite() {
+    try {
+      setProgress(
+        updateLearning(lessons, (data) => {
+          const p = (data.entries[lesson.id] ??= emptyLessonProgress(lesson));
+          p.favorite = !p.favorite;
+        }),
+      );
+      setError('');
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  }
+  const viewGame = step.kind === 'explain' ? new ChessGame(step.fen) : session.game;
+  if (step.kind === 'explain') step.line?.slice(0, demoPly).forEach((m) => applyUci(viewGame, m));
+  const history = viewGame.history();
+  const hintFocus =
+    step.kind === 'move' && session.state.hints === step.hints.length
+      ? step.lines.find((line) => session.state.trail.every((m, i) => line[i] === m))?.[
+          session.state.trail.length
+        ]
+      : undefined;
+  const emphasis =
+    step.kind === 'explain'
+      ? (step.focus ?? [])
+      : hintFocus
+        ? [hintFocus.slice(0, 2), hintFocus.slice(2, 4)]
+        : [];
+  const following = lessons[lessons.findIndex((l) => l.id === lesson.id) + 1];
+  const otherReview = lessons.find(
+    (l) => l.id !== lesson.id && lessonStats(l, progress.entries[l.id]).review > 0,
+  );
   return (
-    <>
+    <div className="lesson-player">
       <a href="#learn" className="back-link">
-        <ArrowLeft size={15} /> К программе обучения
+        <ArrowLeft size={15} />К программе обучения
       </a>
       <div className="page-intro">
         <div>
-          <h1>Мат на последней горизонтали</h1>
-          <p>Основы тактики / Открытый урок</p>
+          <h1>{lesson.title}</h1>
+          <p>
+            {lesson.topic} · {lesson.level} · {lesson.minutes} минут
+          </p>
         </div>
-        <span className="tag">{complete ? 'Урок пройден' : 'Практика на доске'}</span>
+        <button className="secondary" aria-pressed={entry.favorite} onClick={favorite}>
+          <Bookmark size={16} fill={entry.favorite ? 'currentColor' : 'none'} />
+          {entry.favorite ? 'В избранном' : 'Сохранить урок'}
+        </button>
       </div>
-      <div className="lesson-layout">
-        <div className="board-column">
-          <div className="lesson-board-label">
-            <span>Ход белых</span>
-            <span>Найдите мат в один ход</span>
-          </div>
-          <Board
-            settings={settings}
-            position={
-              answer === 'correct' ? { ...exercisePosition, e1: '', e8: 'wr' } : exercisePosition
-            }
-            selected={selected}
-            highlight={answer === 'correct' ? ['e1', 'e8'] : []}
-            onSquare={square}
-            onMove={(from, to) => {
-              if (answer !== 'correct' && from === 'e1') respond(to === 'e8');
-            }}
-            movableSquares={answer === 'correct' ? [] : ['e1']}
-          />
-          <p className="quiet-note board-caption">
-            Перетащите ладью на поле назначения или выберите ответ справа.
-          </p>
+      {error && (
+        <div className="learning-save-error" role="alert">
+          <p>{error}</p>
+          <button className="text-button" onClick={() => save()}>
+            Повторить сохранение
+          </button>
         </div>
-        <article className="lesson-text">
-          <span className="lesson-step">Идея позиции</span>
-          <h2>
-            Собственные пешки
-            <br />
-            могут стать стеной.
+      )}
+      {summary ? (
+        <section className="lesson-summary surface">
+          <CheckCircle2 size={34} />
+          <h2 ref={titleRef} tabIndex={-1}>
+            {reviewMode ? 'Повторение завершено' : 'Урок пройден'}
           </h2>
-          <p>
-            Чёрный король укрыт пешками f7, g7 и h7. Но сейчас они отнимают у него все поля для
-            отступления.
-          </p>
-          <p>
-            Ладья может выйти на восьмую горизонталь с шахом. Король не сможет ни уйти с неё, ни
-            закрыться от удара.
-          </p>
-          <div className="lesson-question">
-            <h3>Как закончить партию?</h3>
-            <div className="answer-options">
-              {[
-                ['Re7', 'На седьмую горизонталь', false],
-                ['Re8#', 'На последнюю горизонталь', true],
-                ['Kf1', 'Приблизить короля', false],
-              ].map(([move, text, ok]) => (
-                <button
-                  key={String(move)}
-                  disabled={answer === 'correct'}
-                  onClick={() => respond(Boolean(ok))}
-                >
-                  <strong>{move}</strong>
-                  <span>{text}</span>
-                  <ArrowRight size={16} />
-                </button>
+          <p>{lesson.objective}</p>
+          <div className="lesson-takeaways">
+            <h3>Что забрать в свою игру</h3>
+            <ul>
+              {lesson.takeaways.map((t) => (
+                <li key={t}>{t}</li>
               ))}
-            </div>
-          </div>
-          {answer && (
-            <div className={'answer-feedback ' + answer} role="status">
-              {answer === 'correct' ? (
-                <>
-                  <CheckCircle2 size={20} />
-                  <div>
-                    <strong>Верно. 1. Re8#</strong>
-                    <p>
-                      Ладья контролирует f8 и h8, а свои пешки закрывают королю седьмую горизонталь.
-                      Это мат.
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Lightbulb size={20} />
-                  <div>
-                    <strong>Попробуйте ещё раз.</strong>
-                    <p>
-                      Нужен шах по восьмой горизонтали. Посмотрите, на какое поле может сразу
-                      попасть ладья.
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-          {hint && answer !== 'correct' && (
-            <p className="notice">
-              Вертикаль e свободна. Поднимите ладью на e8 и проверьте все поля вокруг чёрного
-              короля.
-            </p>
-          )}
-          <div className="lesson-actions">
-            {answer === 'correct' ? (
-              <button
-                className="primary"
-                onClick={() => {
-                  setComplete(true);
-                  try {
-                    localStorage.setItem('bastion.lesson.backrank', 'complete');
-                  } catch {}
-                }}
-              >
-                {complete ? 'Урок отмечен пройденным' : 'Завершить урок'}
-                <CheckCircle2 size={16} />
-              </button>
-            ) : (
-              <button className="text-button" onClick={() => setHint(!hint)}>
-                <Lightbulb size={17} />
-                {hint ? 'Скрыть подсказку' : 'Нужна подсказка'}
-              </button>
-            )}
-            <button className="icon-button" aria-label="Повторить урок" onClick={reset}>
-              <RotateCcw size={17} />
-            </button>
+            </ul>
           </div>
           <p className="quiet-note">
-            Практический вывод: следите за безопасным полем для короля. Ход пешкой создаёт
-            «форточку», но его тоже нужно проверять на угрозы.
+            {stats.complete} из {stats.total} шагов пройдено.
+            {stats.review
+              ? ` Стоит повторить: ${stats.review}.`
+              : ' Можно перейти к следующей теме.'}
           </p>
-        </article>
-      </div>
-    </>
+          <div className="lesson-summary-actions">
+            {stats.review > 0 ? (
+              <button
+                className="primary"
+                onClick={() =>
+                  go(
+                    Math.max(
+                      0,
+                      lesson.steps.findIndex((s) => entry.steps[s.id]?.needsReview),
+                    ),
+                    true,
+                  )
+                }
+              >
+                Закрепить без подсказок
+                <RotateCcw size={16} />
+              </button>
+            ) : reviewMode && otherReview ? (
+              <a className="primary" href={lessonLink(otherReview.id) + '?review=1'}>
+                Следующие трудные задания
+                <ArrowRight size={16} />
+              </a>
+            ) : following ? (
+              <a className="primary" href={lessonLink(following.id)}>
+                Следующий урок
+                <ArrowRight size={16} />
+              </a>
+            ) : (
+              <a className="primary" href="#learn">
+                К программе
+                <ArrowRight size={16} />
+              </a>
+            )}
+            <button className="secondary" onClick={() => go(0, true)}>
+              Пройти ещё раз
+            </button>
+            <a className="text-button" href="#learn">
+              Все уроки
+            </a>
+          </div>
+        </section>
+      ) : (
+        <>
+          <div className="lesson-progress">
+            <span>
+              {reviewMode ? 'Повторение' : 'Шаг'} {index + 1} из {lesson.steps.length}
+            </span>
+            <div className="lesson-step-track">
+              {lesson.steps.map((s, i) => (
+                <button
+                  key={s.id}
+                  title={s.title}
+                  aria-label={`Шаг ${i + 1}: ${s.title}`}
+                  aria-current={i === index ? 'step' : undefined}
+                  className={entry.steps[s.id]?.completed ? 'done' : ''}
+                  onClick={() => go(i)}
+                />
+              ))}
+            </div>
+            <button
+              className="text-button"
+              aria-expanded={showOutline}
+              onClick={() => setShowOutline(!showOutline)}
+            >
+              <List size={16} />
+              Содержание
+            </button>
+          </div>
+          {showOutline && (
+            <nav className="lesson-outline surface" aria-label="Содержание урока">
+              {lesson.steps.map((s, i) => (
+                <button
+                  key={s.id}
+                  aria-current={i === index ? 'step' : undefined}
+                  onClick={() => go(i)}
+                >
+                  <span>
+                    {i + 1}. {s.title}
+                  </span>
+                  {entry.steps[s.id]?.completed && <CheckCircle2 size={16} />}
+                </button>
+              ))}
+            </nav>
+          )}
+          <div className="study-layout">
+            <section className="study-board-column" aria-label="Учебная доска">
+              <div className="study-board-caption">
+                <strong>
+                  {step.kind === 'move'
+                    ? new ChessGame(step.fen).turn() === 'w'
+                      ? 'Вы играете белыми'
+                      : 'Вы играете чёрными'
+                    : step.kind === 'squares'
+                      ? 'Отметьте поля'
+                      : step.kind === 'choice'
+                        ? 'Позиция к вопросу'
+                        : 'Разберите пример'}
+                </strong>
+                <span>
+                  {step.kind === 'move' && session.state.complete
+                    ? 'Задание решено'
+                    : step.kind === 'move'
+                      ? 'Ваш ход'
+                      : ''}
+                </span>
+              </div>
+              <Board
+                settings={settings}
+                position={viewGame.position()}
+                flipped={flipped}
+                selected={selected}
+                markedSquares={step.kind === 'squares' ? session.state.squares : undefined}
+                emphasis={emphasis}
+                highlight={history.length ? [history.at(-1)!.from, history.at(-1)!.to] : []}
+                checkedSquare={viewGame.checkedKing()}
+                movableSquares={movable}
+                legalTargets={
+                  showMoves && selected ? session.game.moves(selected).map((m) => m.to) : []
+                }
+                onSquare={
+                  (step.kind === 'squares' && !session.state.complete) ||
+                  (step.kind === 'move' && !session.state.complete)
+                    ? square
+                    : undefined
+                }
+                onMove={step.kind === 'move' && !session.state.complete ? move : undefined}
+                onDragStart={setSelected}
+              />
+              <div className="board-toolbar">
+                <span>
+                  {step.kind === 'move'
+                    ? 'Перетаскивание и нажатия'
+                    : step.kind === 'squares'
+                      ? `Отмечено полей: ${session.state.squares.length}`
+                      : 'Исследуйте позицию в своём темпе'}
+                </span>
+                <div>
+                  <button
+                    className="icon-button"
+                    aria-label="Перевернуть учебную доску"
+                    onClick={() => setFlipped(!flipped)}
+                  >
+                    <Repeat2 size={17} />
+                  </button>
+                  {step.kind === 'move' && (
+                    <button
+                      className="icon-button"
+                      aria-label="Подсветка возможных ходов"
+                      aria-pressed={showMoves}
+                      onClick={() => setShowMoves(!showMoves)}
+                    >
+                      <Eye size={17} />
+                    </button>
+                  )}
+                </div>
+              </div>
+              {step.kind === 'explain' && step.line && (
+                <div className="example-controls">
+                  <button
+                    className="secondary"
+                    disabled={!demoPly}
+                    onClick={() => setDemoPly(demoPly - 1)}
+                  >
+                    <ChevronLeft size={16} />
+                    Назад
+                  </button>
+                  <span>
+                    {demoPly ? history.at(-1)?.san : 'Начало'} · {demoPly}/{step.line.length}
+                  </span>
+                  <button
+                    className="secondary"
+                    disabled={demoPly === step.line.length}
+                    onClick={() => setDemoPly(demoPly + 1)}
+                  >
+                    Ход примера
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
+              {step.kind === 'move' && history.length > 0 && (
+                <p className="study-line">{history.map((m) => m.san).join('  ')}</p>
+              )}
+            </section>
+            <article className="study-panel">
+              <span className="study-kind">
+                {step.kind === 'explain'
+                  ? 'Разберём идею'
+                  : step.kind === 'move'
+                    ? 'Практика на доске'
+                    : step.kind === 'choice'
+                      ? 'Проверьте понимание'
+                      : 'Найдите на доске'}
+              </span>
+              <h2 ref={titleRef} tabIndex={-1}>
+                {step.title}
+              </h2>
+              {step.body.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+              {step.kind === 'choice' && (
+                <div className="study-options" aria-label="Варианты ответа">
+                  {step.options.map((option) => (
+                    <button
+                      className={session.state.choice === option.id ? 'chosen' : ''}
+                      key={option.id}
+                      disabled={session.state.complete}
+                      aria-pressed={session.state.choice === option.id}
+                      onClick={() => {
+                        session.choose(option.id);
+                        changed();
+                      }}
+                    >
+                      {option.label}
+                      {session.state.complete && option.id === step.answer && (
+                        <CheckCircle2 size={17} />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {step.kind === 'squares' && !session.state.complete && (
+                <button
+                  className="secondary full"
+                  disabled={!session.state.squares.length}
+                  onClick={() => {
+                    session.checkSquares();
+                    changed();
+                  }}
+                >
+                  Проверить поля
+                </button>
+              )}
+              <div className={'study-feedback ' + session.status} role="status" aria-live="polite">
+                {session.message && (
+                  <>
+                    <strong>
+                      {session.state.revealed
+                        ? 'Разобрано с решением'
+                        : session.status === 'correct'
+                          ? 'Верно'
+                          : session.status === 'wrong'
+                            ? 'Попробуйте иначе'
+                            : 'Продолжайте'}
+                    </strong>
+                    <p>{session.message}</p>
+                  </>
+                )}
+              </div>
+              {step.kind !== 'explain' && session.state.hints > 0 && (
+                <ol className="study-hints">
+                  {step.hints.slice(0, session.state.hints).map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ol>
+              )}
+              <div className="study-actions">
+                {step.kind !== 'explain' && !session.state.complete && (
+                  <>
+                    <button
+                      className="text-button"
+                      disabled={session.state.hints >= step.hints.length}
+                      onClick={() => {
+                        session.hint();
+                        changed();
+                      }}
+                    >
+                      <Lightbulb size={16} />
+                      Подсказка {Math.min(session.state.hints + 1, step.hints.length)}/
+                      {step.hints.length}
+                    </button>
+                    {session.state.hints >= step.hints.length && (
+                      <button
+                        className="text-button"
+                        onClick={() => {
+                          session.reveal();
+                          changed();
+                        }}
+                      >
+                        Показать решение
+                      </button>
+                    )}
+                  </>
+                )}
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    save();
+                    setSession(new StepSession(step));
+                    setSelected(undefined);
+                    setDemoPly(0);
+                    setPromotion(null);
+                  }}
+                >
+                  <RotateCcw size={15} />
+                  {step.kind === 'explain' ? 'К началу примера' : 'Решить заново'}
+                </button>
+              </div>
+              <button
+                className="primary full study-next"
+                disabled={step.kind !== 'explain' && !session.state.complete}
+                onClick={advance}
+              >
+                {index === lesson.steps.length - 1
+                  ? 'Завершить урок'
+                  : step.kind === 'explain'
+                    ? 'Понятно, дальше'
+                    : 'Следующий шаг'}
+                <ArrowRight size={17} />
+              </button>
+              <p className="quiet-note study-save-note">
+                Без таймера. Можно ошибаться: позиция останется на месте. Прогресс сохраняется
+                автоматически.
+              </p>
+            </article>
+          </div>
+        </>
+      )}
+      {promotion && (
+        <PromotionDialog
+          timed={false}
+          color={session.game.turn()}
+          onChoose={(piece) => move(promotion.from, promotion.to, piece)}
+          onCancel={() => setPromotion(null)}
+        />
+      )}
+    </div>
   );
 }

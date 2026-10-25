@@ -49,6 +49,8 @@ export function Board({
   movableSquares,
   legalTargets = [],
   checkedSquare,
+  emphasis = [],
+  markedSquares,
 }: {
   position?: Position;
   settings: Settings;
@@ -61,6 +63,8 @@ export function Board({
   movableSquares?: string[];
   legalTargets?: string[];
   checkedSquare?: string;
+  emphasis?: string[];
+  markedSquares?: string[];
 }) {
   const files = flipped ? 'hgfedcba' : 'abcdefgh';
   const ranks = flipped ? '12345678' : '87654321';
@@ -271,6 +275,8 @@ export function Board({
                     ((row + col) % 2 ? 'dark' : 'light') +
                     (highlight.includes(square) ? ' last-move' : '') +
                     (selected === square ? ' selected' : '') +
+                    (emphasis.includes(square) ? ' lesson-emphasis' : '') +
+                    (markedSquares?.includes(square) ? ' lesson-marked' : '') +
                     (drag?.from === square ? ' drag-source' : '') +
                     (checkedSquare === square ? ' in-check' : '')
                   }
@@ -299,7 +305,13 @@ export function Board({
                         names[piece[1]]
                       : ' пустое поле')
                   }
-                  aria-pressed={onSquare ? selected === square : undefined}
+                  aria-pressed={
+                    onSquare
+                      ? markedSquares
+                        ? markedSquares.includes(square)
+                        : selected === square
+                      : undefined
+                  }
                 >
                   {piece && (
                     <Piece

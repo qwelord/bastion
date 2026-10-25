@@ -41,14 +41,20 @@ export function PromotionDialog({
   color,
   onChoose,
   onCancel,
+  timed = true,
 }: {
   color: Color;
   onChoose: (piece: Promotion) => void;
   onCancel: () => void;
+  timed?: boolean;
 }) {
   return (
     <Modal title="Превращение пешки" onClose={onCancel}>
-      <p className="quiet-note">Выберите фигуру. Время продолжает идти.</p>
+      <p className="quiet-note">
+        {timed
+          ? 'Выберите фигуру. Время продолжает идти.'
+          : 'Выберите фигуру для продолжения задания.'}
+      </p>
       <div className="promotion-options">
         {(
           [
