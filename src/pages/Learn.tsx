@@ -12,7 +12,32 @@ import {
   hasOpenAttempt,
 } from '../learning/progress';
 import type { Settings } from '../state';
+import { CourseCatalog, CourseDetail } from './Courses';
+import { courses } from '../learning/courses';
 export function Learn({ settings }: { settings: Settings }) {
+  const [hash, setHash] = useState(() => location.hash);
+  useEffect(() => {
+    const update = () => setHash(location.hash);
+    window.addEventListener('hashchange', update);
+    return () => window.removeEventListener('hashchange', update);
+  }, []);
+  if (hash === '#learn/lessons') return <LessonCatalog settings={settings} />;
+  if (hash.startsWith('#learn/course/')) {
+    const course = courses.find((c) => c.id === hash.slice('#learn/course/'.length));
+    return course ? (
+      <CourseDetail key={course.id} course={course} settings={settings} />
+    ) : (
+      <div className="empty-state">
+        <h1>Курс не найден</h1>
+        <a href="#learn" className="primary">
+          Открыть каталог
+        </a>
+      </div>
+    );
+  }
+  return <CourseCatalog settings={settings} />;
+}
+function LessonCatalog({ settings }: { settings: Settings }) {
   const [progress, setProgress] = useState(() => readLearning(lessons));
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('Все');
@@ -55,6 +80,9 @@ export function Learn({ settings }: { settings: Settings }) {
   });
   return (
     <>
+      <a className="back-link" href="#learn">
+        ← К курсам
+      </a>
       <div className="page-intro">
         <div>
           <h1>Учиться, делая ходы</h1>
@@ -225,8 +253,8 @@ export function Learn({ settings }: { settings: Settings }) {
         )}
       </section>
       <p className="quiet-note learning-footnote">
-        Это первые 12 законченных миниуроков новой системы. Большие курсы и библиотека из 1000+
-        уроков остаются следующими этапами. Прогресс сохраняется в этом браузере.
+        150 уроков в 50 коротких курсах и 12 вводных миниуроков. Все задания доступны бесплатно.
+        Прогресс сохраняется в этом браузере. Библиотека из 1000+ уроков — следующий этап.
       </p>
     </>
   );

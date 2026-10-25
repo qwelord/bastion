@@ -15,6 +15,7 @@ import {
 import { Board } from '../components/Board';
 import { PromotionDialog } from '../components/GameDialogs';
 import { lessons, findLesson } from '../learning/catalog';
+import { courseForLesson, courseLink, courseLessons } from '../learning/courses';
 import { applyUci, type LessonDefinition } from '../learning/schema';
 import { StepSession } from '../learning/session';
 import {
@@ -287,14 +288,17 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
       : hintFocus
         ? [hintFocus.slice(0, 2), hintFocus.slice(2, 4)]
         : [];
-  const following = lessons[lessons.findIndex((l) => l.id === lesson.id) + 1];
+  const course = courseForLesson(lesson.id);
+  const sequence = course ? courseLessons(course) : lessons.filter((l) => !courseForLesson(l.id));
+  const following = sequence[sequence.findIndex((l) => l.id === lesson.id) + 1];
   const otherReview = lessons.find(
     (l) => l.id !== lesson.id && lessonStats(l, progress.entries[l.id]).review > 0,
   );
   return (
     <div className="lesson-player" onKeyDown={shortcuts}>
-      <a href="#learn" className="back-link">
-        <ArrowLeft size={15} />К программе обучения
+      <a href={course ? courseLink(course.id) : '#learn/lessons'} className="back-link">
+        <ArrowLeft size={15} />
+        {course ? course.title : 'К программе обучения'}
       </a>
       <div className="page-intro">
         <div>
@@ -384,8 +388,8 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
                 <ArrowRight size={16} />
               </a>
             ) : (
-              <a className="primary" href="#learn">
-                К программе
+              <a className="primary" href={course ? courseLink(course.id) : '#learn'}>
+                {course ? 'К итогам курса' : 'К программе'}
                 <ArrowRight size={16} />
               </a>
             )}
