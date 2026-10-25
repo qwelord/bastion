@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -24,6 +24,7 @@ import {
   readLearning,
   recordStep,
   updateLearning,
+  applyStepRecord,
 } from '../learning/progress';
 import { ChessGame, type Promotion } from '../chess/rules';
 import { moveSound, unlockSound } from '../chess/sound';
@@ -86,8 +87,12 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
   const [showOutline, setShowOutline] = useState(false);
   const [showMoves, setShowMoves] = useState(true);
   const [error, setError] = useState('');
+  const [note, setNote] = useState(progress.entries[lesson.id]?.note ?? '');
+  const savedNote = useRef(note);
   const [promotion, setPromotion] = useState<{ from: string; to: string } | null>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const stepAreaRef = useRef<HTMLDivElement>(null);
+  const previousIndex = useRef(index);
   const step = lesson.steps[index];
   const entry = progress.entries[lesson.id] ?? emptyLessonProgress(lesson);
   const stats = lessonStats(lesson, entry);
@@ -99,7 +104,10 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
       return next;
     } catch (e) {
       setError((e as Error).message);
-      return progress;
+      const temporary = structuredClone(progress);
+      applyStepRecord(temporary, lesson, cursor, active.snapshot());
+      setProgress(temporary);
+      return temporary;
     }
   }
   useEffect(() => {
@@ -107,14 +115,22 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
   }, [session]);
   useEffect(() => {
     titleRef.current?.focus({ preventScroll: true });
+    if (previousIndex.current !== index && window.matchMedia('(max-width: 760px)').matches)
+      stepAreaRef.current?.scrollIntoView({
+        block: 'start',
+        behavior:
+          settings.motion && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'smooth'
+            : 'auto',
+      });
+    previousIndex.current = index;
   }, [index, summary]);
   function changed() {
     paint((v) => v + 1);
     save();
   }
   function go(next: number, fresh = false) {
-    save();
-    const stored = readLearning(lessons);
+    const stored = save();
     setIndex(next);
     setSession(
       new StepSession(
@@ -127,6 +143,60 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
     setDemoPly(0);
     setShowOutline(false);
     setSummary(false);
+  }
+  function saveNote() {
+    if (savedNote.current === note) return;
+    try {
+      setProgress(
+        updateLearning(lessons, (data) => {
+          const value = (data.entries[lesson.id] ??= emptyLessonProgress(lesson));
+          value.note = note.slice(0, 2000);
+        }),
+      );
+      savedNote.current = note;
+      setError('');
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  }
+  useEffect(() => {
+    if (note === savedNote.current) return;
+    const timer = setTimeout(saveNote, 350);
+    return () => clearTimeout(timer);
+  }, [note]);
+  function restart() {
+    save();
+    setSession(new StepSession(step));
+    setSelected(undefined);
+    setDemoPly(0);
+    setPromotion(null);
+  }
+  function shortcuts(event: KeyboardEvent<HTMLDivElement>) {
+    if (
+      event.defaultPrevented ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey ||
+      (event.target as HTMLElement).closest(
+        'input,textarea,select,button,a,summary,[data-square]',
+      ) ||
+      summary
+    )
+      return;
+    const key = event.key.toLowerCase();
+    if ((key === 'n' || key === 'т') && (step.kind === 'explain' || session.state.complete)) {
+      event.preventDefault();
+      advance();
+    }
+    if ((key === 'h' || key === 'р') && step.kind !== 'explain' && !session.state.complete) {
+      event.preventDefault();
+      session.hint();
+      changed();
+    }
+    if (key === 'r' || key === 'к') {
+      event.preventDefault();
+      restart();
+    }
   }
   function move(from: string, to: string, piece?: Promotion) {
     if (step.kind !== 'move' || session.state.complete) return;
@@ -218,7 +288,7 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
     (l) => l.id !== lesson.id && lessonStats(l, progress.entries[l.id]).review > 0,
   );
   return (
-    <div className="lesson-player">
+    <div className="lesson-player" onKeyDown={shortcuts}>
       <a href="#learn" className="back-link">
         <ArrowLeft size={15} />К программе обучения
       </a>
@@ -306,7 +376,15 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
         </section>
       ) : (
         <>
-          <div className="lesson-progress">
+          <div className="lesson-progress" ref={stepAreaRef}>
+            <button
+              className="icon-button"
+              disabled={index === 0}
+              aria-label="Предыдущий шаг урока"
+              onClick={() => go(index - 1)}
+            >
+              <ChevronLeft size={18} />
+            </button>
             <span>
               {reviewMode ? 'Повторение' : 'Шаг'} {index + 1} из {lesson.steps.length}
             </span>
@@ -546,16 +624,7 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
                     )}
                   </>
                 )}
-                <button
-                  className="text-button"
-                  onClick={() => {
-                    save();
-                    setSession(new StepSession(step));
-                    setSelected(undefined);
-                    setDemoPly(0);
-                    setPromotion(null);
-                  }}
-                >
+                <button className="text-button" onClick={restart}>
                   <RotateCcw size={15} />
                   {step.kind === 'explain' ? 'К началу примера' : 'Решить заново'}
                 </button>
@@ -580,6 +649,55 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
           </div>
         </>
       )}
+      <div className="study-extras">
+        <details>
+          <summary>
+            Моя заметка к уроку
+            {note ? (note === savedNote.current ? ' · сохранена' : ' · не сохранена') : ''}
+          </summary>
+          <label htmlFor="lesson-note" className="quiet-note">
+            Запишите свою формулировку идеи или вопрос для повторения.
+          </label>
+          <textarea
+            id="lesson-note"
+            maxLength={2000}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            onBlur={saveNote}
+            placeholder="Что хочется запомнить?"
+          />
+          <small>{note.length}/2000 · сохраняется в этом браузере</small>
+        </details>
+        <details>
+          <summary>Обозначения и управление</summary>
+          <dl>
+            {[
+              ['K', 'король'],
+              ['Q', 'ферзь'],
+              ['R', 'ладья'],
+              ['B', 'слон'],
+              ['N', 'конь'],
+              ['x', 'взятие'],
+              ['+', 'шах'],
+              ['#', 'мат'],
+              ['O-O / O-O-O', 'короткая / длинная рокировка'],
+            ].map(([term, value]) => (
+              <div key={term}>
+                <dt>{term}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p>
+            Пешка записывается без буквы фигуры. Например, Nf3 — конь на f3, exd5 — пешка с
+            вертикали e берёт на d5.
+          </p>
+          <p>
+            На доске: стрелки перемещают фокус, Enter выбирает поле. Вне полей и элементов ввода: N
+            — дальше, H — подсказка, R — заново. Работает и русская раскладка.
+          </p>
+        </details>
+      </div>
       {promotion && (
         <PromotionDialog
           timed={false}

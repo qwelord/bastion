@@ -114,6 +114,24 @@ export function updateLearning(
   change: (data: LearningProgress) => void,
   storage: StoragePort = localStorage,
 ) {
+  const existing = storage.getItem(key);
+  if (existing) {
+    try {
+      const data = JSON.parse(existing);
+      if (
+        existing.length > 1_000_000 ||
+        data?.version !== 1 ||
+        !data.entries ||
+        typeof data.entries !== 'object' ||
+        Array.isArray(data.entries)
+      )
+        throw new Error();
+    } catch {
+      throw new Error(
+        'Сохранённый прогресс повреждён или имеет другую версию. Он не перезаписан; работа продолжится в текущей вкладке.',
+      );
+    }
+  }
   const data = readLearning(catalog, storage);
   change(data);
   const raw = JSON.stringify(data);
@@ -139,24 +157,30 @@ export function recordStep(
     throw new Error('Неизвестный шаг урока.');
   return updateLearning(
     catalog,
-    (data) => {
-      const entry = (data.entries[lesson.id] ??= emptyLessonProgress(lesson));
-      const step = lesson.steps[cursor];
-      const old = entry.steps[step.id];
-      const assisted = snapshot.hints > 0 || snapshot.revealed || snapshot.mistakes > 0;
-      entry.steps[step.id] = {
-        completed: !!old?.completed || snapshot.complete,
-        mastered: !!old?.mastered || (snapshot.complete && !assisted),
-        needsReview: snapshot.complete ? assisted : !!old?.needsReview,
-        snapshot,
-        updated: Date.now(),
-      };
-      entry.cursor = cursor;
-      entry.visited = Date.now();
-      data.lastLesson = lesson.id;
-    },
+    (data) => applyStepRecord(data, lesson, cursor, snapshot),
     storage,
   );
+}
+export function applyStepRecord(
+  data: LearningProgress,
+  lesson: LessonDefinition,
+  cursor: number,
+  snapshot: StepSnapshot,
+) {
+  const entry = (data.entries[lesson.id] ??= emptyLessonProgress(lesson));
+  const step = lesson.steps[cursor];
+  const old = entry.steps[step.id];
+  const assisted = snapshot.hints > 0 || snapshot.revealed || snapshot.mistakes > 0;
+  entry.steps[step.id] = {
+    completed: !!old?.completed || snapshot.complete,
+    mastered: !!old?.mastered || (snapshot.complete && !assisted),
+    needsReview: snapshot.complete ? assisted : !!old?.needsReview || assisted,
+    snapshot,
+    updated: Date.now(),
+  };
+  entry.cursor = cursor;
+  entry.visited = Date.now();
+  data.lastLesson = lesson.id;
 }
 export function lessonLink(id: string) {
   return `#lesson/${encodeURIComponent(id)}`;

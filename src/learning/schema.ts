@@ -38,6 +38,10 @@ export type LessonDefinition = {
   takeaways: string[];
 };
 const idPattern = /^[a-z][a-z0-9-]{0,63}$/;
+const validId = (id: unknown) =>
+  typeof id === 'string' &&
+  idPattern.test(id) &&
+  !['constructor', 'prototype', '__proto__'].includes(id);
 const movePattern = /^[a-h][1-8][a-h][1-8][qrbn]?$/;
 const squarePattern = /^[a-h][1-8]$/;
 function demand(ok: unknown, message: string): asserts ok {
@@ -69,7 +73,7 @@ export function validateLesson(input: unknown): LessonDefinition {
   );
   const lesson = input as LessonDefinition;
   const fail = (s: string) => `${lesson.id ?? '?'}: ${s}`;
-  demand(lesson.schemaVersion === 1 && idPattern.test(lesson.id), fail('неверная версия или ID'));
+  demand(lesson.schemaVersion === 1 && validId(lesson.id), fail('неверная версия или ID'));
   demand(Number.isInteger(lesson.revision) && lesson.revision > 0, fail('неверная ревизия'));
   demand(
     text(lesson.title, 120) &&
@@ -86,7 +90,7 @@ export function validateLesson(input: unknown): LessonDefinition {
   demand(
     Array.isArray(lesson.prerequisites) &&
       lesson.prerequisites.length <= 10 &&
-      lesson.prerequisites.every((id) => idPattern.test(id)),
+      lesson.prerequisites.every(validId),
     fail('неверные зависимости'),
   );
   demand(texts(lesson.takeaways, 1, 5), fail('нужны выводы'));
@@ -97,7 +101,7 @@ export function validateLesson(input: unknown): LessonDefinition {
   const ids = new Set<string>();
   let exercises = 0;
   for (const step of lesson.steps) {
-    demand(step && idPattern.test(step.id) && !ids.has(step.id), fail('повторяющийся ID шага'));
+    demand(step && validId(step.id) && !ids.has(step.id), fail('повторяющийся ID шага'));
     ids.add(step.id);
     demand(text(step.title, 160) && texts(step.body, 1, 5), fail(`${step.id}: неверный текст`));
     new ChessGame(step.fen);
@@ -129,7 +133,7 @@ export function validateLesson(input: unknown): LessonDefinition {
       );
       demand(
         new Set(step.options.map((o) => o.id)).size === step.options.length &&
-          step.options.every((o) => idPattern.test(o.id) && text(o.label, 300) && text(o.feedback)),
+          step.options.every((o) => validId(o.id) && text(o.label, 300) && text(o.feedback)),
         fail('неверные варианты ответа'),
       );
       demand(
@@ -147,10 +151,21 @@ export function validateLesson(input: unknown): LessonDefinition {
       );
     } else if (step.kind === 'move') {
       demand(
+        !step.goal || ['mate', 'capture', 'promotion', 'castle'].includes(step.goal),
+        fail('неизвестная цель задания'),
+      );
+      demand(
         Array.isArray(step.lines) && step.lines.length > 0 && step.lines.length <= 8,
         fail('нужны решения'),
       );
       const replies = new Map<string, string>();
+      for (const [i, a] of step.lines.entries())
+        for (const [j, b] of step.lines.entries())
+          if (i !== j && Array.isArray(a) && Array.isArray(b))
+            demand(
+              !(a.length <= b.length && a.every((m, n) => b[n] === m)),
+              fail('решения повторяются или одно заканчивается внутри другого'),
+            );
       for (const line of step.lines) {
         demand(
           Array.isArray(line) && line.length > 0 && line.length <= 15 && line.length % 2 === 1,

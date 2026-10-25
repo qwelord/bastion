@@ -201,8 +201,7 @@ export class StepSession {
     this.message = this.step.success;
   }
   retry() {
-    const { attempts, mistakes, hints, revealed } = this.state;
-    this.state = { ...fresh(), attempts, mistakes, hints, revealed };
+    this.state = fresh();
     this.game = new ChessGame(this.step.fen);
     this.status = 'idle';
     this.message = '';

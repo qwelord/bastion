@@ -39,7 +39,7 @@ export function Learn({ settings }: { settings: Settings }) {
     const stats = lessonStats(l, entry);
     return (
       (topic === 'Все темы' || l.topic === topic) &&
-      `${l.title} ${l.summary} ${l.topic} ${l.objective}`
+      `${l.title} ${l.summary} ${l.topic} ${l.objective} ${entry?.note ?? ''}`
         .toLocaleLowerCase('ru')
         .includes(query.trim().toLocaleLowerCase('ru')) &&
       (filter === 'Все' ||
