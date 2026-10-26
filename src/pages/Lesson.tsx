@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Board } from '../components/Board';
 import { PromotionDialog } from '../components/GameDialogs';
-import { lessons, findLesson } from '../learning/catalog';
+import { lessons, findLesson, lessonDifficulty, difficultyLabels } from '../learning/catalog';
 import { courseForLesson, courseLink, courseLessons } from '../learning/courses';
 import { applyUci, type LessonDefinition } from '../learning/schema';
 import { StepSession } from '../learning/session';
@@ -304,7 +304,9 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
         <div>
           <h1>{lesson.title}</h1>
           <p>
-            {lesson.topic} · {lesson.level} · {lesson.minutes} мин.
+            {lesson.topic} · {lessonDifficulty(lesson)}/5{' '}
+            {difficultyLabels[lessonDifficulty(lesson)]} · {lesson.minutes} мин.
+            {lesson.challenge ? ' · Самостоятельная проверка' : ''}
           </p>
         </div>
         <button className="secondary" aria-pressed={entry.favorite} onClick={favorite}>
@@ -407,7 +409,7 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
                 К итогам курса
               </a>
             )}
-            <a className="text-button" href="#learn">
+            <a className="text-button" href="#learn/lessons">
               Все уроки
             </a>
           </div>

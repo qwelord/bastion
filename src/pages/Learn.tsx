@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Bookmark, BookOpen, Check, Search, RotateCcw } from 'lucide-react';
 import { Board } from '../components/Board';
 import { ChessGame } from '../chess/rules';
-import { lessons } from '../learning/catalog';
+import { lessons, lessonDifficulty, difficultyLabels } from '../learning/catalog';
+import { LearningDifficulty } from '../components/LearningDifficulty';
 import {
   readLearning,
   lessonStats,
@@ -43,6 +44,10 @@ function LessonCatalog({ settings }: { settings: Settings }) {
   const [filter, setFilter] = useState('Все');
   const [topic, setTopic] = useState('Все темы');
   const [error, setError] = useState('');
+  const [difficulty, setDifficulty] = useState(0);
+  const [page, setPage] = useState(0);
+  const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => setPage(0), [query, filter, topic, difficulty]);
   useEffect(() => {
     const refresh = () => setProgress(readLearning(lessons));
     window.addEventListener('storage', refresh);
@@ -68,6 +73,7 @@ function LessonCatalog({ settings }: { settings: Settings }) {
     const stats = lessonStats(l, entry);
     return (
       (topic === 'Все темы' || l.topic === topic) &&
+      (!difficulty || lessonDifficulty(l) === difficulty) &&
       `${l.title} ${l.summary} ${l.topic} ${l.objective} ${entry?.note ?? ''}`
         .toLocaleLowerCase('ru')
         .includes(query.trim().toLocaleLowerCase('ru')) &&
@@ -78,6 +84,15 @@ function LessonCatalog({ settings }: { settings: Settings }) {
         (filter === 'Повторить' && stats.review > 0))
     );
   });
+  const pageCount = Math.max(1, Math.ceil(visible.length / 24));
+  const currentPage = Math.min(page, pageCount - 1);
+  function turnPage(value: number) {
+    setPage(value);
+    listRef.current?.scrollIntoView({
+      block: 'start',
+      behavior: settings.motion ? 'smooth' : 'auto',
+    });
+  }
   return (
     <>
       <a className="back-link" href="#learn">
@@ -175,8 +190,9 @@ function LessonCatalog({ settings }: { settings: Settings }) {
               ))}
             </select>
           </label>
+          <LearningDifficulty value={difficulty} onChange={setDifficulty} />
           <span aria-live="polite">
-            Показано {visible.length} из {lessons.length}
+            Найдено {visible.length} из {lessons.length}
           </span>
         </div>
         {error && (
@@ -184,8 +200,8 @@ function LessonCatalog({ settings }: { settings: Settings }) {
             {error}
           </p>
         )}
-        <div className="learning-list">
-          {visible.map((l) => {
+        <div className="learning-list" ref={listRef}>
+          {visible.slice(currentPage * 24, (currentPage + 1) * 24).map((l) => {
             const entry = progress.entries[l.id];
             const stats = lessonStats(l, entry);
             return (
@@ -198,7 +214,8 @@ function LessonCatalog({ settings }: { settings: Settings }) {
                     <strong>{l.title}</strong>
                     <span>{l.summary}</span>
                     <small>
-                      {l.topic} · {l.level}
+                      {l.topic} · {lessonDifficulty(l)}/5 {difficultyLabels[lessonDifficulty(l)]}
+                      {l.challenge ? ' · Самостоятельная проверка' : ''}
                       {stats.review > 0 ? ' · Есть задания для повторения' : ''}
                     </small>
                   </span>
@@ -234,6 +251,27 @@ function LessonCatalog({ settings }: { settings: Settings }) {
             );
           })}
         </div>
+        {pageCount > 1 && (
+          <nav className="learning-pagination" aria-label="Страницы уроков">
+            <button
+              className="secondary"
+              disabled={currentPage === 0}
+              onClick={() => turnPage(currentPage - 1)}
+            >
+              Предыдущие уроки
+            </button>
+            <span aria-live="polite">
+              Страница {currentPage + 1} из {pageCount}
+            </span>
+            <button
+              className="secondary"
+              disabled={currentPage + 1 === pageCount}
+              onClick={() => turnPage(currentPage + 1)}
+            >
+              Следующие уроки
+            </button>
+          </nav>
+        )}
         {!visible.length && (
           <div className="empty-state">
             <Search size={26} />
@@ -245,6 +283,7 @@ function LessonCatalog({ settings }: { settings: Settings }) {
                 setQuery('');
                 setFilter('Все');
                 setTopic('Все темы');
+                setDifficulty(0);
               }}
             >
               Сбросить фильтры
@@ -253,8 +292,8 @@ function LessonCatalog({ settings }: { settings: Settings }) {
         )}
       </section>
       <p className="quiet-note learning-footnote">
-        150 уроков в 50 коротких курсах и 12 вводных миниуроков. Все задания доступны бесплатно.
-        Прогресс сохраняется в этом браузере. Библиотека из 1000+ уроков — следующий этап.
+        {lessons.length} урока, включая вводные миниуроки. Все задания доступны бесплатно. Прогресс
+        сохраняется в этом браузере. Дальнейшее наполнение до 1000+ уроков остаётся в плане.
       </p>
     </>
   );

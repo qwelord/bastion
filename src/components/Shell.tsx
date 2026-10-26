@@ -93,7 +93,7 @@ export function Shell({ route, children }: { route: Route; children: ReactNode }
         </main>
         <footer className="workspace-footer">
           <span>
-            Bastion <span className="footer-version">/ 0.5</span>
+            Bastion <span className="footer-version">/ 0.6</span>
           </span>
           <span>Локальная игра</span>
           <a href="https://github.com/qwelord/bastion" target="_blank" rel="noreferrer">

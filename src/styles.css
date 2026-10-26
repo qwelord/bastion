@@ -3270,3 +3270,63 @@ main {
   color: var(--muted);
   font-size: 14px;
 }
+
+.learning-catalog-heading {
+  flex-wrap: wrap;
+}
+.difficulty-select,
+.learning-catalog-heading .difficulty-select {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 12px;
+  color: var(--muted);
+}
+.difficulty-select select {
+  width: 230px;
+  max-width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.course-program-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.lesson-difficulty {
+  display: inline-block;
+  color: var(--accent);
+  margin-right: 8px;
+}
+.learning-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-block: 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.learning-list {
+  scroll-margin-top: 20px;
+}
+@media (max-width: 480px) {
+  .learning-pagination .secondary {
+    flex: 1;
+    font-size: 12px;
+  }
+  .learning-pagination > span {
+    flex-basis: 100%;
+    text-align: center;
+    order: -1;
+  }
+}

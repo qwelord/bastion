@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Check, Search, RotateCcw } from 'lucide-react';
 import { Board } from '../components/Board';
 import { ChessGame } from '../chess/rules';
-import { lessons } from '../learning/catalog';
+import { lessons, difficultyLabels, lessonDifficulty } from '../learning/catalog';
+import { LearningDifficulty } from '../components/LearningDifficulty';
 import {
   courses,
   courseLessons,
@@ -43,6 +44,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
   const [query, setQuery] = useState('');
   const [track, setTrack] = useState('Все направления');
   const [status, setStatus] = useState('Все');
+  const [difficulty, setDifficulty] = useState(0);
   const normalized = query.trim().toLocaleLowerCase('ru');
   const current = courseForLesson(progress.lastLesson);
   const next =
@@ -70,6 +72,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
       .toLocaleLowerCase('ru');
     return (
       (track === 'Все направления' || c.track === track) &&
+      (!difficulty || courseLessons(c).some((l) => lessonDifficulty(l) === difficulty)) &&
       searchable.includes(normalized) &&
       (status === 'Все' ||
         (status === 'В процессе' && stats.visited && !stats.finished) ||
@@ -99,7 +102,8 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
           <h2>{next.title}</h2>
           <p>{next.outcome}</p>
           <p className="quiet-note">
-            3 коротких урока. Можно проходить в своём темпе и возвращаться к практике.
+            {next.lessonIds.length} уроков: от объяснения до практики. Можно возвращаться к трудным
+            заданиям.
           </p>
           <a className="primary" href={lessonLink(resume.id)}>
             {courseStats(next, progress).visited ? 'Продолжить' : 'Начать курс'}
@@ -132,8 +136,8 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
           <div>
             <h2>Выберите следующий навык</h2>
             <p className="quiet-note">
-              50 коротких курсов, 150 новых уроков. Нумерация подсказывает порядок; любой курс
-              открыт сразу.
+              {courses.length} курсов, {lessons.length} урока. Нумерация подсказывает порядок; любой
+              курс открыт сразу.
             </p>
           </div>
         </div>
@@ -169,6 +173,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
               ))}
             </select>
           </label>
+          <LearningDifficulty value={difficulty} onChange={setDifficulty} />
           <span aria-live="polite">
             Показано {visible.length} из {courses.length}
           </span>
@@ -203,12 +208,14 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
                                   : 'Пройден с помощью'
                                 : stats.visited
                                   ? 'Курс начат'
-                                  : '3 урока с практикой'}
+                                  : `${c.lessonIds.length} уроков с практикой`}
                           </small>
                         </span>
                         <span className="learning-row-meta">
                           <span>≈ {stats.minutes} мин.</span>
-                          <span>{stats.complete}/3 уроков</span>
+                          <span>
+                            {stats.complete}/{c.lessonIds.length} уроков
+                          </span>
                           <progress
                             value={stats.steps}
                             max={stats.total}
@@ -234,6 +241,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
                 setQuery('');
                 setTrack('Все направления');
                 setStatus('Все');
+                setDifficulty(0);
               }}
             >
               Сбросить фильтры
@@ -242,9 +250,8 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
         )}
       </section>
       <p className="quiet-note learning-footnote">
-        Все курсы доступны бесплатно. Дополнительно сохранены 12 вводных миниуроков. Прогресс и
-        заметки хранятся в этом браузере. Это базовая и средняя программа, без обещаний конкретного
-        рейтинга.
+        Все курсы доступны бесплатно. Сложность 1–5 описывает учебную задачу и не является Elo.
+        Прогресс и заметки хранятся в этом браузере. 12 вводных миниуроков доступны в общем списке.
       </p>
     </>
   );
@@ -258,6 +265,7 @@ export function CourseDetail({
 }) {
   const progress = useProgress();
   const list = courseLessons(course);
+  const [difficulty, setDifficulty] = useState(0);
   const stats = courseStats(course, progress);
   const next = nextCourseLesson(course, progress);
   const following = courses[courses.indexOf(course) + 1];
@@ -280,7 +288,8 @@ export function CourseDetail({
           <h2>{stats.finished ? 'Курс пройден' : 'Чему вы научитесь'}</h2>
           <p>{course.outcome}</p>
           <p className="quiet-note">
-            3 урока, около {stats.minutes} минут. Время ориентировочное: спешить не нужно.
+            {list.length} уроков, около {stats.minutes} минут. Время ориентировочное: спешить не
+            нужно.
           </p>
           <a className="primary" href={lessonLink(next.id)}>
             {stats.finished
@@ -310,7 +319,11 @@ export function CourseDetail({
       </section>
       <div className="learning-overview">
         <span>
-          Пройдено <strong>{stats.complete} из 3</strong> уроков
+          Пройдено{' '}
+          <strong>
+            {stats.complete} из {list.length}
+          </strong>{' '}
+          уроков
         </span>
         <progress value={stats.steps} max={stats.total} aria-label="Прогресс курса" />
       </div>
@@ -326,39 +339,57 @@ export function CourseDetail({
         </p>
       )}
       <section className="course-program" aria-label="Программа курса">
-        <h2>Три шага к навыку</h2>
+        <div className="course-program-heading">
+          <h2>Программа курса</h2>
+          <LearningDifficulty value={difficulty} onChange={setDifficulty} />
+        </div>
+        <p className="quiet-note">
+          Сначала основа, затем закрепление и самостоятельные решения. Порядок рекомендательный.
+        </p>
         <div className="learning-list">
-          {list.map((l, i) => {
-            const result = lessonStats(l, progress.entries[l.id]);
-            return (
-              <article className="learning-row" key={l.id}>
-                <a className="learning-row-link" href={lessonLink(l.id)}>
-                  <span className={'course-sequence' + (result.finished ? ' finished' : '')}>
-                    {result.finished ? <Check size={20} /> : i + 1}
-                  </span>
-                  <span className="learning-row-copy">
-                    <strong>{l.title}</strong>
-                    <span>{l.summary}</span>
-                    <small>
-                      {result.finished
-                        ? result.review
-                          ? 'Пройден • стоит повторить'
-                          : 'Пройден'
-                        : progress.entries[l.id]?.visited
-                          ? 'Продолжить с сохранённого шага'
-                          : 'Объяснение и проверка'}
-                    </small>
-                  </span>
-                  <span className="learning-row-meta">
-                    {result.complete}/{result.total} шагов
-                  </span>
-                  <ArrowRight size={17} />
-                </a>
-              </article>
-            );
-          })}
+          {list
+            .filter((l) => !difficulty || lessonDifficulty(l) === difficulty)
+            .map((l) => {
+              const i = list.indexOf(l);
+              const result = lessonStats(l, progress.entries[l.id]);
+              return (
+                <article className="learning-row" key={l.id}>
+                  <a className="learning-row-link" href={lessonLink(l.id)}>
+                    <span className={'course-sequence' + (result.finished ? ' finished' : '')}>
+                      {result.finished ? <Check size={20} /> : i + 1}
+                    </span>
+                    <span className="learning-row-copy">
+                      <strong>{l.title}</strong>
+                      <span>{l.summary}</span>
+                      <small>
+                        <span className="lesson-difficulty">
+                          {lessonDifficulty(l)}/5 · {difficultyLabels[lessonDifficulty(l)]}
+                        </span>{' '}
+                        {l.challenge ? 'Самостоятельная проверка · ' : ''}
+                        {result.finished
+                          ? result.review
+                            ? 'Пройден • стоит повторить'
+                            : 'Пройден'
+                          : progress.entries[l.id]?.visited
+                            ? 'Продолжить с сохранённого шага'
+                            : 'Объяснение и проверка'}
+                      </small>
+                    </span>
+                    <span className="learning-row-meta">
+                      {result.complete}/{result.total} шагов
+                    </span>
+                    <ArrowRight size={17} />
+                  </a>
+                </article>
+              );
+            })}
         </div>
       </section>
+      {difficulty > 0 && !list.some((l) => lessonDifficulty(l) === difficulty) && (
+        <p className="empty-state">
+          В этом курсе нет уроков выбранной сложности. Выберите другой уровень.
+        </p>
+      )}
       <section className="course-outcomes">
         <h2>После курса проверьте себя</h2>
         <ul>
