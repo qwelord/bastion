@@ -45,8 +45,13 @@ test('v0.5 solved steps notes and favorites survive an added debrief without res
   assert.equal(restored.favorite, true);
   assert.equal(restored.note, progress.entries[old.id].note);
 });
-test('the published two-move smothered mates include every legal defensive reply', () => {
-  for (const id of ['forcing-sacrifices-3', 'forcing-sacrifices-5', 'mixed-tactics-4']) {
+test('the published two-move mating sacrifices include every legal defensive reply', () => {
+  for (const id of [
+    'forcing-sacrifices-3',
+    'forcing-sacrifices-4',
+    'forcing-sacrifices-5',
+    'mixed-tactics-4',
+  ]) {
     const step = findLesson(id)!.steps.find((step) => step.kind === 'move')!;
     assert.equal(step.kind, 'move');
     if (step.kind !== 'move') continue;
