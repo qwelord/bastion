@@ -55,7 +55,7 @@ export function Settings({
             />
             {profileError && <p role="alert">{profileError}</p>}
           </section>
-          <section>
+          <section id="appearance-section" tabIndex={-1}>
             <h2>Пространство</h2>
             <p className="quiet-note">Тема интерфейса</p>
             <div className="theme-options">
@@ -82,7 +82,7 @@ export function Settings({
               ))}
             </div>
           </section>
-          <section>
+          <section id="board-section" tabIndex={-1}>
             <h2>Цвет доски</h2>
             <p className="quiet-note">Сочетание светлых и тёмных полей</p>
             <div className="board-options">
@@ -103,7 +103,7 @@ export function Settings({
               ))}
             </div>
           </section>
-          <section className="display-options">
+          <section id="details-section" tabIndex={-1} className="display-options">
             <h2>Детали</h2>
             <label className="toggle-row">
               <span>

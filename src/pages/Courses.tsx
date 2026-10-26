@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useDeferredValue, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Check, Search, RotateCcw } from 'lucide-react';
 import { Board } from '../components/Board';
 import { ChessGame } from '../chess/rules';
@@ -14,6 +14,8 @@ import {
   type CourseDefinition,
 } from '../learning/courses';
 import { readLearning, lessonLink, lessonStats, hasOpenAttempt } from '../learning/progress';
+import { learningAreas, areaForTrack, areaLink } from '../learning/navigation';
+import { useLearningLocation } from '../learning/useLearningLocation';
 import type { Settings } from '../state';
 function useProgress() {
   const [progress, setProgress] = useState(() => readLearning(lessons));
@@ -45,7 +47,15 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
   const [track, setTrack] = useState('Все направления');
   const [status, setStatus] = useState('Все');
   const [difficulty, setDifficulty] = useState(0);
-  const normalized = query.trim().toLocaleLowerCase('ru');
+  const { area } = useLearningLocation();
+  const [page, setPage] = useState(0);
+  const catalogRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    setTrack('Все направления');
+    setPage(0);
+  }, [area]);
+  useEffect(() => setPage(0), [query, track, status, difficulty]);
+  const normalized = useDeferredValue(query.trim().toLocaleLowerCase('ru'));
   const current = courseForLesson(progress.lastLesson);
   const next =
     current &&
@@ -59,6 +69,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
     const stats = courseStats(c, progress);
     const searchable = [
       c.title,
+      ...(c.aliases ?? []),
       c.outcome,
       c.track,
       ...courseLessons(c).flatMap((l) => [
@@ -71,6 +82,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
       .join(' ')
       .toLocaleLowerCase('ru');
     return (
+      (!area || areaForTrack(c.track) === area) &&
       (track === 'Все направления' || c.track === track) &&
       (!difficulty || courseLessons(c).some((l) => lessonDifficulty(l) === difficulty)) &&
       searchable.includes(normalized) &&
@@ -81,6 +93,16 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
         (status === 'Есть избранное' && stats.favorite))
     );
   });
+  const pageCount = Math.max(1, Math.ceil(visible.length / 18));
+  const currentPage = Math.min(page, pageCount - 1);
+  const paged = visible.slice(currentPage * 18, (currentPage + 1) * 18);
+  function turnPage(value: number) {
+    setPage(value);
+    catalogRef.current?.scrollIntoView({
+      block: 'start',
+      behavior: settings.motion ? 'smooth' : 'auto',
+    });
+  }
   const review = lessons.find((l) => lessonStats(l, progress.entries[l.id]).review > 0);
   return (
     <>
@@ -94,7 +116,25 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
           Все уроки
         </a>
       </div>
-      <section className="learning-hero course-hero">
+      <nav
+        className={'learning-paths' + (area ? ' area-selected' : '')}
+        aria-label="Направления школы"
+      >
+        {learningAreas.map((item) => (
+          <a
+            key={item.id}
+            href={area === item.id ? '#learn' : areaLink(item.id)}
+            aria-current={area === item.id ? 'page' : undefined}
+          >
+            <span className="path-title">
+              {item.title}
+              <small>{courses.filter((c) => areaForTrack(c.track) === item.id).length}</small>
+            </span>
+            <span>{item.description}</span>
+          </a>
+        ))}
+      </nav>
+      <section className="learning-hero course-hero catalog-resume">
         <div>
           <span className="learning-kicker">
             {courseStats(next, progress).visited ? 'Продолжить курс' : 'Первый курс'}
@@ -131,13 +171,19 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
           </a>
         )}
       </div>
-      <section className="learning-catalog" aria-label="Каталог курсов">
+      <section
+        className="learning-catalog course-catalog"
+        ref={catalogRef}
+        aria-label="Каталог курсов"
+      >
         <div className="section-title">
           <div>
-            <h2>Выберите следующий навык</h2>
+            <h2>
+              {learningAreas.find((item) => item.id === area)?.title ?? 'Выберите следующий навык'}
+            </h2>
             <p className="quiet-note">
-              {courses.length} курсов, {lessons.length} урока. Нумерация подсказывает порядок; любой
-              курс открыт сразу.
+              Курсов: {courses.length}. Уроков: {lessons.length}. Выберите навык под свою задачу.
+              Каждый курс открыт сразу.
             </p>
           </div>
         </div>
@@ -168,21 +214,28 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
               value={track}
               onChange={(e) => setTrack(e.target.value)}
             >
-              {['Все направления', ...new Set(courses.map((c) => c.track))].map((t) => (
+              {[
+                'Все направления',
+                ...new Set(
+                  courses
+                    .filter((c) => !area || areaForTrack(c.track) === area)
+                    .map((c) => c.track),
+                ),
+              ].map((t) => (
                 <option key={t}>{t}</option>
               ))}
             </select>
           </label>
           <LearningDifficulty value={difficulty} onChange={setDifficulty} />
           <span aria-live="polite">
-            Показано {visible.length} из {courses.length}
+            Найдено {visible.length} из {courses.length}
           </span>
         </div>
-        {[...new Set(visible.map((c) => c.track))].map((t) => (
+        {[...new Set(paged.map((c) => c.track))].map((t) => (
           <section className="course-track" key={t} aria-label={t}>
             <h3>{t}</h3>
-            <div className="learning-list">
-              {visible
+            <div className="learning-list course-grid" key={`${t}-${currentPage}`}>
+              {paged
                 .filter((c) => c.track === t)
                 .map((c) => {
                   const stats = courseStats(c, progress);
@@ -230,6 +283,28 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
             </div>
           </section>
         ))}
+        {pageCount > 1 && (
+          <nav className="learning-pagination" aria-label="Страницы курсов">
+            <button
+              className="secondary"
+              disabled={currentPage === 0}
+              onClick={() => turnPage(currentPage - 1)}
+            >
+              Назад
+            </button>
+            <span aria-live="polite">
+              {currentPage * 18 + 1}–{Math.min((currentPage + 1) * 18, visible.length)} из{' '}
+              {visible.length} курсов
+            </span>
+            <button
+              className="secondary"
+              disabled={currentPage + 1 === pageCount}
+              onClick={() => turnPage(currentPage + 1)}
+            >
+              Дальше
+            </button>
+          </nav>
+        )}
         {!visible.length && (
           <div className="empty-state">
             <Search size={26} />
@@ -242,6 +317,7 @@ export function CourseCatalog({ settings }: { settings: Settings }) {
                 setTrack('Все направления');
                 setStatus('Все');
                 setDifficulty(0);
+                if (area) location.hash = '#learn';
               }}
             >
               Сбросить фильтры
@@ -272,9 +348,9 @@ export function CourseDetail({
   const review = list.find((l) => lessonStats(l, progress.entries[l.id]).review > 0);
   return (
     <>
-      <a className="back-link" href="#learn">
+      <a className="back-link" href={areaLink(areaForTrack(course.track))}>
         <ArrowLeft size={15} />
-        Все курсы
+        {learningAreas.find((area) => area.id === areaForTrack(course.track))?.title ?? 'Все курсы'}
       </a>
       <div className="page-intro">
         <div>
@@ -392,11 +468,14 @@ export function CourseDetail({
       )}
       <section className="course-outcomes">
         <h2>После курса проверьте себя</h2>
-        <ul>
-          {list.map((l) => (
-            <li key={l.id}>{l.objective}</li>
-          ))}
-        </ul>
+        <details>
+          <summary>Что проверить после курса</summary>
+          <ul>
+            {list.map((l) => (
+              <li key={l.id}>{l.objective}</li>
+            ))}
+          </ul>
+        </details>
         <p>
           Сформулируйте правило своими словами и попробуйте применить его в партии. К заданиям с
           ошибками можно вернуться через «Повторить трудное».

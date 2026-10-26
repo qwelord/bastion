@@ -122,7 +122,7 @@ export function Play({ settings }: { settings: Settings }) {
         </div>
       </div>
       <div className="play-layout">
-        <section className="board-column" aria-label="Игровое поле">
+        <section id="play-board" tabIndex={-1} className="board-column" aria-label="Игровое поле">
           <div className="player-row">
             <div className="player-identity">
               <span className="opponent-icon">
@@ -242,7 +242,7 @@ export function Play({ settings }: { settings: Settings }) {
             </button>
           )}
         </section>
-        <aside className="game-panel surface">
+        <aside id="match-panel" tabIndex={-1} className="game-panel surface">
           {setup ? (
             <>
               <div className="panel-heading">

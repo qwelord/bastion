@@ -87,7 +87,10 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
       !hasOpenAttempt(lesson, progress.entries[lesson.id]),
   );
   const [selected, setSelected] = useState<string>();
-  const [flipped, setFlipped] = useState(false);
+  const [flipped, setFlipped] = useState(() => {
+    const practice = lesson.steps.find((step) => step.kind === 'move');
+    return practice ? new ChessGame(practice.fen).turn() === 'b' : false;
+  });
   const [demoPly, setDemoPly] = useState(0);
   const [showOutline, setShowOutline] = useState(false);
   const [showMoves, setShowMoves] = useState(true);
@@ -300,6 +303,11 @@ function LessonPlayer({ lesson, settings }: { lesson: LessonDefinition; settings
         <ArrowLeft size={15} />
         {course ? course.title : 'К программе обучения'}
       </a>
+      {course && (
+        <p className="lesson-course-position">
+          Урок {course.lessonIds.indexOf(lesson.id) + 1} из {course.lessonIds.length}
+        </p>
+      )}
       <div className="page-intro">
         <div>
           <h1>{lesson.title}</h1>

@@ -105,7 +105,7 @@ export function Analysis({ settings }: { settings: Settings }) {
         </div>
       </div>
       <div className="play-layout review-layout">
-        <section className="board-column">
+        <section id="analysis-board" tabIndex={-1} className="board-column">
           <div className="review-board-caption">
             <span>{ply ? `После ${history[ply - 1].san}` : 'Начальная позиция'}</span>
             <strong>{current ? evaluation(whiteScore) : 'Оценка за белых'}</strong>
@@ -182,7 +182,7 @@ export function Analysis({ settings }: { settings: Settings }) {
             </div>
           )}
         </section>
-        <aside className="game-panel surface">
+        <aside id="analysis-panel" tabIndex={-1} className="game-panel surface">
           <label className="field-label" htmlFor="review-game">
             Партия
           </label>

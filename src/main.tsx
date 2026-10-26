@@ -10,6 +10,7 @@ import '@fontsource/manrope/latin-600.css';
 import '@fontsource/literata/cyrillic-400.css';
 import '@fontsource/literata/latin-400.css';
 import './styles.css';
+import './learning-refresh.css';
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AppBoundary>

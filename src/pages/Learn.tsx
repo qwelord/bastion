@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useDeferredValue, useEffect, useRef, useState } from 'react';
 import { ArrowRight, Bookmark, BookOpen, Check, Search, RotateCcw } from 'lucide-react';
 import { Board } from '../components/Board';
 import { ChessGame } from '../chess/rules';
@@ -14,7 +14,9 @@ import {
 } from '../learning/progress';
 import type { Settings } from '../state';
 import { CourseCatalog, CourseDetail } from './Courses';
-import { courses } from '../learning/courses';
+import { learningLocation, areaForTrack, learningAreas } from '../learning/navigation';
+import { useLearningLocation } from '../learning/useLearningLocation';
+import { courses, courseForLesson } from '../learning/courses';
 export function Learn({ settings }: { settings: Settings }) {
   const [hash, setHash] = useState(() => location.hash);
   useEffect(() => {
@@ -22,9 +24,10 @@ export function Learn({ settings }: { settings: Settings }) {
     window.addEventListener('hashchange', update);
     return () => window.removeEventListener('hashchange', update);
   }, []);
-  if (hash === '#learn/lessons') return <LessonCatalog settings={settings} />;
-  if (hash.startsWith('#learn/course/')) {
-    const course = courses.find((c) => c.id === hash.slice('#learn/course/'.length));
+  const { path } = learningLocation(hash);
+  if (path === '#learn/lessons') return <LessonCatalog settings={settings} />;
+  if (path.startsWith('#learn/course/')) {
+    const course = courses.find((c) => c.id === path.slice('#learn/course/'.length));
     return course ? (
       <CourseDetail key={course.id} course={course} settings={settings} />
     ) : (
@@ -41,7 +44,12 @@ export function Learn({ settings }: { settings: Settings }) {
 function LessonCatalog({ settings }: { settings: Settings }) {
   const [progress, setProgress] = useState(() => readLearning(lessons));
   const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState('Все');
+  const { area, filter: locationFilter } = useLearningLocation();
+  const [filter, setFilter] = useState(() => learningLocation(location.hash).filter);
+  useEffect(() => {
+    setFilter(locationFilter);
+  }, [locationFilter]);
+  const normalized = useDeferredValue(query.trim().toLocaleLowerCase('ru'));
   const [topic, setTopic] = useState('Все темы');
   const [error, setError] = useState('');
   const [difficulty, setDifficulty] = useState(0);
@@ -72,11 +80,12 @@ function LessonCatalog({ settings }: { settings: Settings }) {
     const entry = progress.entries[l.id];
     const stats = lessonStats(l, entry);
     return (
+      (!area || areaForTrack(l.topic) === area) &&
       (topic === 'Все темы' || l.topic === topic) &&
       (!difficulty || lessonDifficulty(l) === difficulty) &&
-      `${l.title} ${l.summary} ${l.topic} ${l.objective} ${entry?.note ?? ''}`
+      `${l.title} ${l.summary} ${l.topic} ${l.objective} ${entry?.note ?? ''} ${courseForLesson(l.id)?.title ?? ''} ${courseForLesson(l.id)?.aliases?.join(' ') ?? ''}`
         .toLocaleLowerCase('ru')
-        .includes(query.trim().toLocaleLowerCase('ru')) &&
+        .includes(normalized) &&
       (filter === 'Все' ||
         (filter === 'Избранное' && entry?.favorite) ||
         (filter === 'В процессе' && !!entry?.visited && !stats.finished) ||
@@ -100,7 +109,7 @@ function LessonCatalog({ settings }: { settings: Settings }) {
       </a>
       <div className="page-intro">
         <div>
-          <h1>Учиться, делая ходы</h1>
+          <h1>{learningAreas.find((item) => item.id === area)?.title ?? 'Учиться, делая ходы'}</h1>
           <p>Короткое объяснение, практика на доске и понятный разбор ответа.</p>
         </div>
         <span className="tag">
@@ -292,8 +301,9 @@ function LessonCatalog({ settings }: { settings: Settings }) {
         )}
       </section>
       <p className="quiet-note learning-footnote">
-        {lessons.length} урока, включая вводные миниуроки. Все задания доступны бесплатно. Прогресс
-        сохраняется в этом браузере. Дальнейшее наполнение до 1000+ уроков остаётся в плане.
+        Уроков: {lessons.length}, включая вводные миниуроки. Все задания доступны бесплатно.
+        Прогресс сохраняется в этом браузере. У каждого урока есть объяснение, проверяемое задание и
+        сохранение результата.
       </p>
     </>
   );
