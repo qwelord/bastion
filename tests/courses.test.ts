@@ -55,6 +55,12 @@ test('course validation refuses missing lessons, shared filler, unsafe IDs and d
   bad((d) => {
     d[0].prerequisites = ['unknown'];
   });
+  bad((d) => {
+    d[0].aliases = ['x'.repeat(161)];
+  });
+  bad((d) => {
+    d[0].aliases = Array(11).fill('overflow');
+  });
 });
 test('course continuation follows incomplete practice and assistance remains visible', () => {
   const storage = { getItem: () => null, setItem: () => {} };
