@@ -25,7 +25,7 @@ test('every authored exercise is solvable by the learner session including autom
     }
 });
 test('the published lesson set exercises all four supported authoring formats', () => {
-  assert.equal(lessons.length, 162);
+  assert.equal(lessons.length, 402);
   assert.deepEqual(
     new Set(lessons.flatMap((l) => l.steps.map((s) => s.kind))),
     new Set(['explain', 'choice', 'squares', 'move']),

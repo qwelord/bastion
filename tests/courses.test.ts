@@ -13,13 +13,13 @@ import { lessons } from '../src/learning/catalog.ts';
 import { validateCurriculum } from '../src/learning/schema.ts';
 import { StepSession } from '../src/learning/session.ts';
 import { applyStepRecord, readLearning } from '../src/learning/progress.ts';
-test('fifty published courses contain three distinct real lessons and live exercises each', () => {
+test('expanded courses contain distinct real lessons and live exercises', () => {
   validateCurriculum(lessons);
   validateCourses(courses, lessons);
-  assert.equal(courses.length, 50);
-  assert.equal(new Set(courses.flatMap((c) => c.lessonIds)).size, 150);
+  assert.equal(courses.length, 58);
+  assert.equal(new Set(courses.flatMap((c) => c.lessonIds)).size, 390);
   for (const c of courses) {
-    assert.equal(c.lessonIds.length, 3);
+    assert.equal(c.lessonIds.length, courses.indexOf(c) < 50 ? 7 : 5);
     for (const l of courseLessons(c)) {
       assert.equal(courseForLesson(l.id)?.id, c.id);
       assert.ok(l.steps.some((s) => s.kind !== 'explain'));
@@ -68,7 +68,7 @@ test('course continuation follows incomplete practice and assistance remains vis
   }
   assert.equal(courseStats(c, progress).finished, true);
   assert.equal(courseStats(c, progress).mastered, false);
-  assert.equal(courseStats(c, progress).review, 3);
+  assert.equal(courseStats(c, progress).review, 7);
   const l = courseLessons(c)[1];
   applyStepRecord(progress, l, 1, new StepSession(l.steps[1]).snapshot());
   assert.equal(nextCourseLesson(c, progress).id, l.id);
