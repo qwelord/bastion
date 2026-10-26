@@ -2,7 +2,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { material } from '../content/course-material.mjs';
 import { extensions, newCourses, transferNotes } from '../content/course-expansion.mjs';
 import { Chess } from 'chess.js';
-const authored = [...material.map(course => ({...course, units: [...course.units, ...(extensions[course.id] ?? [])]})), ...newCourses];
+const authored = [
+  ...material.map((course) => ({
+    ...course,
+    units: [...course.units, ...(extensions[course.id] ?? [])],
+  })),
+  ...newCourses,
+];
 const lessonPath = new URL('../src/learning/lessons.json', import.meta.url);
 const existing = JSON.parse(await readFile(lessonPath, 'utf8'));
 const generatedIds = new Set(authored.flatMap((c) => c.units.map((_, i) => `${c.id}-${i + 1}`)));
@@ -24,7 +30,13 @@ for (const [courseIndex, course] of authored.entries()) {
   lastInTrack.set(course.track, course.id);
   for (const [index, unit] of course.units.entries()) {
     const finalPosition = new Chess(unit.fen);
-    if (unit.kind === 'move') for (const uci of unit.lines[0]) finalPosition.move({from:uci.slice(0,2),to:uci.slice(2,4),...(uci[4] ? {promotion:uci[4]} : {})});
+    if (unit.kind === 'move')
+      for (const uci of unit.lines[0])
+        finalPosition.move({
+          from: uci.slice(0, 2),
+          to: uci.slice(2, 4),
+          ...(uci[4] ? { promotion: uci[4] } : {}),
+        });
     const task = {
       id: 'practice',
       kind: unit.kind,
@@ -70,13 +82,20 @@ for (const [courseIndex, course] of authored.entries()) {
       objective: unit.question,
       level: ['Первые ходы', 'Правила и старт'].includes(course.track) ? 'Основы' : 'Практика',
       difficulty: unit.difficulty ?? (courseIndex < 14 ? 1 : courseIndex < 31 ? 2 : 3),
+      ...(course.id === 'mixed-tactics' ? { challenge: true } : {}),
       topic: course.track,
       minutes: unit.expanded ? (unit.difficulty >= 4 ? 5 : 4) : 3,
       prerequisites: index ? [lessonIds[index - 1]] : [],
       steps: [
         { id: 'idea', kind: 'explain', title: unit.title, fen: unit.fen, body: [unit.body] },
         task,
-        {id: 'debrief', kind: 'explain', title: 'Почему это работает', fen: finalPosition.fen(), body: [unit.success, unit.debrief ?? transferNotes[course.id]]},
+        {
+          id: 'debrief',
+          kind: 'explain',
+          title: 'Почему это работает',
+          fen: finalPosition.fen(),
+          body: [unit.success, unit.debrief ?? transferNotes[course.id]],
+        },
       ],
       takeaways: [unit.success],
     });

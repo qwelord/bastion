@@ -6346,9 +6346,9 @@
     "summary": "Можно ли белым взять на проходе gxf6?",
     "objective": "Можно ли белым взять на проходе gxf6?",
     "level": "Основы",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Правила и старт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "en-passant-rule-6"
     ],
@@ -8523,9 +8523,9 @@
     "summary": "Что считать перед центральной жертвой?",
     "objective": "Что считать перед центральной жертвой?",
     "level": "Основы",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Правила и старт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "opening-king-6"
     ],
@@ -8962,9 +8962,9 @@
     "summary": "Почему не обязательно сразу уводить ферзя d1?",
     "objective": "Почему не обязательно сразу уводить ферзя d1?",
     "level": "Основы",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Правила и старт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "opening-tempo-6"
     ],
@@ -9398,9 +9398,9 @@
     "summary": "Отметьте белую фигуру, атакованную слоном g4.",
     "objective": "Отметьте белую фигуру, атакованную слоном g4.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "threat-scan-6"
     ],
@@ -9823,9 +9823,9 @@
     "summary": "Какая проверка нужна перед упрощающим разменом?",
     "objective": "Какая проверка нужна перед упрощающим разменом?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "exchange-math-6"
     ],
@@ -10201,9 +10201,9 @@
     "summary": "Почему вилка с шахом часто форсированнее обычной?",
     "objective": "Почему вилка с шахом часто форсированнее обычной?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "knight-forks-5"
     ],
@@ -10271,9 +10271,9 @@
     "summary": "Отметьте свободные поля между f8 и c5 на диагонали слона.",
     "objective": "Отметьте свободные поля между f8 и c5 на диагонали слона.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "knight-forks-6"
     ],
@@ -10627,9 +10627,9 @@
     "summary": "Отметьте поле, куда нужно продвинуть пешку для двойного удара.",
     "objective": "Отметьте поле, куда нужно продвинуть пешку для двойного удара.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-forks-5"
     ],
@@ -10683,9 +10683,9 @@
     "summary": "Какую цену кроме темпа может иметь пешечная вилка?",
     "objective": "Какую цену кроме темпа может иметь пешечная вилка?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-forks-6"
     ],
@@ -11049,9 +11049,9 @@
     "summary": "Остаётся ли конь f6 абсолютно связанным слоном g5?",
     "objective": "Остаётся ли конь f6 абсолютно связанным слоном g5?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "absolute-pin-5"
     ],
@@ -11474,9 +11474,9 @@
     "summary": "Почему уход связанного коня может быть плохим, хотя законен?",
     "objective": "Почему уход связанного коня может быть плохим, хотя законен?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "relative-pin-5"
     ],
@@ -11544,9 +11544,9 @@
     "summary": "Отметьте поле между конём c6 и ферзём e8.",
     "objective": "Отметьте поле между конём c6 и ферзём e8.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "relative-pin-6"
     ],
@@ -11904,9 +11904,9 @@
     "summary": "Что нужно проверить после предполагаемого отхода передней цели?",
     "objective": "Что нужно проверить после предполагаемого отхода передней цели?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "skewer-lines-5"
     ],
@@ -11974,9 +11974,9 @@
     "summary": "Отметьте поля между королём e4 и ферзём h4.",
     "objective": "Отметьте поля между королём e4 и ферзём h4.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "skewer-lines-6"
     ],
@@ -12327,9 +12327,9 @@
     "summary": "Что даёт шах в механизме вскрытого нападения?",
     "objective": "Что даёт шах в механизме вскрытого нападения?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "discovered-attack-5"
     ],
@@ -12397,9 +12397,9 @@
     "summary": "Сыграйте Nf5, открывая слона.",
     "objective": "Сыграйте Nf5, открывая слона.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "discovered-attack-6"
     ],
@@ -12753,9 +12753,9 @@
     "summary": "Может ли ответом на двойной шах быть взятие королём?",
     "objective": "Может ли ответом на двойной шах быть взятие королём?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "double-check-5"
     ],
@@ -12823,9 +12823,9 @@
     "summary": "Отметьте клетку на вертикали e, с которой слон мог выйти на b5, открыв ладью e1. Среди e2, e3, e4 подходит одна.",
     "objective": "Отметьте клетку на вертикали e, с которой слон мог выйти на b5, открыв ладью e1. Среди e2, e3, e4 подходит одна.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "double-check-6"
     ],
@@ -13247,9 +13247,9 @@
     "summary": "Почему при снятии защитника полезно искать шах?",
     "objective": "Почему при снятии защитника полезно искать шах?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "remove-guard-6"
     ],
@@ -13556,9 +13556,9 @@
     "summary": "Как оценить жертву на отвлечение?",
     "objective": "Как оценить жертву на отвлечение?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "overload-deflect-4"
     ],
@@ -13626,9 +13626,9 @@
     "summary": "Отметьте обе фигуры, защищённые ферзём e7.",
     "objective": "Отметьте обе фигуры, защищённые ферзём e7.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "overload-deflect-5"
     ],
@@ -13683,9 +13683,9 @@
     "summary": "Что проверить после перемещения предполагаемого защитника?",
     "objective": "Что проверить после перемещения предполагаемого защитника?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "overload-deflect-6"
     ],
@@ -14008,9 +14008,9 @@
     "summary": "Отметьте белую фигуру, защищающую слона b3.",
     "objective": "Отметьте белую фигуру, защищающую слона b3.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "zwischenzug-4"
     ],
@@ -14123,9 +14123,9 @@
     "summary": "Обязан ли промежуточный ход всегда быть шахом?",
     "objective": "Обязан ли промежуточный ход всегда быть шахом?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Практическая тактика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "zwischenzug-6"
     ],
@@ -14493,9 +14493,9 @@
     "summary": "Контролирует ли слон c4 поле h7?",
     "objective": "Контролирует ли слон c4 поле h7?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "back-rank-mate-5"
     ],
@@ -14563,9 +14563,9 @@
     "summary": "Как выбирать способ защиты последней горизонтали?",
     "objective": "Как выбирать способ защиты последней горизонтали?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "back-rank-mate-6"
     ],
@@ -14933,9 +14933,9 @@
     "summary": "Что важнее очередного формального шаха?",
     "objective": "Что важнее очередного формального шаха?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "ladder-checkmate-5"
     ],
@@ -15003,9 +15003,9 @@
     "summary": "Отметьте g5, g6 и g7 — три соседних по высоте поля отрезанной вертикали.",
     "objective": "Отметьте g5, g6 и g7 — три соседних по высоте поля отрезанной вертикали.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "ladder-checkmate-6"
     ],
@@ -15363,9 +15363,9 @@
     "summary": "Почему это не мат?",
     "objective": "Почему это не мат?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "queen-king-mate-5"
     ],
@@ -15433,9 +15433,9 @@
     "summary": "Когда нужно проверять опасность пата?",
     "objective": "Когда нужно проверять опасность пата?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "queen-king-mate-6"
     ],
@@ -15806,9 +15806,9 @@
     "summary": "Когда тихий ход может усилить атаку?",
     "objective": "Когда тихий ход может усилить атаку?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "mating-net-5"
     ],
@@ -15876,9 +15876,9 @@
     "summary": "Отметьте собственные чёрные пешки, мешающие королю уйти вниз.",
     "objective": "Отметьте собственные чёрные пешки, мешающие королю уйти вниз.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "mating-net-6"
     ],
@@ -16179,9 +16179,9 @@
     "summary": "Когда можно отбросить кандидат?",
     "objective": "Когда можно отбросить кандидат?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "candidate-moves-4"
     ],
@@ -16249,9 +16249,9 @@
     "summary": "Отметьте первую чёрную фигуру на диагонали c4–g8.",
     "objective": "Отметьте первую чёрную фигуру на диагонали c4–g8.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "candidate-moves-5"
     ],
@@ -16305,9 +16305,9 @@
     "summary": "Что сравнивать в конце рассчитанных ветвей?",
     "objective": "Что сравнивать в конце рассчитанных ветвей?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "candidate-moves-6"
     ],
@@ -16672,9 +16672,9 @@
     "summary": "Что особенно нужно обновить при взятии на проходе?",
     "objective": "Что особенно нужно обновить при взятии на проходе?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "visualize-lines-5"
     ],
@@ -16742,9 +16742,9 @@
     "summary": "Что делать перед расчётом другого первого хода?",
     "objective": "Что делать перед расчётом другого первого хода?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "visualize-lines-6"
     ],
@@ -17117,9 +17117,9 @@
     "summary": "Когда встречное нападение является защитой?",
     "objective": "Когда встречное нападение является защитой?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "defensive-thinking-5"
     ],
@@ -17187,9 +17187,9 @@
     "summary": "Что разумно сравнить при опасной атаке на своего короля?",
     "objective": "Что разумно сравнить при опасной атаке на своего короля?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Мат и расчёт",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "defensive-thinking-6"
     ],
@@ -17554,9 +17554,9 @@
     "summary": "Что спросить перед удвоением ладей?",
     "objective": "Что спросить перед удвоением ладей?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "open-files-5"
     ],
@@ -17624,9 +17624,9 @@
     "summary": "Отметьте свою пешку, закрывающую ладье c1 путь к c7.",
     "objective": "Отметьте свою пешку, закрывающую ладье c1 путь к c7.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "open-files-6"
     ],
@@ -17978,9 +17978,9 @@
     "summary": "Что учитывать вместе с атакой пешек на седьмой?",
     "objective": "Что учитывать вместе с атакой пешек на седьмой?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "seventh-rank-5"
     ],
@@ -18048,9 +18048,9 @@
     "summary": "Из f7, b7, a7 отметьте поле, защищённое королём g8.",
     "objective": "Из f7, b7, a7 отметьте поле, защищённое королём g8.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "seventh-rank-6"
     ],
@@ -18400,9 +18400,9 @@
     "summary": "Может ли чёрный конь f6 взять белого коня d5?",
     "objective": "Может ли чёрный конь f6 взять белого коня d5?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "knight-outpost-5"
     ],
@@ -18470,9 +18470,9 @@
     "summary": "Отметьте чёрные фигуры, атакованные конём d5.",
     "objective": "Отметьте чёрные фигуры, атакованные конём d5.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "knight-outpost-6"
     ],
@@ -18827,9 +18827,9 @@
     "summary": "Что проверить перед разменом ограниченного слона?",
     "objective": "Что проверить перед разменом ограниченного слона?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "bishop-activity-5"
     ],
@@ -18897,9 +18897,9 @@
     "summary": "Переведите слона b2 на f6.",
     "objective": "Переведите слона b2 на f6.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "bishop-activity-6"
     ],
@@ -19249,9 +19249,9 @@
     "summary": "Почему изолированная пешка не означает автоматически плохую позицию?",
     "objective": "Почему изолированная пешка не означает автоматически плохую позицию?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-structure-5"
     ],
@@ -19674,9 +19674,9 @@
     "summary": "В чём идея отдалённой проходной?",
     "objective": "В чём идея отдалённой проходной?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "passed-pawn-5"
     ],
@@ -19744,9 +19744,9 @@
     "summary": "Отметьте чёрную пешку, мешающую считать d5 проходной.",
     "objective": "Отметьте чёрную пешку, мешающую считать d5 проходной.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Позиционная игра",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "passed-pawn-6"
     ],
@@ -20101,9 +20101,9 @@
     "summary": "Что важнее плана централизации в этой позиции?",
     "objective": "Что важнее плана централизации в этой позиции?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "active-king-5"
     ],
@@ -20171,9 +20171,9 @@
     "summary": "Из a5, b5, b4 отметьте поля, атакованные ладьёй c5.",
     "objective": "Из a5, b5, b4 отметьте поля, атакованные ладьёй c5.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "active-king-6"
     ],
@@ -20534,9 +20534,9 @@
     "summary": "Зачем в борьбе за оппозицию считают запасные пешечные ходы?",
     "objective": "Зачем в борьбе за оппозицию считают запасные пешечные ходы?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "king-opposition-5"
     ],
@@ -20604,9 +20604,9 @@
     "summary": "Отметьте контролируемые чёрным королём поля пятой горизонтали.",
     "objective": "Отметьте контролируемые чёрным королём поля пятой горизонтали.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "king-opposition-6"
     ],
@@ -20964,9 +20964,9 @@
     "summary": "Почему для пешки a2 простое построение по одиночным шагам может ошибиться?",
     "objective": "Почему для пешки a2 простое построение по одиночным шагам может ошибиться?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-square-5"
     ],
@@ -21034,9 +21034,9 @@
     "summary": "Что считать после первого превращения в пешечной гонке?",
     "objective": "Что считать после первого превращения в пешечной гонке?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-square-6"
     ],
@@ -21400,9 +21400,9 @@
     "summary": "Что проверить перед разменом последней пары ладей?",
     "objective": "Что проверить перед разменом последней пары ладей?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "rook-endgame-basics-5"
     ],
@@ -21470,9 +21470,9 @@
     "summary": "Сыграйте ...Re5+ сбоку от исходной линии.",
     "objective": "Сыграйте ...Re5+ сбоку от исходной линии.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "rook-endgame-basics-6"
     ],
@@ -21831,9 +21831,9 @@
     "summary": "Какое поле сохраняет ладья для чёрного короля в этом примере?",
     "objective": "Какое поле сохраняет ладья для чёрного короля в этом примере?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "underpromotion-5"
     ],
@@ -21901,9 +21901,9 @@
     "summary": "Что проверить после выбора слабой фигуры ради избегания пата?",
     "objective": "Что проверить после выбора слабой фигуры ради избегания пата?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Основы окончаний",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "underpromotion-6"
     ],
@@ -22297,9 +22297,9 @@
     "summary": "Какой момент оправдывает дополнительное время?",
     "objective": "Какой момент оправдывает дополнительное время?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практика игрока",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "clock-decisions-5"
     ],
@@ -22367,9 +22367,9 @@
     "summary": "Что лучше подтверждает усвоение приёма?",
     "objective": "Что лучше подтверждает усвоение приёма?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практика игрока",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "clock-decisions-6"
     ],
@@ -22760,9 +22760,9 @@
     "summary": "Как поступить с нестабильной оценкой сложной жертвы?",
     "objective": "Как поступить с нестабильной оценкой сложной жертвы?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практика игрока",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "learn-from-games-5"
     ],
@@ -22830,9 +22830,9 @@
     "summary": "Как лучше закрепить найденную слабость?",
     "objective": "Как лучше закрепить найденную слабость?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Практика игрока",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "learn-from-games-6"
     ],
@@ -22900,9 +22900,9 @@
     "summary": "Что нужно доказать перед жертвой ферзя на мат?",
     "objective": "Что нужно доказать перед жертвой ферзя на мат?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [],
     "steps": [
       {
@@ -22968,9 +22968,9 @@
     "summary": "Отметьте белого защитника поля g8.",
     "objective": "Отметьте белого защитника поля g8.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "forcing-sacrifices-1"
     ],
@@ -23085,9 +23085,9 @@
     "summary": "Почему ...Rxg8 — вынужденный ответ здесь?",
     "objective": "Почему ...Rxg8 — вынужденный ответ здесь?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "forcing-sacrifices-3"
     ],
@@ -23328,9 +23328,9 @@
     "summary": "Для учебной позиции сыграйте c2–c4.",
     "objective": "Для учебной позиции сыграйте c2–c4.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-breaks-2"
     ],
@@ -23386,9 +23386,9 @@
     "summary": "Что оценить до подрыва, кроме атакованной пешки?",
     "objective": "Что оценить до подрыва, кроме атакованной пешки?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-breaks-3"
     ],
@@ -23456,9 +23456,9 @@
     "summary": "Воспроизведите d4xc5.",
     "objective": "Воспроизведите d4xc5.",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "pawn-breaks-4"
     ],
@@ -23627,9 +23627,9 @@
     "summary": "Когда профилактический ход оправдан?",
     "objective": "Когда профилактический ход оправдан?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "prophylaxis-2"
     ],
@@ -23697,9 +23697,9 @@
     "summary": "Отметьте собственные чёрные пешки вокруг короля g8.",
     "objective": "Отметьте собственные чёрные пешки вокруг короля g8.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "prophylaxis-3"
     ],
@@ -23755,9 +23755,9 @@
     "summary": "Какой профилактический кандидат стоит искать первым?",
     "objective": "Какой профилактический кандидат стоит искать первым?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "prophylaxis-4"
     ],
@@ -23825,9 +23825,9 @@
     "summary": "Воспроизведите Nd4 h6 Nc6+ Kd7 Nxa7.",
     "objective": "Воспроизведите Nd4 h6 Nc6+ Kd7 Nxa7.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [],
     "steps": [
       {
@@ -23886,9 +23886,9 @@
     "summary": "Что ещё нужно для вывода, что Nd4 выигрывает форсированно?",
     "objective": "Что ещё нужно для вывода, что Nd4 выигрывает форсированно?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "calculation-tree-1"
     ],
@@ -23956,9 +23956,9 @@
     "summary": "Отметьте освободившиеся клетки b3 и h7.",
     "objective": "Отметьте освободившиеся клетки b3 и h7.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "calculation-tree-2"
     ],
@@ -24013,9 +24013,9 @@
     "summary": "Воспроизведите Nc6+ Kd7 Nxa7.",
     "objective": "Воспроизведите Nc6+ Kd7 Nxa7.",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "calculation-tree-3"
     ],
@@ -24074,9 +24074,9 @@
     "summary": "По какой ветви оценивают надёжность кандидата?",
     "objective": "По какой ветви оценивают надёжность кандидата?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "calculation-tree-4"
     ],
@@ -24144,9 +24144,9 @@
     "summary": "Воспроизведите a6 h3 a7 h2 a8=Q+.",
     "objective": "Воспроизведите a6 h3 a7 h2 a8=Q+.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [],
     "steps": [
       {
@@ -24205,9 +24205,9 @@
     "summary": "Могут ли чёрные сейчас немедленно сыграть ...h1=Q?",
     "objective": "Могут ли чёрные сейчас немедленно сыграть ...h1=Q?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "endgame-races-1"
     ],
@@ -24275,9 +24275,9 @@
     "summary": "Воспроизведите ...a3 h6 a2 h7 a1=Q+.",
     "objective": "Воспроизведите ...a3 h6 a2 h7 a1=Q+.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "endgame-races-2"
     ],
@@ -24338,9 +24338,9 @@
     "summary": "Что особенно важно проверить у первой новой фигуры?",
     "objective": "Что особенно важно проверить у первой новой фигуры?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "endgame-races-3"
     ],
@@ -24408,9 +24408,9 @@
     "summary": "Отметьте поле превращения белой пешки b7.",
     "objective": "Отметьте поле превращения белой пешки b7.",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "endgame-races-4"
     ],
@@ -24465,6 +24465,7 @@
     "objective": "Найдите взятие, выигрывающее ладью.",
     "level": "Практика",
     "difficulty": 3,
+    "challenge": true,
     "topic": "Самостоятельная практика",
     "minutes": 4,
     "prerequisites": [],
@@ -24522,6 +24523,7 @@
     "objective": "Найдите шах и затем выиграйте ферзя в показанном ответе.",
     "level": "Практика",
     "difficulty": 4,
+    "challenge": true,
     "topic": "Самостоятельная практика",
     "minutes": 5,
     "prerequisites": [
@@ -24583,6 +24585,7 @@
     "objective": "Найдите мат в один ход.",
     "level": "Практика",
     "difficulty": 4,
+    "challenge": true,
     "topic": "Самостоятельная практика",
     "minutes": 5,
     "prerequisites": [
@@ -24642,6 +24645,7 @@
     "objective": "Найдите мат в два хода.",
     "level": "Практика",
     "difficulty": 5,
+    "challenge": true,
     "topic": "Самостоятельная практика",
     "minutes": 5,
     "prerequisites": [
@@ -24702,9 +24706,10 @@
     "summary": "Почему Qxd5 здесь не выигрывает пешку бесплатно?",
     "objective": "Почему Qxd5 здесь не выигрывает пешку бесплатно?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
+    "challenge": true,
     "topic": "Самостоятельная практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "mixed-tactics-4"
     ],
@@ -24886,9 +24891,9 @@
     "summary": "За чёрных воспроизведите Bf5.",
     "objective": "За чёрных воспроизведите Bf5.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "opening-decisions-2"
     ],
@@ -24944,9 +24949,9 @@
     "summary": "Что делать при незнакомом ходе соперника в знакомом дебюте?",
     "objective": "Что делать при незнакомом ходе соперника в знакомом дебюте?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "opening-decisions-3"
     ],
@@ -25014,9 +25019,9 @@
     "summary": "Воспроизведите O-O.",
     "objective": "Воспроизведите O-O.",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "opening-decisions-4"
     ],
@@ -25200,9 +25205,9 @@
     "summary": "Почему ладья позади своей проходной часто удобна?",
     "objective": "Почему ладья позади своей проходной часто удобна?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "convert-advantage-2"
     ],
@@ -25270,9 +25275,9 @@
     "summary": "Когда полезно создавать вторую слабость?",
     "objective": "Когда полезно создавать вторую слабость?",
     "level": "Практика",
-    "difficulty": 4,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "convert-advantage-3"
     ],
@@ -25340,9 +25345,9 @@
     "summary": "Что обязательно проверить перед финальным разменом?",
     "objective": "Что обязательно проверить перед финальным разменом?",
     "level": "Практика",
-    "difficulty": 5,
+    "difficulty": 3,
     "topic": "Углублённая практика",
-    "minutes": 5,
+    "minutes": 4,
     "prerequisites": [
       "convert-advantage-4"
     ],

@@ -1,5 +1,5 @@
 import source from './courses.json';
-import { lessons } from './catalog';
+import { findLesson } from './catalog';
 import type { LessonDefinition } from './schema';
 import { hasOpenAttempt, lessonStats, type LearningProgress } from './progress';
 export type CourseDefinition = {
@@ -67,8 +67,7 @@ export function validateCourses(input: unknown, catalog: LessonDefinition[]): Co
 }
 // Bundled content is validated by the build, not during a player's first board interaction.
 export const courses = source as CourseDefinition[];
-export const courseLessons = (c: CourseDefinition) =>
-  c.lessonIds.map((id) => lessons.find((l) => l.id === id)!);
+export const courseLessons = (c: CourseDefinition) => c.lessonIds.map((id) => findLesson(id)!);
 export const courseForLesson = (id: string) => courses.find((c) => c.lessonIds.includes(id));
 export const courseLink = (id: string) => `#learn/course/${id}`;
 export function courseStats(c: CourseDefinition, progress: LearningProgress) {

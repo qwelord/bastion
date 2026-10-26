@@ -31,6 +31,8 @@ export type LessonDefinition = {
   summary: string;
   objective: string;
   level: 'Основы' | 'Практика' | 'Мастерство';
+  difficulty?: 1 | 2 | 3 | 4 | 5;
+  challenge?: boolean;
   topic: string;
   minutes: number;
   prerequisites: string[];
@@ -83,6 +85,15 @@ export function validateLesson(input: unknown): LessonDefinition {
     fail('пустой или длинный текст'),
   );
   demand(['Основы', 'Практика', 'Мастерство'].includes(lesson.level), fail('неверный уровень'));
+  demand(
+    lesson.difficulty === undefined ||
+      (Number.isInteger(lesson.difficulty) && lesson.difficulty >= 1 && lesson.difficulty <= 5),
+    fail('неверная сложность'),
+  );
+  demand(
+    lesson.challenge === undefined || typeof lesson.challenge === 'boolean',
+    fail('неверный режим проверки'),
+  );
   demand(
     Number.isInteger(lesson.minutes) && lesson.minutes >= 1 && lesson.minutes <= 60,
     fail('неверная длительность'),
