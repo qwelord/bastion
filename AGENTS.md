@@ -19,3 +19,5 @@
 - Lesson content lives in src/learning/lessons.json. Run pnpm lessons:validate after edits; bump a lesson revision for changes that invalidate saved solutions.
 - Keep StepSession and learning progress independent from React. Never identify a scripted teaching reply as a live engine decision.
 - Distinguish completed with assistance from independently solved. Preserve the repeat queue, resume cursor, notes and accessibility when changing lesson UI.
+
+- Author expanded courses in content/course-material.mjs and content/course-expansion.mjs, then run node scripts/author-courses.mjs and pnpm lessons:validate. Preserve published lesson/step IDs and raise revision when changing answers. Course lengths are dynamic; do not restore fixed three-lesson assumptions. Stage 11 currently targets 402 lessons, not a claim of 1000 published lessons.
