@@ -8,7 +8,11 @@
     "lessonIds": [
       "board-map-1",
       "board-map-2",
-      "board-map-3"
+      "board-map-3",
+      "board-map-4",
+      "board-map-5",
+      "board-map-6",
+      "board-map-7"
     ],
     "prerequisites": []
   },
@@ -21,7 +25,11 @@
     "lessonIds": [
       "line-pieces-1",
       "line-pieces-2",
-      "line-pieces-3"
+      "line-pieces-3",
+      "line-pieces-4",
+      "line-pieces-5",
+      "line-pieces-6",
+      "line-pieces-7"
     ],
     "prerequisites": [
       "board-map"
@@ -36,7 +44,11 @@
     "lessonIds": [
       "queen-lines-1",
       "queen-lines-2",
-      "queen-lines-3"
+      "queen-lines-3",
+      "queen-lines-4",
+      "queen-lines-5",
+      "queen-lines-6",
+      "queen-lines-7"
     ],
     "prerequisites": [
       "line-pieces"
@@ -51,7 +63,11 @@
     "lessonIds": [
       "knight-route-1",
       "knight-route-2",
-      "knight-route-3"
+      "knight-route-3",
+      "knight-route-4",
+      "knight-route-5",
+      "knight-route-6",
+      "knight-route-7"
     ],
     "prerequisites": [
       "queen-lines"
@@ -66,7 +82,11 @@
     "lessonIds": [
       "king-space-1",
       "king-space-2",
-      "king-space-3"
+      "king-space-3",
+      "king-space-4",
+      "king-space-5",
+      "king-space-6",
+      "king-space-7"
     ],
     "prerequisites": [
       "knight-route"
@@ -81,7 +101,11 @@
     "lessonIds": [
       "pawn-basics-1",
       "pawn-basics-2",
-      "pawn-basics-3"
+      "pawn-basics-3",
+      "pawn-basics-4",
+      "pawn-basics-5",
+      "pawn-basics-6",
+      "pawn-basics-7"
     ],
     "prerequisites": [
       "king-space"
@@ -96,7 +120,11 @@
     "lessonIds": [
       "material-count-1",
       "material-count-2",
-      "material-count-3"
+      "material-count-3",
+      "material-count-4",
+      "material-count-5",
+      "material-count-6",
+      "material-count-7"
     ],
     "prerequisites": [
       "pawn-basics"
@@ -111,7 +139,11 @@
     "lessonIds": [
       "defend-piece-1",
       "defend-piece-2",
-      "defend-piece-3"
+      "defend-piece-3",
+      "defend-piece-4",
+      "defend-piece-5",
+      "defend-piece-6",
+      "defend-piece-7"
     ],
     "prerequisites": [
       "material-count"
@@ -126,7 +158,11 @@
     "lessonIds": [
       "escape-check-1",
       "escape-check-2",
-      "escape-check-3"
+      "escape-check-3",
+      "escape-check-4",
+      "escape-check-5",
+      "escape-check-6",
+      "escape-check-7"
     ],
     "prerequisites": [
       "defend-piece"
@@ -141,7 +177,11 @@
     "lessonIds": [
       "mate-draw-1",
       "mate-draw-2",
-      "mate-draw-3"
+      "mate-draw-3",
+      "mate-draw-4",
+      "mate-draw-5",
+      "mate-draw-6",
+      "mate-draw-7"
     ],
     "prerequisites": [
       "escape-check"
@@ -156,7 +196,11 @@
     "lessonIds": [
       "castle-safely-1",
       "castle-safely-2",
-      "castle-safely-3"
+      "castle-safely-3",
+      "castle-safely-4",
+      "castle-safely-5",
+      "castle-safely-6",
+      "castle-safely-7"
     ],
     "prerequisites": []
   },
@@ -169,7 +213,11 @@
     "lessonIds": [
       "en-passant-rule-1",
       "en-passant-rule-2",
-      "en-passant-rule-3"
+      "en-passant-rule-3",
+      "en-passant-rule-4",
+      "en-passant-rule-5",
+      "en-passant-rule-6",
+      "en-passant-rule-7"
     ],
     "prerequisites": [
       "castle-safely"
@@ -184,7 +232,11 @@
     "lessonIds": [
       "pawn-promotion-1",
       "pawn-promotion-2",
-      "pawn-promotion-3"
+      "pawn-promotion-3",
+      "pawn-promotion-4",
+      "pawn-promotion-5",
+      "pawn-promotion-6",
+      "pawn-promotion-7"
     ],
     "prerequisites": [
       "en-passant-rule"
@@ -199,7 +251,11 @@
     "lessonIds": [
       "notation-read-1",
       "notation-read-2",
-      "notation-read-3"
+      "notation-read-3",
+      "notation-read-4",
+      "notation-read-5",
+      "notation-read-6",
+      "notation-read-7"
     ],
     "prerequisites": [
       "pawn-promotion"
@@ -214,7 +270,11 @@
     "lessonIds": [
       "opening-center-1",
       "opening-center-2",
-      "opening-center-3"
+      "opening-center-3",
+      "opening-center-4",
+      "opening-center-5",
+      "opening-center-6",
+      "opening-center-7"
     ],
     "prerequisites": [
       "notation-read"
@@ -229,7 +289,11 @@
     "lessonIds": [
       "develop-pieces-1",
       "develop-pieces-2",
-      "develop-pieces-3"
+      "develop-pieces-3",
+      "develop-pieces-4",
+      "develop-pieces-5",
+      "develop-pieces-6",
+      "develop-pieces-7"
     ],
     "prerequisites": [
       "opening-center"
@@ -244,7 +308,11 @@
     "lessonIds": [
       "opening-king-1",
       "opening-king-2",
-      "opening-king-3"
+      "opening-king-3",
+      "opening-king-4",
+      "opening-king-5",
+      "opening-king-6",
+      "opening-king-7"
     ],
     "prerequisites": [
       "develop-pieces"
@@ -259,7 +327,11 @@
     "lessonIds": [
       "opening-tempo-1",
       "opening-tempo-2",
-      "opening-tempo-3"
+      "opening-tempo-3",
+      "opening-tempo-4",
+      "opening-tempo-5",
+      "opening-tempo-6",
+      "opening-tempo-7"
     ],
     "prerequisites": [
       "opening-king"
@@ -274,7 +346,11 @@
     "lessonIds": [
       "threat-scan-1",
       "threat-scan-2",
-      "threat-scan-3"
+      "threat-scan-3",
+      "threat-scan-4",
+      "threat-scan-5",
+      "threat-scan-6",
+      "threat-scan-7"
     ],
     "prerequisites": []
   },
@@ -287,7 +363,11 @@
     "lessonIds": [
       "exchange-math-1",
       "exchange-math-2",
-      "exchange-math-3"
+      "exchange-math-3",
+      "exchange-math-4",
+      "exchange-math-5",
+      "exchange-math-6",
+      "exchange-math-7"
     ],
     "prerequisites": [
       "threat-scan"
@@ -302,7 +382,11 @@
     "lessonIds": [
       "knight-forks-1",
       "knight-forks-2",
-      "knight-forks-3"
+      "knight-forks-3",
+      "knight-forks-4",
+      "knight-forks-5",
+      "knight-forks-6",
+      "knight-forks-7"
     ],
     "prerequisites": [
       "exchange-math"
@@ -317,7 +401,11 @@
     "lessonIds": [
       "pawn-forks-1",
       "pawn-forks-2",
-      "pawn-forks-3"
+      "pawn-forks-3",
+      "pawn-forks-4",
+      "pawn-forks-5",
+      "pawn-forks-6",
+      "pawn-forks-7"
     ],
     "prerequisites": [
       "knight-forks"
@@ -332,7 +420,11 @@
     "lessonIds": [
       "absolute-pin-1",
       "absolute-pin-2",
-      "absolute-pin-3"
+      "absolute-pin-3",
+      "absolute-pin-4",
+      "absolute-pin-5",
+      "absolute-pin-6",
+      "absolute-pin-7"
     ],
     "prerequisites": [
       "pawn-forks"
@@ -347,7 +439,11 @@
     "lessonIds": [
       "relative-pin-1",
       "relative-pin-2",
-      "relative-pin-3"
+      "relative-pin-3",
+      "relative-pin-4",
+      "relative-pin-5",
+      "relative-pin-6",
+      "relative-pin-7"
     ],
     "prerequisites": [
       "absolute-pin"
@@ -362,7 +458,11 @@
     "lessonIds": [
       "skewer-lines-1",
       "skewer-lines-2",
-      "skewer-lines-3"
+      "skewer-lines-3",
+      "skewer-lines-4",
+      "skewer-lines-5",
+      "skewer-lines-6",
+      "skewer-lines-7"
     ],
     "prerequisites": [
       "relative-pin"
@@ -377,7 +477,11 @@
     "lessonIds": [
       "discovered-attack-1",
       "discovered-attack-2",
-      "discovered-attack-3"
+      "discovered-attack-3",
+      "discovered-attack-4",
+      "discovered-attack-5",
+      "discovered-attack-6",
+      "discovered-attack-7"
     ],
     "prerequisites": [
       "skewer-lines"
@@ -392,7 +496,11 @@
     "lessonIds": [
       "double-check-1",
       "double-check-2",
-      "double-check-3"
+      "double-check-3",
+      "double-check-4",
+      "double-check-5",
+      "double-check-6",
+      "double-check-7"
     ],
     "prerequisites": [
       "discovered-attack"
@@ -407,7 +515,11 @@
     "lessonIds": [
       "remove-guard-1",
       "remove-guard-2",
-      "remove-guard-3"
+      "remove-guard-3",
+      "remove-guard-4",
+      "remove-guard-5",
+      "remove-guard-6",
+      "remove-guard-7"
     ],
     "prerequisites": [
       "double-check"
@@ -422,7 +534,11 @@
     "lessonIds": [
       "overload-deflect-1",
       "overload-deflect-2",
-      "overload-deflect-3"
+      "overload-deflect-3",
+      "overload-deflect-4",
+      "overload-deflect-5",
+      "overload-deflect-6",
+      "overload-deflect-7"
     ],
     "prerequisites": [
       "remove-guard"
@@ -437,7 +553,11 @@
     "lessonIds": [
       "zwischenzug-1",
       "zwischenzug-2",
-      "zwischenzug-3"
+      "zwischenzug-3",
+      "zwischenzug-4",
+      "zwischenzug-5",
+      "zwischenzug-6",
+      "zwischenzug-7"
     ],
     "prerequisites": [
       "overload-deflect"
@@ -452,7 +572,11 @@
     "lessonIds": [
       "back-rank-mate-1",
       "back-rank-mate-2",
-      "back-rank-mate-3"
+      "back-rank-mate-3",
+      "back-rank-mate-4",
+      "back-rank-mate-5",
+      "back-rank-mate-6",
+      "back-rank-mate-7"
     ],
     "prerequisites": []
   },
@@ -465,7 +589,11 @@
     "lessonIds": [
       "ladder-checkmate-1",
       "ladder-checkmate-2",
-      "ladder-checkmate-3"
+      "ladder-checkmate-3",
+      "ladder-checkmate-4",
+      "ladder-checkmate-5",
+      "ladder-checkmate-6",
+      "ladder-checkmate-7"
     ],
     "prerequisites": [
       "back-rank-mate"
@@ -480,7 +608,11 @@
     "lessonIds": [
       "queen-king-mate-1",
       "queen-king-mate-2",
-      "queen-king-mate-3"
+      "queen-king-mate-3",
+      "queen-king-mate-4",
+      "queen-king-mate-5",
+      "queen-king-mate-6",
+      "queen-king-mate-7"
     ],
     "prerequisites": [
       "ladder-checkmate"
@@ -495,7 +627,11 @@
     "lessonIds": [
       "mating-net-1",
       "mating-net-2",
-      "mating-net-3"
+      "mating-net-3",
+      "mating-net-4",
+      "mating-net-5",
+      "mating-net-6",
+      "mating-net-7"
     ],
     "prerequisites": [
       "queen-king-mate"
@@ -510,7 +646,11 @@
     "lessonIds": [
       "candidate-moves-1",
       "candidate-moves-2",
-      "candidate-moves-3"
+      "candidate-moves-3",
+      "candidate-moves-4",
+      "candidate-moves-5",
+      "candidate-moves-6",
+      "candidate-moves-7"
     ],
     "prerequisites": [
       "mating-net"
@@ -525,7 +665,11 @@
     "lessonIds": [
       "visualize-lines-1",
       "visualize-lines-2",
-      "visualize-lines-3"
+      "visualize-lines-3",
+      "visualize-lines-4",
+      "visualize-lines-5",
+      "visualize-lines-6",
+      "visualize-lines-7"
     ],
     "prerequisites": [
       "candidate-moves"
@@ -540,7 +684,11 @@
     "lessonIds": [
       "defensive-thinking-1",
       "defensive-thinking-2",
-      "defensive-thinking-3"
+      "defensive-thinking-3",
+      "defensive-thinking-4",
+      "defensive-thinking-5",
+      "defensive-thinking-6",
+      "defensive-thinking-7"
     ],
     "prerequisites": [
       "visualize-lines"
@@ -555,7 +703,11 @@
     "lessonIds": [
       "open-files-1",
       "open-files-2",
-      "open-files-3"
+      "open-files-3",
+      "open-files-4",
+      "open-files-5",
+      "open-files-6",
+      "open-files-7"
     ],
     "prerequisites": []
   },
@@ -568,7 +720,11 @@
     "lessonIds": [
       "seventh-rank-1",
       "seventh-rank-2",
-      "seventh-rank-3"
+      "seventh-rank-3",
+      "seventh-rank-4",
+      "seventh-rank-5",
+      "seventh-rank-6",
+      "seventh-rank-7"
     ],
     "prerequisites": [
       "open-files"
@@ -583,7 +739,11 @@
     "lessonIds": [
       "knight-outpost-1",
       "knight-outpost-2",
-      "knight-outpost-3"
+      "knight-outpost-3",
+      "knight-outpost-4",
+      "knight-outpost-5",
+      "knight-outpost-6",
+      "knight-outpost-7"
     ],
     "prerequisites": [
       "seventh-rank"
@@ -598,7 +758,11 @@
     "lessonIds": [
       "bishop-activity-1",
       "bishop-activity-2",
-      "bishop-activity-3"
+      "bishop-activity-3",
+      "bishop-activity-4",
+      "bishop-activity-5",
+      "bishop-activity-6",
+      "bishop-activity-7"
     ],
     "prerequisites": [
       "knight-outpost"
@@ -613,7 +777,11 @@
     "lessonIds": [
       "pawn-structure-1",
       "pawn-structure-2",
-      "pawn-structure-3"
+      "pawn-structure-3",
+      "pawn-structure-4",
+      "pawn-structure-5",
+      "pawn-structure-6",
+      "pawn-structure-7"
     ],
     "prerequisites": [
       "bishop-activity"
@@ -628,7 +796,11 @@
     "lessonIds": [
       "passed-pawn-1",
       "passed-pawn-2",
-      "passed-pawn-3"
+      "passed-pawn-3",
+      "passed-pawn-4",
+      "passed-pawn-5",
+      "passed-pawn-6",
+      "passed-pawn-7"
     ],
     "prerequisites": [
       "pawn-structure"
@@ -643,7 +815,11 @@
     "lessonIds": [
       "active-king-1",
       "active-king-2",
-      "active-king-3"
+      "active-king-3",
+      "active-king-4",
+      "active-king-5",
+      "active-king-6",
+      "active-king-7"
     ],
     "prerequisites": []
   },
@@ -656,7 +832,11 @@
     "lessonIds": [
       "king-opposition-1",
       "king-opposition-2",
-      "king-opposition-3"
+      "king-opposition-3",
+      "king-opposition-4",
+      "king-opposition-5",
+      "king-opposition-6",
+      "king-opposition-7"
     ],
     "prerequisites": [
       "active-king"
@@ -671,7 +851,11 @@
     "lessonIds": [
       "pawn-square-1",
       "pawn-square-2",
-      "pawn-square-3"
+      "pawn-square-3",
+      "pawn-square-4",
+      "pawn-square-5",
+      "pawn-square-6",
+      "pawn-square-7"
     ],
     "prerequisites": [
       "king-opposition"
@@ -686,7 +870,11 @@
     "lessonIds": [
       "rook-endgame-basics-1",
       "rook-endgame-basics-2",
-      "rook-endgame-basics-3"
+      "rook-endgame-basics-3",
+      "rook-endgame-basics-4",
+      "rook-endgame-basics-5",
+      "rook-endgame-basics-6",
+      "rook-endgame-basics-7"
     ],
     "prerequisites": [
       "pawn-square"
@@ -701,7 +889,11 @@
     "lessonIds": [
       "underpromotion-1",
       "underpromotion-2",
-      "underpromotion-3"
+      "underpromotion-3",
+      "underpromotion-4",
+      "underpromotion-5",
+      "underpromotion-6",
+      "underpromotion-7"
     ],
     "prerequisites": [
       "rook-endgame-basics"
@@ -716,7 +908,11 @@
     "lessonIds": [
       "clock-decisions-1",
       "clock-decisions-2",
-      "clock-decisions-3"
+      "clock-decisions-3",
+      "clock-decisions-4",
+      "clock-decisions-5",
+      "clock-decisions-6",
+      "clock-decisions-7"
     ],
     "prerequisites": []
   },
@@ -729,10 +925,146 @@
     "lessonIds": [
       "learn-from-games-1",
       "learn-from-games-2",
-      "learn-from-games-3"
+      "learn-from-games-3",
+      "learn-from-games-4",
+      "learn-from-games-5",
+      "learn-from-games-6",
+      "learn-from-games-7"
     ],
     "prerequisites": [
       "clock-decisions"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "forcing-sacrifices",
+    "title": "Жертва ради форсированного мата",
+    "track": "Углублённая практика",
+    "outcome": "Проверять вынужденность принятия жертвы и завершать матовую сеть.",
+    "lessonIds": [
+      "forcing-sacrifices-1",
+      "forcing-sacrifices-2",
+      "forcing-sacrifices-3",
+      "forcing-sacrifices-4",
+      "forcing-sacrifices-5"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-breaks",
+    "title": "Пешечные подрывы",
+    "track": "Углублённая практика",
+    "outcome": "Находить контакт с чужим центром и заранее видеть изменившиеся линии.",
+    "lessonIds": [
+      "pawn-breaks-1",
+      "pawn-breaks-2",
+      "pawn-breaks-3",
+      "pawn-breaks-4",
+      "pawn-breaks-5"
+    ],
+    "prerequisites": [
+      "forcing-sacrifices"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "prophylaxis",
+    "title": "Профилактика и план соперника",
+    "track": "Углублённая практика",
+    "outcome": "Замечать чужие намерения до возникновения прямой угрозы.",
+    "lessonIds": [
+      "prophylaxis-1",
+      "prophylaxis-2",
+      "prophylaxis-3",
+      "prophylaxis-4",
+      "prophylaxis-5"
+    ],
+    "prerequisites": [
+      "pawn-breaks"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "calculation-tree",
+    "title": "Расчёт с подготовительным ходом",
+    "track": "Углублённая практика",
+    "outcome": "Удерживать пятиходовую учебную линию и проверять границы её доказательства.",
+    "lessonIds": [
+      "calculation-tree-1",
+      "calculation-tree-2",
+      "calculation-tree-3",
+      "calculation-tree-4",
+      "calculation-tree-5"
+    ],
+    "prerequisites": [
+      "prophylaxis"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "endgame-races",
+    "title": "Пешечные гонки и темпы",
+    "track": "Углублённая практика",
+    "outcome": "Считать превращения по очереди ходов и учитывать шах новой фигуры.",
+    "lessonIds": [
+      "endgame-races-1",
+      "endgame-races-2",
+      "endgame-races-3",
+      "endgame-races-4",
+      "endgame-races-5"
+    ],
+    "prerequisites": [
+      "calculation-tree"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mixed-tactics",
+    "title": "Самостоятельная тактическая проверка",
+    "track": "Самостоятельная практика",
+    "outcome": "Находить механизм без названия приёма и подсвеченной первой фигуры.",
+    "lessonIds": [
+      "mixed-tactics-1",
+      "mixed-tactics-2",
+      "mixed-tactics-3",
+      "mixed-tactics-4",
+      "mixed-tactics-5"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-decisions",
+    "title": "Дебютные решения по смыслу",
+    "track": "Углублённая практика",
+    "outcome": "Связывать знакомые дебютные ходы с центром, развитием и планом.",
+    "lessonIds": [
+      "opening-decisions-1",
+      "opening-decisions-2",
+      "opening-decisions-3",
+      "opening-decisions-4",
+      "opening-decisions-5"
+    ],
+    "prerequisites": [
+      "endgame-races"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "convert-advantage",
+    "title": "Реализация без лишнего риска",
+    "track": "Углублённая практика",
+    "outcome": "Удерживать безопасность и уменьшать контригру при перевесе.",
+    "lessonIds": [
+      "convert-advantage-1",
+      "convert-advantage-2",
+      "convert-advantage-3",
+      "convert-advantage-4",
+      "convert-advantage-5"
+    ],
+    "prerequisites": [
+      "opening-decisions"
     ]
   }
 ]

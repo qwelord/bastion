@@ -26,7 +26,7 @@ export function position(white, black, turn = 'w', rights = '-') {
     .join(' ');
 }
 const p = position;
-const s = (title, fen, body, question, targets, success) => ({
+export const s = (title, fen, body, question, targets, success) => ({
   title,
   fen,
   body,
@@ -35,7 +35,7 @@ const s = (title, fen, body, question, targets, success) => ({
   targets: targets.split(' '),
   success,
 });
-const m = (title, fen, body, question, line, success, goal) => ({
+export const m = (title, fen, body, question, line, success, goal) => ({
   title,
   fen,
   body,
@@ -45,7 +45,7 @@ const m = (title, fen, body, question, line, success, goal) => ({
   success,
   ...(goal ? { goal } : {}),
 });
-const q = (title, fen, body, question, good, bad, other, success) => ({
+export const q = (title, fen, body, question, good, bad, other, success) => ({
   title,
   fen,
   body,
@@ -54,7 +54,7 @@ const q = (title, fen, body, question, good, bad, other, success) => ({
   options: [good, bad, other],
   success,
 });
-const c = (id, title, track, outcome, units) => ({ id, title, track, outcome, units });
+export const c = (id, title, track, outcome, units) => ({ id, title, track, outcome, units });
 export const material = [
   c(
     'board-map',
