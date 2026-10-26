@@ -16,10 +16,13 @@ import { applyStepRecord, readLearning } from '../src/learning/progress.ts';
 test('expanded courses contain distinct real lessons and live exercises', () => {
   validateCurriculum(lessons);
   validateCourses(courses, lessons);
-  assert.equal(courses.length, 58);
-  assert.equal(new Set(courses.flatMap((c) => c.lessonIds)).size, 390);
+  assert.equal(courses.length, 127);
+  assert.equal(new Set(courses.flatMap((c) => c.lessonIds)).size, 988);
   for (const c of courses) {
-    assert.equal(c.lessonIds.length, courses.indexOf(c) < 50 ? 7 : 5);
+    assert.equal(
+      c.lessonIds.length,
+      courses.indexOf(c) < 50 ? 7 : courses.indexOf(c) < 58 ? 5 : courses.indexOf(c) < 104 ? 10 : 6,
+    );
     for (const l of courseLessons(c)) {
       assert.equal(courseForLesson(l.id)?.id, c.id);
       assert.ok(l.steps.some((s) => s.kind !== 'explain'));

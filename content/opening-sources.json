@@ -1,0 +1,836 @@
+{
+  "source": "https://github.com/lichess-org/chess-openings",
+  "revision": "a6189a30dc273ccb21fc2536a9a2fefd5592a67a",
+  "license": "CC0-1.0",
+  "note": "Reference identifies the longest named prefix. Further moves and all Russian teaching text are authored examples, not an engine recommendation.",
+  "branches": [
+    {
+      "course": "opening-italian",
+      "branch": "Спокойный центр",
+      "eco": "C54",
+      "reference": "Italian Game: Classical Variation, Giuoco Pianissimo",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6"
+    },
+    {
+      "course": "opening-italian",
+      "branch": "Открыть игру",
+      "eco": "C54",
+      "reference": "Italian Game: Classical Variation, Greco Gambit, Traditional Line",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d4 exd4 6. cxd4",
+      "referencePlies": 11,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+"
+    },
+    {
+      "course": "opening-two-knights",
+      "branch": "Развитие без гонки",
+      "eco": "C55",
+      "reference": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Be7",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O"
+    },
+    {
+      "course": "opening-two-knights",
+      "branch": "Пешка f7 и контрудар",
+      "eco": "C58",
+      "reference": "Italian Game: Two Knights Defense, Polerio Defense",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5"
+    },
+    {
+      "course": "opening-evans",
+      "branch": "Принять пешку",
+      "eco": "C52",
+      "reference": "Italian Game: Evans Gambit, Pierce Defense",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bxb4 5. c3 Ba5 6. d4 exd4",
+      "referencePlies": 12,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Ba5 d4 exd4"
+    },
+    {
+      "course": "opening-evans",
+      "branch": "Отказ от гамбита",
+      "eco": "C51",
+      "reference": "Italian Game: Evans Gambit Declined",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 Bb6 5. a4",
+      "referencePlies": 9,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bb6 a4 a6 d3 Nf6"
+    },
+    {
+      "course": "opening-ruy-lopez",
+      "branch": "Закрытая система",
+      "eco": "C88",
+      "reference": "Ruy Lopez: Closed",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3",
+      "referencePlies": 13,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6"
+    },
+    {
+      "course": "opening-ruy-lopez",
+      "branch": "Берлинская защита",
+      "eco": "C67",
+      "reference": "Ruy Lopez: Berlin Defense, l'Hermet Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. O-O Nxe4 5. d4 Nd6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6"
+    },
+    {
+      "course": "opening-spanish-exchange",
+      "branch": "Сдвоенные пешки",
+      "eco": "C69",
+      "reference": "Ruy Lopez: Exchange Variation, Gligoric Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Bxc6 dxc6 5. O-O f6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 O-O f6 d4 exd4"
+    },
+    {
+      "course": "opening-spanish-exchange",
+      "branch": "Развитие после размена",
+      "eco": "C68",
+      "reference": "Ruy Lopez: Exchange Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Bxc6",
+      "referencePlies": 7,
+      "teachingLine": "e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d3 Bd6 Nbd2 Ne7"
+    },
+    {
+      "course": "opening-scotch",
+      "branch": "Слон на c5",
+      "eco": "C45",
+      "reference": "Scotch Game: Classical Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Bc5",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Be3 Qf6"
+    },
+    {
+      "course": "opening-scotch",
+      "branch": "Конь на f6",
+      "eco": "C45",
+      "reference": "Scotch Game: Mieses Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Nf6 5. Nxc6 bxc6 6. e5",
+      "referencePlies": 11,
+      "teachingLine": "e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 e5 Qe7"
+    },
+    {
+      "course": "opening-four-knights",
+      "branch": "Симметрия и слоны",
+      "eco": "C49",
+      "reference": "Four Knights Game: Spanish Variation, Double Spanish",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Bb4",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O"
+    },
+    {
+      "course": "opening-four-knights",
+      "branch": "Шотландский центр",
+      "eco": "C47",
+      "reference": "Four Knights Game: Scotch Variation Accepted",
+      "referencePgn": "1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. d4 exd4",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6"
+    },
+    {
+      "course": "opening-petrov",
+      "branch": "Классический размен",
+      "eco": "C42",
+      "reference": "Petrov's Defense: Classical Attack",
+      "referencePgn": "1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4",
+      "referencePlies": 9,
+      "teachingLine": "e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 d4 d5"
+    },
+    {
+      "course": "opening-petrov",
+      "branch": "Пешечный центр",
+      "eco": "C43",
+      "reference": "Petrov's Defense: Modern Attack, Center Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 Nf6 3. d4 Nxe4 4. Bd3",
+      "referencePlies": 7,
+      "teachingLine": "e4 e5 Nf3 Nf6 d4 Nxe4 Bd3 d5 Nxe5 Bd6"
+    },
+    {
+      "course": "opening-philidor",
+      "branch": "Удержать опору e5",
+      "eco": "C41",
+      "reference": "Philidor Defense: Lion Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 d6 3. d4 Nf6 4. Nc3 Nbd7",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 d6 d4 Nf6 Nc3 Nbd7 Bc4 Be7"
+    },
+    {
+      "course": "opening-philidor",
+      "branch": "Смена центра",
+      "eco": "C41",
+      "reference": "Philidor Defense: Exchange Variation",
+      "referencePgn": "1. e4 e5 2. Nf3 d6 3. d4 exd4 4. Nxd4 Nf6",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 Nf3 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7"
+    },
+    {
+      "course": "opening-vienna",
+      "branch": "Подготовить f4",
+      "eco": "C29",
+      "reference": "Vienna Game: Vienna Gambit, Breyer Variation",
+      "referencePgn": "1. e4 e5 2. Nc3 Nf6 3. f4 d5 4. fxe5 Nxe4 5. Nf3 Be7",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Be7"
+    },
+    {
+      "course": "opening-vienna",
+      "branch": "Спокойное развитие",
+      "eco": "C28",
+      "reference": "Vienna Game: Stanley Variation, Three Knights Variation",
+      "referencePgn": "1. e4 e5 2. Nc3 Nc6 3. Bc4 Nf6",
+      "referencePlies": 6,
+      "teachingLine": "e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Bc5 Nf3 d6"
+    },
+    {
+      "course": "opening-kings-gambit",
+      "branch": "Принятие гамбита",
+      "eco": "C39",
+      "reference": "King's Gambit Accepted: Kieseritzky Gambit, Berlin Defense",
+      "referencePgn": "1. e4 e5 2. f4 exf4 3. Nf3 g5 4. h4 g4 5. Ne5 Nf6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 f4 exf4 Nf3 g5 h4 g4 Ne5 Nf6"
+    },
+    {
+      "course": "opening-kings-gambit",
+      "branch": "Отказ и развитие",
+      "eco": "C30",
+      "reference": "King's Gambit Declined: Classical Variation",
+      "referencePgn": "1. e4 e5 2. f4 Bc5",
+      "referencePlies": 4,
+      "teachingLine": "e4 e5 f4 Bc5 Nf3 d6 Nc3 Nf6 Bc4 Nc6"
+    },
+    {
+      "course": "opening-center-game",
+      "branch": "Ранний ферзь",
+      "eco": "C22",
+      "reference": "Center Game: Berger Variation",
+      "referencePgn": "1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3 Nf6",
+      "referencePlies": 8,
+      "teachingLine": "e4 e5 d4 exd4 Qxd4 Nc6 Qe3 Nf6 Nc3 Bb4"
+    },
+    {
+      "course": "opening-center-game",
+      "branch": "Переход к развитию",
+      "eco": "C22",
+      "reference": "Center Game: Paulsen Attack Variation",
+      "referencePgn": "1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3",
+      "referencePlies": 7,
+      "teachingLine": "e4 e5 d4 exd4 Qxd4 Nc6 Qe3 g6 Nc3 Bg7 Bd2 Nf6"
+    },
+    {
+      "course": "opening-danish",
+      "branch": "Две пешки за развитие",
+      "eco": "C21",
+      "reference": "Danish Gambit Accepted: Classical Defense",
+      "referencePgn": "1. e4 e5 2. d4 exd4 3. c3 dxc3 4. Bc4 cxb2 5. Bxb2 Nf6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e5 d4 exd4 c3 dxc3 Bc4 cxb2 Bxb2 Nf6"
+    },
+    {
+      "course": "opening-danish",
+      "branch": "Умеренное принятие",
+      "eco": "C21",
+      "reference": "Danish Gambit Accepted",
+      "referencePgn": "1. e4 e5 2. d4 exd4 3. c3 dxc3",
+      "referencePlies": 6,
+      "teachingLine": "e4 e5 d4 exd4 c3 dxc3 Nxc3 Nc6 Nf3 d6"
+    },
+    {
+      "course": "opening-najdorf",
+      "branch": "Слон на e3",
+      "eco": "B90",
+      "reference": "Sicilian Defense: Najdorf Variation, English Attack",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be3",
+      "referencePlies": 11,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be3 e5 Nb3 Be6"
+    },
+    {
+      "course": "opening-najdorf",
+      "branch": "Слон на e2",
+      "eco": "B84",
+      "reference": "Sicilian Defense: Scheveningen Variation, Classical Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 6. Be2 e6",
+      "referencePlies": 12,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6 Be2 e6 O-O Be7"
+    },
+    {
+      "course": "opening-dragon",
+      "branch": "Длинная рокировка",
+      "eco": "B76",
+      "reference": "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be3 Bg7 7. f3 O-O 8. Qd2 Nc6",
+      "referencePlies": 16,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6"
+    },
+    {
+      "course": "opening-dragon",
+      "branch": "Короткая рокировка",
+      "eco": "B70",
+      "reference": "Sicilian Defense: Dragon Variation, Classical Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 6. Be2",
+      "referencePlies": 11,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be2 Bg7 O-O O-O Be3 Nc6"
+    },
+    {
+      "course": "opening-sicilian-classical",
+      "branch": "Связка на f6",
+      "eco": "B63",
+      "reference": "Sicilian Defense: Richter-Rauzer Variation, Classical Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e6 7. Qd2 Be7",
+      "referencePlies": 14,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 Nc6 Bg5 e6 Qd2 Be7"
+    },
+    {
+      "course": "opening-sicilian-classical",
+      "branch": "Слон на c4",
+      "eco": "B57",
+      "reference": "Sicilian Defense: Classical Variation, Sozin Attack",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bc4",
+      "referencePlies": 11,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 Nc6 Bc4 e6 Be3 Be7"
+    },
+    {
+      "course": "opening-scheveningen",
+      "branch": "Пешечный клин",
+      "eco": "B54",
+      "reference": "Sicilian Defense: Modern Variations, Main Line",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6",
+      "referencePlies": 8,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 e6 g4 h6 h4 Nc6"
+    },
+    {
+      "course": "opening-scheveningen",
+      "branch": "Классическое развитие",
+      "eco": "B54",
+      "reference": "Sicilian Defense: Modern Variations, Main Line",
+      "referencePgn": "1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6",
+      "referencePlies": 8,
+      "teachingLine": "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 e6 Be2 Be7 O-O O-O f4 Nc6"
+    },
+    {
+      "course": "opening-sveshnikov",
+      "branch": "Выигрыш пространства",
+      "eco": "B33",
+      "reference": "Sicilian Defense: Lasker-Pelikan Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5",
+      "referencePlies": 10,
+      "teachingLine": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 Nf6 Nc3 e5 Ndb5 d6 Bg5 a6"
+    },
+    {
+      "course": "opening-sveshnikov",
+      "branch": "Конь на a3",
+      "eco": "B33",
+      "reference": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5 6. Ndb5 d6 7. Bg5 a6 8. Na3 b5",
+      "referencePlies": 16,
+      "teachingLine": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 Nf6 Nc3 e5 Ndb5 d6 Bg5 a6 Na3 b5"
+    },
+    {
+      "course": "opening-accelerated-dragon",
+      "branch": "Связка Мароци",
+      "eco": "B38",
+      "reference": "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+      "referencePgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. c4 Bg7 6. Be3",
+      "referencePlies": 11,
+      "teachingLine": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 c4 Bg7 Be3 Nf6 Nc3 O-O"
+    },
+    {
+      "course": "opening-accelerated-dragon",
+      "branch": "Развитие без c4",
+      "eco": "B35",
+      "reference": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
+      "referencePgn": "1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 5. Nc3 Bg7 6. Be3 Nf6 7. Bc4",
+      "referencePlies": 13,
+      "teachingLine": "e4 c5 Nf3 Nc6 d4 cxd4 Nxd4 g6 Nc3 Bg7 Be3 Nf6 Bc4 O-O"
+    },
+    {
+      "course": "opening-alapin",
+      "branch": "Ответ конём",
+      "eco": "B22",
+      "reference": "Sicilian Defense: Alapin Variation, Smith-Morra Declined",
+      "referencePgn": "1. e4 c5 2. c3 Nf6 3. e5 Nd5 4. d4 cxd4",
+      "referencePlies": 8,
+      "teachingLine": "e4 c5 c3 Nf6 e5 Nd5 d4 cxd4 Nf3 Nc6"
+    },
+    {
+      "course": "opening-alapin",
+      "branch": "Ответ пешкой",
+      "eco": "B22",
+      "reference": "Sicilian Defense: Alapin Variation, Barmen Defense",
+      "referencePgn": "1. e4 c5 2. c3 d5 3. exd5 Qxd5",
+      "referencePlies": 6,
+      "teachingLine": "e4 c5 c3 d5 exd5 Qxd5 d4 Nf6 Nf3 e6"
+    },
+    {
+      "course": "opening-closed-sicilian",
+      "branch": "Фианкетто белых",
+      "eco": "B25",
+      "reference": "Sicilian Defense: Closed",
+      "referencePgn": "1. e4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. d3 d6",
+      "referencePlies": 10,
+      "teachingLine": "e4 c5 Nc3 Nc6 g3 g6 Bg2 Bg7 d3 d6"
+    },
+    {
+      "course": "opening-closed-sicilian",
+      "branch": "План с f4",
+      "eco": "B23",
+      "reference": "Sicilian Defense: Grand Prix Attack",
+      "referencePgn": "1. e4 c5 2. Nc3 Nc6 3. f4",
+      "referencePlies": 5,
+      "teachingLine": "e4 c5 Nc3 Nc6 f4 g6 Nf3 Bg7 Bb5 Nd4"
+    },
+    {
+      "course": "opening-morra",
+      "branch": "Принять c3",
+      "eco": "B21",
+      "reference": "Sicilian Defense: Smith-Morra Gambit Accepted, Scheveningen Formation",
+      "referencePgn": "1. e4 c5 2. d4 cxd4 3. c3 dxc3 4. Nxc3 Nc6 5. Nf3 d6 6. Bc4 e6",
+      "referencePlies": 12,
+      "teachingLine": "e4 c5 d4 cxd4 c3 dxc3 Nxc3 Nc6 Nf3 d6 Bc4 e6"
+    },
+    {
+      "course": "opening-morra",
+      "branch": "Отклонить гамбит",
+      "eco": "B21",
+      "reference": "Sicilian Defense: Smith-Morra Gambit Declined, Alapin Formation",
+      "referencePgn": "1. e4 c5 2. d4 cxd4 3. c3 Nf6",
+      "referencePlies": 6,
+      "teachingLine": "e4 c5 d4 cxd4 c3 Nf6 e5 Nd5 Nf3 Nc6"
+    },
+    {
+      "course": "opening-french-advance",
+      "branch": "Давление на d4",
+      "eco": "C02",
+      "reference": "French Defense: Advance Variation, Paulsen Attack",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3",
+      "referencePlies": 9,
+      "teachingLine": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6"
+    },
+    {
+      "course": "opening-french-advance",
+      "branch": "Развитие слона",
+      "eco": "C02",
+      "reference": "French Defense: Advance Variation, Euwe Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. e5 c5 4. c3 Nc6 5. Nf3 Bd7",
+      "referencePlies": 10,
+      "teachingLine": "e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Bd7 Be2 Nge7"
+    },
+    {
+      "course": "opening-french-exchange",
+      "branch": "Симметричный центр",
+      "eco": "C01",
+      "reference": "French Defense: Exchange Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. exd5 exd5 4. Nf3",
+      "referencePlies": 7,
+      "teachingLine": "e4 e6 d4 d5 exd5 exd5 Nf3 Nf6 Bd3 Bd6"
+    },
+    {
+      "course": "opening-french-exchange",
+      "branch": "Изолированная пешка",
+      "eco": "C01",
+      "reference": "French Defense: Exchange Variation, Monte Carlo Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. exd5 exd5 4. c4",
+      "referencePlies": 7,
+      "teachingLine": "e4 e6 d4 d5 exd5 exd5 c4 Nf6 Nc3 Bb4 Nf3 O-O"
+    },
+    {
+      "course": "opening-french-tarrasch",
+      "branch": "Центральный размен",
+      "eco": "C09",
+      "reference": "French Defense: Tarrasch Variation, Open System, Main Line",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. Nd2 c5 4. exd5 exd5 5. Ngf3 Nc6",
+      "referencePlies": 10,
+      "teachingLine": "e4 e6 d4 d5 Nd2 c5 exd5 exd5 Ngf3 Nc6"
+    },
+    {
+      "course": "opening-french-tarrasch",
+      "branch": "Закрыть центр",
+      "eco": "C05",
+      "reference": "French Defense: Tarrasch Variation, Closed Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. Nd2 Nf6 4. e5 Nfd7 5. Bd3 c5 6. c3 Nc6",
+      "referencePlies": 12,
+      "teachingLine": "e4 e6 d4 d5 Nd2 Nf6 e5 Nfd7 Bd3 c5 c3 Nc6"
+    },
+    {
+      "course": "opening-winawer",
+      "branch": "Размен на c3",
+      "eco": "C18",
+      "reference": "French Defense: Winawer Variation, Advance Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Bxc3+ 6. bxc3 Ne7",
+      "referencePlies": 12,
+      "teachingLine": "e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 Ne7"
+    },
+    {
+      "course": "opening-winawer",
+      "branch": "Ферзь к g7",
+      "eco": "C18",
+      "reference": "French Defense: Winawer Variation, Warsaw Variation",
+      "referencePgn": "1. e4 e6 2. d4 d5 3. Nc3 Bb4 4. e5 c5 5. a3 Bxc3+ 6. bxc3 Ne7 7. Qg4 O-O",
+      "referencePlies": 14,
+      "teachingLine": "e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 Ne7 Qg4 O-O"
+    },
+    {
+      "course": "opening-caro-advance",
+      "branch": "Слон перед цепью",
+      "eco": "B12",
+      "reference": "Caro-Kann Defense: Advance Variation, Short Variation",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. Nf3",
+      "referencePlies": 7,
+      "teachingLine": "e4 c6 d4 d5 e5 Bf5 Nf3 e6 Be2 c5"
+    },
+    {
+      "course": "opening-caro-advance",
+      "branch": "Расширение на фланге",
+      "eco": "B12",
+      "reference": "Caro-Kann Defense: Advance Variation, Tal Variation",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. e5 Bf5 4. h4",
+      "referencePlies": 7,
+      "teachingLine": "e4 c6 d4 d5 e5 Bf5 h4 h5 Bd3 Bxd3 Qxd3 e6"
+    },
+    {
+      "course": "opening-caro-classical",
+      "branch": "Слон на f5",
+      "eco": "B15",
+      "reference": "Caro-Kann Defense",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4",
+      "referencePlies": 6,
+      "teachingLine": "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Bf5 Ng3 Bg6 h4 h6"
+    },
+    {
+      "course": "opening-caro-classical",
+      "branch": "Размен коней",
+      "eco": "B15",
+      "reference": "Caro-Kann Defense",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. Nc3 dxe4",
+      "referencePlies": 6,
+      "teachingLine": "e4 c6 d4 d5 Nc3 dxe4 Nxe4 Nd7 Nf3 Ngf6 Nxf6+ Nxf6"
+    },
+    {
+      "course": "opening-panov",
+      "branch": "Давление на d5",
+      "eco": "B14",
+      "reference": "Caro-Kann Defense: Panov Attack",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4 Nf6 5. Nc3 e6",
+      "referencePlies": 10,
+      "teachingLine": "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 e6 Nf3 Be7"
+    },
+    {
+      "course": "opening-panov",
+      "branch": "Фианкетто чёрных",
+      "eco": "B14",
+      "reference": "Caro-Kann Defense: Panov Attack, Fianchetto Defense",
+      "referencePgn": "1. e4 c6 2. d4 d5 3. exd5 cxd5 4. c4 Nf6 5. Nc3 g6",
+      "referencePlies": 10,
+      "teachingLine": "e4 c6 d4 d5 exd5 cxd5 c4 Nf6 Nc3 g6 Nf3 Bg7"
+    },
+    {
+      "course": "opening-scandinavian",
+      "branch": "Ферзь на a5",
+      "eco": "B01",
+      "reference": "Scandinavian Defense: Main Line, Mieses Variation",
+      "referencePgn": "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6",
+      "referencePlies": 8,
+      "teachingLine": "e4 d5 exd5 Qxd5 Nc3 Qa5 d4 Nf6 Nf3 c6"
+    },
+    {
+      "course": "opening-scandinavian",
+      "branch": "Возврат конём",
+      "eco": "B01",
+      "reference": "Scandinavian Defense: Richter Variation",
+      "referencePgn": "1. e4 d5 2. exd5 Nf6 3. d4 Nxd5 4. Nf3 g6",
+      "referencePlies": 8,
+      "teachingLine": "e4 d5 exd5 Nf6 d4 Nxd5 Nf3 g6 Be2 Bg7"
+    },
+    {
+      "course": "opening-pirc",
+      "branch": "Австрийская атака",
+      "eco": "B09",
+      "reference": "Pirc Defense: Austrian Attack",
+      "referencePgn": "1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. f4 Bg7 5. Nf3 O-O",
+      "referencePlies": 10,
+      "teachingLine": "e4 d6 d4 Nf6 Nc3 g6 f4 Bg7 Nf3 O-O"
+    },
+    {
+      "course": "opening-pirc",
+      "branch": "Классическая система",
+      "eco": "B08",
+      "reference": "Pirc Defense: Classical Variation, Quiet System, Chigorin Line",
+      "referencePgn": "1. e4 d6 2. d4 Nf6 3. Nc3 g6 4. Nf3 Bg7 5. Be2 O-O 6. O-O Nc6",
+      "referencePlies": 12,
+      "teachingLine": "e4 d6 d4 Nf6 Nc3 g6 Nf3 Bg7 Be2 O-O O-O Nc6"
+    },
+    {
+      "course": "opening-modern",
+      "branch": "Гибкое фианкетто",
+      "eco": "B06",
+      "reference": "Modern Defense: Standard Defense",
+      "referencePgn": "1. e4 g6 2. d4 Bg7 3. Nc3 d6",
+      "referencePlies": 6,
+      "teachingLine": "e4 g6 d4 Bg7 Nc3 d6 Be3 a6 Qd2 b5"
+    },
+    {
+      "course": "opening-modern",
+      "branch": "Спокойный переход",
+      "eco": "B06",
+      "reference": "Modern Defense",
+      "referencePgn": "1. e4 g6 2. d4 Bg7",
+      "referencePlies": 4,
+      "teachingLine": "e4 g6 d4 Bg7 Nf3 d6 Be2 Nf6 Nc3 O-O"
+    },
+    {
+      "course": "opening-alekhine",
+      "branch": "Четыре пешки",
+      "eco": "B03",
+      "reference": "Alekhine Defense: Four Pawns Attack",
+      "referencePgn": "1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. c4 Nb6 5. f4",
+      "referencePlies": 9,
+      "teachingLine": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 f4 dxe5 fxe5 Nc6"
+    },
+    {
+      "course": "opening-alekhine",
+      "branch": "Разменный центр",
+      "eco": "B03",
+      "reference": "Alekhine Defense: Exchange Variation",
+      "referencePgn": "1. e4 Nf6 2. e5 Nd5 3. d4 d6 4. c4 Nb6 5. exd6",
+      "referencePlies": 9,
+      "teachingLine": "e4 Nf6 e5 Nd5 d4 d6 c4 Nb6 exd6 cxd6 Nf3 g6"
+    },
+    {
+      "course": "opening-queens-gambit-declined",
+      "branch": "Классическое развитие",
+      "eco": "D53",
+      "reference": "Queen's Gambit Declined",
+      "referencePgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7",
+      "referencePlies": 8,
+      "teachingLine": "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 Nbd7"
+    },
+    {
+      "course": "opening-queens-gambit-declined",
+      "branch": "Карлсбадская структура",
+      "eco": "D35",
+      "reference": "Queen's Gambit Declined: Normal Defense",
+      "referencePgn": "1. d4 d5 2. c4 e6 3. Nc3 Nf6",
+      "referencePlies": 6,
+      "teachingLine": "d4 d5 c4 e6 Nc3 Nf6 cxd5 exd5 Bg5 Be7 e3 O-O"
+    },
+    {
+      "course": "opening-queens-gambit-accepted",
+      "branch": "Вернуть пешку слоном",
+      "eco": "D27",
+      "reference": "Queen's Gambit Accepted: Classical Defense, Main Line",
+      "referencePgn": "1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 4. e3 e6 5. Bxc4 c5 6. O-O a6",
+      "referencePlies": 12,
+      "teachingLine": "d4 d5 c4 dxc4 Nf3 Nf6 e3 e6 Bxc4 c5 O-O a6"
+    },
+    {
+      "course": "opening-queens-gambit-accepted",
+      "branch": "Большой центр",
+      "eco": "D20",
+      "reference": "Queen's Gambit Accepted: Central Variation, McDonnell Defense",
+      "referencePgn": "1. d4 d5 2. c4 dxc4 3. e4 e5",
+      "referencePlies": 6,
+      "teachingLine": "d4 d5 c4 dxc4 e4 e5 Nf3 exd4 Bxc4 Nc6"
+    },
+    {
+      "course": "opening-slav",
+      "branch": "Сохранить слона c8",
+      "eco": "D18",
+      "reference": "Slav Defense: Czech Variation, Classical System",
+      "referencePgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 dxc4 5. a4 Bf5 6. e3",
+      "referencePlies": 11,
+      "teachingLine": "d4 d5 c4 c6 Nf3 Nf6 Nc3 dxc4 a4 Bf5 e3 e6"
+    },
+    {
+      "course": "opening-slav",
+      "branch": "Разменная система",
+      "eco": "D14",
+      "reference": "Slav Defense: Exchange Variation, Symmetrical Line",
+      "referencePgn": "1. d4 d5 2. c4 c6 3. cxd5 cxd5 4. Nc3 Nf6 5. Nf3 Nc6 6. Bf4 Bf5",
+      "referencePlies": 12,
+      "teachingLine": "d4 d5 c4 c6 cxd5 cxd5 Nc3 Nf6 Nf3 Nc6 Bf4 Bf5"
+    },
+    {
+      "course": "opening-semi-slav",
+      "branch": "Меранская идея",
+      "eco": "D43",
+      "reference": "Semi-Slav Defense",
+      "referencePgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6",
+      "referencePlies": 8,
+      "teachingLine": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 e3 Nbd7 Bd3 dxc4 Bxc4 b5"
+    },
+    {
+      "course": "opening-semi-slav",
+      "branch": "Слон вне цепи белых",
+      "eco": "D43",
+      "reference": "Semi-Slav Defense: Moscow Variation",
+      "referencePgn": "1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6 5. Bg5 h6 6. Bxf6 Qxf6",
+      "referencePlies": 12,
+      "teachingLine": "d4 d5 c4 c6 Nf3 Nf6 Nc3 e6 Bg5 h6 Bxf6 Qxf6 e3 Nd7"
+    },
+    {
+      "course": "opening-nimzo",
+      "branch": "Система Рубинштейна",
+      "eco": "E53",
+      "reference": "Nimzo-Indian Defense: Normal Variation, Gligoric System",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3 d5 6. Nf3 c5",
+      "referencePlies": 12,
+      "teachingLine": "d4 Nf6 c4 e6 Nc3 Bb4 e3 O-O Bd3 d5 Nf3 c5"
+    },
+    {
+      "course": "opening-nimzo",
+      "branch": "Ферзь на c2",
+      "eco": "E32",
+      "reference": "Nimzo-Indian Defense: Classical Variation",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. Qc2",
+      "referencePlies": 7,
+      "teachingLine": "d4 Nf6 c4 e6 Nc3 Bb4 Qc2 O-O a3 Bxc3+ Qxc3 d5"
+    },
+    {
+      "course": "opening-queens-indian",
+      "branch": "Два фианкетто",
+      "eco": "E17",
+      "reference": "Queen's Indian Defense: Classical Variation",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Bb7 5. Bg2 Be7 6. O-O",
+      "referencePlies": 11,
+      "teachingLine": "d4 Nf6 c4 e6 Nf3 b6 g3 Bb7 Bg2 Be7 O-O O-O"
+    },
+    {
+      "course": "opening-queens-indian",
+      "branch": "Слон на a6",
+      "eco": "E15",
+      "reference": "Queen's Indian Defense: Fianchetto Variation, Check Variation, Intermezzo Line",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. Nf3 b6 4. g3 Ba6 5. b3 Bb4+ 6. Bd2 Be7",
+      "referencePlies": 12,
+      "teachingLine": "d4 Nf6 c4 e6 Nf3 b6 g3 Ba6 b3 Bb4+ Bd2 Be7"
+    },
+    {
+      "course": "opening-kings-indian",
+      "branch": "Классический центр",
+      "eco": "E97",
+      "reference": "King's Indian Defense: Orthodox Variation, Aronin-Taimanov Defense",
+      "referencePgn": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. Nf3 O-O 6. Be2 e5 7. O-O Nc6",
+      "referencePlies": 14,
+      "teachingLine": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 Nf3 O-O Be2 e5 O-O Nc6"
+    },
+    {
+      "course": "opening-kings-indian",
+      "branch": "Система Земиша",
+      "eco": "E81",
+      "reference": "King's Indian Defense: Sämisch Variation, Sämisch Gambit",
+      "referencePgn": "1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 5. f3 O-O 6. Be3 c5",
+      "referencePlies": 12,
+      "teachingLine": "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f3 O-O Be3 c5"
+    },
+    {
+      "course": "opening-grunfeld",
+      "branch": "Разменный центр",
+      "eco": "D85",
+      "reference": "Grünfeld Defense: Exchange Variation",
+      "referencePgn": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. cxd5 Nxd5",
+      "referencePlies": 8,
+      "teachingLine": "d4 Nf6 c4 g6 Nc3 d5 cxd5 Nxd5 e4 Nxc3 bxc3 Bg7"
+    },
+    {
+      "course": "opening-grunfeld",
+      "branch": "Развитие слона",
+      "eco": "D93",
+      "reference": "Grünfeld Defense: Three Knights Variation, Hungarian Variation",
+      "referencePgn": "1. d4 Nf6 2. c4 g6 3. Nc3 d5 4. Nf3 Bg7 5. Bf4 O-O 6. e3",
+      "referencePlies": 11,
+      "teachingLine": "d4 Nf6 c4 g6 Nc3 d5 Nf3 Bg7 Bf4 O-O e3 c5"
+    },
+    {
+      "course": "opening-catalan",
+      "branch": "Открытый вариант",
+      "eco": "E05",
+      "reference": "Catalan Opening: Open Defense, Classical Line",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 dxc4 5. Nf3 Be7",
+      "referencePlies": 10,
+      "teachingLine": "d4 Nf6 c4 e6 g3 d5 Bg2 dxc4 Nf3 Be7 O-O O-O"
+    },
+    {
+      "course": "opening-catalan",
+      "branch": "Закрытый вариант",
+      "eco": "E07",
+      "reference": "Catalan Opening: Closed",
+      "referencePgn": "1. d4 Nf6 2. c4 e6 3. g3 d5 4. Bg2 Be7 5. Nf3 O-O 6. O-O Nbd7",
+      "referencePlies": 12,
+      "teachingLine": "d4 Nf6 c4 e6 g3 d5 Bg2 Be7 Nf3 O-O O-O Nbd7"
+    },
+    {
+      "course": "opening-london",
+      "branch": "Треугольник белых",
+      "eco": "D02",
+      "reference": "Queen's Pawn Game: London System",
+      "referencePgn": "1. d4 d5 2. Nf3 Nf6 3. Bf4",
+      "referencePlies": 5,
+      "teachingLine": "d4 d5 Nf3 Nf6 Bf4 e6 e3 c5 c3 Nc6 Nbd2 Bd6"
+    },
+    {
+      "course": "opening-london",
+      "branch": "Против фианкетто",
+      "eco": "A48",
+      "reference": "London System",
+      "referencePgn": "1. d4 Nf6 2. Nf3 g6 3. Bf4 Bg7 4. e3",
+      "referencePlies": 7,
+      "teachingLine": "d4 Nf6 Nf3 g6 Bf4 Bg7 e3 O-O Be2 d6 O-O c5"
+    },
+    {
+      "course": "opening-dutch",
+      "branch": "Каменная стена",
+      "eco": "A81",
+      "reference": "Dutch Defense: Fianchetto Attack",
+      "referencePgn": "1. d4 f5 2. g3",
+      "referencePlies": 3,
+      "teachingLine": "d4 f5 g3 Nf6 Bg2 e6 Nf3 d5 O-O Bd6 c4 c6"
+    },
+    {
+      "course": "opening-dutch",
+      "branch": "Ленинградская система",
+      "eco": "A81",
+      "reference": "Dutch Defense: Semi-Leningrad Variation",
+      "referencePgn": "1. d4 f5 2. g3 Nf6 3. Bg2 g6",
+      "referencePlies": 6,
+      "teachingLine": "d4 f5 g3 Nf6 Bg2 g6 Nf3 Bg7 O-O O-O c4 d6"
+    },
+    {
+      "course": "opening-english",
+      "branch": "Обратная сицилианская",
+      "eco": "A22",
+      "reference": "English Opening: King's English Variation, Two Knights Variation, Reversed Dragon",
+      "referencePgn": "1. c4 e5 2. Nc3 Nf6 3. g3 d5",
+      "referencePlies": 6,
+      "teachingLine": "c4 e5 Nc3 Nf6 g3 d5 cxd5 Nxd5 Bg2 Nb6"
+    },
+    {
+      "course": "opening-english",
+      "branch": "Симметричный вариант",
+      "eco": "A37",
+      "reference": "English Opening: Symmetrical Variation, Three Knights, Fianchetto Variation",
+      "referencePgn": "1. c4 c5 2. Nc3 Nc6 3. g3 g6 4. Bg2 Bg7 5. Nf3",
+      "referencePlies": 9,
+      "teachingLine": "c4 c5 Nc3 Nc6 g3 g6 Bg2 Bg7 Nf3 Nf6"
+    },
+    {
+      "course": "opening-reti",
+      "branch": "Давление на центр",
+      "eco": "A09",
+      "reference": "Réti Opening",
+      "referencePgn": "1. Nf3 d5 2. c4",
+      "referencePlies": 3,
+      "teachingLine": "Nf3 d5 c4 e6 g3 Nf6 Bg2 Be7 O-O O-O"
+    },
+    {
+      "course": "opening-reti",
+      "branch": "Продвинутый центр чёрных",
+      "eco": "A09",
+      "reference": "Réti Opening: Advance Variation",
+      "referencePgn": "1. Nf3 d5 2. c4 d4",
+      "referencePlies": 4,
+      "teachingLine": "Nf3 d5 c4 d4 g3 Nc6 Bg2 e5 O-O Nf6"
+    }
+  ]
+}

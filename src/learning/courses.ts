@@ -6,6 +6,7 @@ export type CourseDefinition = {
   schemaVersion: 1;
   id: string;
   title: string;
+  aliases?: string[];
   track: string;
   outcome: string;
   lessonIds: string[];
@@ -30,6 +31,10 @@ export function validateCourses(input: unknown, catalog: LessonDefinition[]): Co
       !id(c.id) ||
       ids.has(c.id) ||
       !text(c.title, 120) ||
+      (c.aliases !== undefined &&
+        (!Array.isArray(c.aliases) ||
+          c.aliases.length > 10 ||
+          !c.aliases.every((alias: unknown) => text(alias, 160)))) ||
       !text(c.track, 80) ||
       !text(c.outcome, 600) ||
       !Array.isArray(c.lessonIds) ||
@@ -68,7 +73,10 @@ export function validateCourses(input: unknown, catalog: LessonDefinition[]): Co
 // Bundled content is validated by the build, not during a player's first board interaction.
 export const courses = source as CourseDefinition[];
 export const courseLessons = (c: CourseDefinition) => c.lessonIds.map((id) => findLesson(id)!);
-export const courseForLesson = (id: string) => courses.find((c) => c.lessonIds.includes(id));
+const courseIndex = new Map(
+  courses.flatMap((course) => course.lessonIds.map((id) => [id, course] as const)),
+);
+export const courseForLesson = (id: string) => courseIndex.get(id);
 export const courseLink = (id: string) => `#learn/course/${id}`;
 export function courseStats(c: CourseDefinition, progress: LearningProgress) {
   const list = courseLessons(c);

@@ -1066,5 +1066,1768 @@
     "prerequisites": [
       "opening-decisions"
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-italian",
+    "title": "Итальянская партия",
+    "aliases": [
+      "Italian Game: Classical Variation, Giuoco Pianissimo",
+      "C54",
+      "italian",
+      "Italian Game: Classical Variation, Greco Gambit, Traditional Line"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: спокойный центр и открыть игру. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-italian-1",
+      "opening-italian-2",
+      "opening-italian-3",
+      "opening-italian-4",
+      "opening-italian-5",
+      "opening-italian-6",
+      "opening-italian-7",
+      "opening-italian-8",
+      "opening-italian-9",
+      "opening-italian-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-two-knights",
+    "title": "Защита двух коней",
+    "aliases": [
+      "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+      "C55",
+      "two-knights",
+      "Italian Game: Two Knights Defense, Polerio Defense",
+      "C58"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: развитие без гонки и пешка f7 и контрудар. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-two-knights-1",
+      "opening-two-knights-2",
+      "opening-two-knights-3",
+      "opening-two-knights-4",
+      "opening-two-knights-5",
+      "opening-two-knights-6",
+      "opening-two-knights-7",
+      "opening-two-knights-8",
+      "opening-two-knights-9",
+      "opening-two-knights-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-evans",
+    "title": "Гамбит Эванса",
+    "aliases": [
+      "Italian Game: Evans Gambit, Pierce Defense",
+      "C52",
+      "evans",
+      "Italian Game: Evans Gambit Declined",
+      "C51"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: принять пешку и отказ от гамбита. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-evans-1",
+      "opening-evans-2",
+      "opening-evans-3",
+      "opening-evans-4",
+      "opening-evans-5",
+      "opening-evans-6",
+      "opening-evans-7",
+      "opening-evans-8",
+      "opening-evans-9",
+      "opening-evans-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-ruy-lopez",
+    "title": "Испанская партия",
+    "aliases": [
+      "Ruy Lopez: Closed",
+      "C88",
+      "ruy-lopez",
+      "Ruy Lopez: Berlin Defense, l'Hermet Variation",
+      "C67"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: закрытая система и берлинская защита. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-ruy-lopez-1",
+      "opening-ruy-lopez-2",
+      "opening-ruy-lopez-3",
+      "opening-ruy-lopez-4",
+      "opening-ruy-lopez-5",
+      "opening-ruy-lopez-6",
+      "opening-ruy-lopez-7",
+      "opening-ruy-lopez-8",
+      "opening-ruy-lopez-9",
+      "opening-ruy-lopez-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-spanish-exchange",
+    "title": "Разменная испанская",
+    "aliases": [
+      "Ruy Lopez: Exchange Variation, Gligoric Variation",
+      "C69",
+      "spanish-exchange",
+      "Ruy Lopez: Exchange Variation",
+      "C68"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: сдвоенные пешки и развитие после размена. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-spanish-exchange-1",
+      "opening-spanish-exchange-2",
+      "opening-spanish-exchange-3",
+      "opening-spanish-exchange-4",
+      "opening-spanish-exchange-5",
+      "opening-spanish-exchange-6",
+      "opening-spanish-exchange-7",
+      "opening-spanish-exchange-8",
+      "opening-spanish-exchange-9",
+      "opening-spanish-exchange-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-scotch",
+    "title": "Шотландская партия",
+    "aliases": [
+      "Scotch Game: Classical Variation",
+      "C45",
+      "scotch",
+      "Scotch Game: Mieses Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: слон на c5 и конь на f6. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-scotch-1",
+      "opening-scotch-2",
+      "opening-scotch-3",
+      "opening-scotch-4",
+      "opening-scotch-5",
+      "opening-scotch-6",
+      "opening-scotch-7",
+      "opening-scotch-8",
+      "opening-scotch-9",
+      "opening-scotch-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-four-knights",
+    "title": "Дебют четырёх коней",
+    "aliases": [
+      "Four Knights Game: Spanish Variation, Double Spanish",
+      "C49",
+      "four-knights",
+      "Four Knights Game: Scotch Variation Accepted",
+      "C47"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: симметрия и слоны и шотландский центр. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-four-knights-1",
+      "opening-four-knights-2",
+      "opening-four-knights-3",
+      "opening-four-knights-4",
+      "opening-four-knights-5",
+      "opening-four-knights-6",
+      "opening-four-knights-7",
+      "opening-four-knights-8",
+      "opening-four-knights-9",
+      "opening-four-knights-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-petrov",
+    "title": "Русская партия",
+    "aliases": [
+      "Petrov's Defense: Classical Attack",
+      "C42",
+      "petrov",
+      "Petrov's Defense: Modern Attack, Center Variation",
+      "C43"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: классический размен и пешечный центр. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-petrov-1",
+      "opening-petrov-2",
+      "opening-petrov-3",
+      "opening-petrov-4",
+      "opening-petrov-5",
+      "opening-petrov-6",
+      "opening-petrov-7",
+      "opening-petrov-8",
+      "opening-petrov-9",
+      "opening-petrov-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-philidor",
+    "title": "Защита Филидора",
+    "aliases": [
+      "Philidor Defense: Lion Variation",
+      "C41",
+      "philidor",
+      "Philidor Defense: Exchange Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: удержать опору e5 и смена центра. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-philidor-1",
+      "opening-philidor-2",
+      "opening-philidor-3",
+      "opening-philidor-4",
+      "opening-philidor-5",
+      "opening-philidor-6",
+      "opening-philidor-7",
+      "opening-philidor-8",
+      "opening-philidor-9",
+      "opening-philidor-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-vienna",
+    "title": "Венская партия",
+    "aliases": [
+      "Vienna Game: Vienna Gambit, Breyer Variation",
+      "C29",
+      "vienna",
+      "Vienna Game: Stanley Variation, Three Knights Variation",
+      "C28"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: подготовить f4 и спокойное развитие. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-vienna-1",
+      "opening-vienna-2",
+      "opening-vienna-3",
+      "opening-vienna-4",
+      "opening-vienna-5",
+      "opening-vienna-6",
+      "opening-vienna-7",
+      "opening-vienna-8",
+      "opening-vienna-9",
+      "opening-vienna-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-kings-gambit",
+    "title": "Королевский гамбит",
+    "aliases": [
+      "King's Gambit Accepted: Kieseritzky Gambit, Berlin Defense",
+      "C39",
+      "kings-gambit",
+      "King's Gambit Declined: Classical Variation",
+      "C30"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: принятие гамбита и отказ и развитие. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-kings-gambit-1",
+      "opening-kings-gambit-2",
+      "opening-kings-gambit-3",
+      "opening-kings-gambit-4",
+      "opening-kings-gambit-5",
+      "opening-kings-gambit-6",
+      "opening-kings-gambit-7",
+      "opening-kings-gambit-8",
+      "opening-kings-gambit-9",
+      "opening-kings-gambit-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-center-game",
+    "title": "Центральный дебют",
+    "aliases": [
+      "Center Game: Berger Variation",
+      "C22",
+      "center-game",
+      "Center Game: Paulsen Attack Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: ранний ферзь и переход к развитию. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-center-game-1",
+      "opening-center-game-2",
+      "opening-center-game-3",
+      "opening-center-game-4",
+      "opening-center-game-5",
+      "opening-center-game-6",
+      "opening-center-game-7",
+      "opening-center-game-8",
+      "opening-center-game-9",
+      "opening-center-game-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-danish",
+    "title": "Северный гамбит",
+    "aliases": [
+      "Danish Gambit Accepted: Classical Defense",
+      "C21",
+      "danish",
+      "Danish Gambit Accepted"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: две пешки за развитие и умеренное принятие. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-danish-1",
+      "opening-danish-2",
+      "opening-danish-3",
+      "opening-danish-4",
+      "opening-danish-5",
+      "opening-danish-6",
+      "opening-danish-7",
+      "opening-danish-8",
+      "opening-danish-9",
+      "opening-danish-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-najdorf",
+    "title": "Сицилианская: Найдорф",
+    "aliases": [
+      "Sicilian Defense: Najdorf Variation, English Attack",
+      "B90",
+      "najdorf",
+      "Sicilian Defense: Scheveningen Variation, Classical Variation",
+      "B84"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: слон на e3 и слон на e2. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-najdorf-1",
+      "opening-najdorf-2",
+      "opening-najdorf-3",
+      "opening-najdorf-4",
+      "opening-najdorf-5",
+      "opening-najdorf-6",
+      "opening-najdorf-7",
+      "opening-najdorf-8",
+      "opening-najdorf-9",
+      "opening-najdorf-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-dragon",
+    "title": "Сицилианская: дракон",
+    "aliases": [
+      "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+      "B76",
+      "dragon",
+      "Sicilian Defense: Dragon Variation, Classical Variation",
+      "B70"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: длинная рокировка и короткая рокировка. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-dragon-1",
+      "opening-dragon-2",
+      "opening-dragon-3",
+      "opening-dragon-4",
+      "opening-dragon-5",
+      "opening-dragon-6",
+      "opening-dragon-7",
+      "opening-dragon-8",
+      "opening-dragon-9",
+      "opening-dragon-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-sicilian-classical",
+    "title": "Сицилианская: классическая",
+    "aliases": [
+      "Sicilian Defense: Richter-Rauzer Variation, Classical Variation",
+      "B63",
+      "sicilian-classical",
+      "Sicilian Defense: Classical Variation, Sozin Attack",
+      "B57"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: связка на f6 и слон на c4. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-sicilian-classical-1",
+      "opening-sicilian-classical-2",
+      "opening-sicilian-classical-3",
+      "opening-sicilian-classical-4",
+      "opening-sicilian-classical-5",
+      "opening-sicilian-classical-6",
+      "opening-sicilian-classical-7",
+      "opening-sicilian-classical-8",
+      "opening-sicilian-classical-9",
+      "opening-sicilian-classical-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-scheveningen",
+    "title": "Сицилианская: схевенинген",
+    "aliases": [
+      "Sicilian Defense: Modern Variations, Main Line",
+      "B54",
+      "scheveningen"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: пешечный клин и классическое развитие. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-scheveningen-1",
+      "opening-scheveningen-2",
+      "opening-scheveningen-3",
+      "opening-scheveningen-4",
+      "opening-scheveningen-5",
+      "opening-scheveningen-6",
+      "opening-scheveningen-7",
+      "opening-scheveningen-8",
+      "opening-scheveningen-9",
+      "opening-scheveningen-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-sveshnikov",
+    "title": "Сицилианская: Свешников",
+    "aliases": [
+      "Sicilian Defense: Lasker-Pelikan Variation",
+      "B33",
+      "sveshnikov",
+      "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: выигрыш пространства и конь на a3. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-sveshnikov-1",
+      "opening-sveshnikov-2",
+      "opening-sveshnikov-3",
+      "opening-sveshnikov-4",
+      "opening-sveshnikov-5",
+      "opening-sveshnikov-6",
+      "opening-sveshnikov-7",
+      "opening-sveshnikov-8",
+      "opening-sveshnikov-9",
+      "opening-sveshnikov-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-accelerated-dragon",
+    "title": "Ускоренный дракон",
+    "aliases": [
+      "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+      "B38",
+      "accelerated-dragon",
+      "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
+      "B35"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: связка мароци и развитие без c4. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-accelerated-dragon-1",
+      "opening-accelerated-dragon-2",
+      "opening-accelerated-dragon-3",
+      "opening-accelerated-dragon-4",
+      "opening-accelerated-dragon-5",
+      "opening-accelerated-dragon-6",
+      "opening-accelerated-dragon-7",
+      "opening-accelerated-dragon-8",
+      "opening-accelerated-dragon-9",
+      "opening-accelerated-dragon-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-alapin",
+    "title": "Сицилианская: Алапин",
+    "aliases": [
+      "Sicilian Defense: Alapin Variation, Smith-Morra Declined",
+      "B22",
+      "alapin",
+      "Sicilian Defense: Alapin Variation, Barmen Defense"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: ответ конём и ответ пешкой. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-alapin-1",
+      "opening-alapin-2",
+      "opening-alapin-3",
+      "opening-alapin-4",
+      "opening-alapin-5",
+      "opening-alapin-6",
+      "opening-alapin-7",
+      "opening-alapin-8",
+      "opening-alapin-9",
+      "opening-alapin-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-closed-sicilian",
+    "title": "Закрытая сицилианская",
+    "aliases": [
+      "Sicilian Defense: Closed",
+      "B25",
+      "closed-sicilian",
+      "Sicilian Defense: Grand Prix Attack",
+      "B23"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: фианкетто белых и план с f4. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-closed-sicilian-1",
+      "opening-closed-sicilian-2",
+      "opening-closed-sicilian-3",
+      "opening-closed-sicilian-4",
+      "opening-closed-sicilian-5",
+      "opening-closed-sicilian-6",
+      "opening-closed-sicilian-7",
+      "opening-closed-sicilian-8",
+      "opening-closed-sicilian-9",
+      "opening-closed-sicilian-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-morra",
+    "title": "Гамбит Морра",
+    "aliases": [
+      "Sicilian Defense: Smith-Morra Gambit Accepted, Scheveningen Formation",
+      "B21",
+      "morra",
+      "Sicilian Defense: Smith-Morra Gambit Declined, Alapin Formation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: принять c3 и отклонить гамбит. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-morra-1",
+      "opening-morra-2",
+      "opening-morra-3",
+      "opening-morra-4",
+      "opening-morra-5",
+      "opening-morra-6",
+      "opening-morra-7",
+      "opening-morra-8",
+      "opening-morra-9",
+      "opening-morra-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-french-advance",
+    "title": "Французская: продвижение",
+    "aliases": [
+      "French Defense: Advance Variation, Paulsen Attack",
+      "C02",
+      "french-advance",
+      "French Defense: Advance Variation, Euwe Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: давление на d4 и развитие слона. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-french-advance-1",
+      "opening-french-advance-2",
+      "opening-french-advance-3",
+      "opening-french-advance-4",
+      "opening-french-advance-5",
+      "opening-french-advance-6",
+      "opening-french-advance-7",
+      "opening-french-advance-8",
+      "opening-french-advance-9",
+      "opening-french-advance-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-french-exchange",
+    "title": "Французская: размен",
+    "aliases": [
+      "French Defense: Exchange Variation",
+      "C01",
+      "french-exchange",
+      "French Defense: Exchange Variation, Monte Carlo Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: симметричный центр и изолированная пешка. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-french-exchange-1",
+      "opening-french-exchange-2",
+      "opening-french-exchange-3",
+      "opening-french-exchange-4",
+      "opening-french-exchange-5",
+      "opening-french-exchange-6",
+      "opening-french-exchange-7",
+      "opening-french-exchange-8",
+      "opening-french-exchange-9",
+      "opening-french-exchange-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-french-tarrasch",
+    "title": "Французская: Тарраш",
+    "aliases": [
+      "French Defense: Tarrasch Variation, Open System, Main Line",
+      "C09",
+      "french-tarrasch",
+      "French Defense: Tarrasch Variation, Closed Variation",
+      "C05"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: центральный размен и закрыть центр. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-french-tarrasch-1",
+      "opening-french-tarrasch-2",
+      "opening-french-tarrasch-3",
+      "opening-french-tarrasch-4",
+      "opening-french-tarrasch-5",
+      "opening-french-tarrasch-6",
+      "opening-french-tarrasch-7",
+      "opening-french-tarrasch-8",
+      "opening-french-tarrasch-9",
+      "opening-french-tarrasch-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-winawer",
+    "title": "Французская: Винавер",
+    "aliases": [
+      "French Defense: Winawer Variation, Advance Variation",
+      "C18",
+      "winawer",
+      "French Defense: Winawer Variation, Warsaw Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: размен на c3 и ферзь к g7. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-winawer-1",
+      "opening-winawer-2",
+      "opening-winawer-3",
+      "opening-winawer-4",
+      "opening-winawer-5",
+      "opening-winawer-6",
+      "opening-winawer-7",
+      "opening-winawer-8",
+      "opening-winawer-9",
+      "opening-winawer-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-caro-advance",
+    "title": "Каро-Канн: продвижение",
+    "aliases": [
+      "Caro-Kann Defense: Advance Variation, Short Variation",
+      "B12",
+      "caro-advance",
+      "Caro-Kann Defense: Advance Variation, Tal Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: слон перед цепью и расширение на фланге. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-caro-advance-1",
+      "opening-caro-advance-2",
+      "opening-caro-advance-3",
+      "opening-caro-advance-4",
+      "opening-caro-advance-5",
+      "opening-caro-advance-6",
+      "opening-caro-advance-7",
+      "opening-caro-advance-8",
+      "opening-caro-advance-9",
+      "opening-caro-advance-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-caro-classical",
+    "title": "Каро-Канн: классическая",
+    "aliases": [
+      "Caro-Kann Defense",
+      "B15",
+      "caro-classical"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: слон на f5 и размен коней. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-caro-classical-1",
+      "opening-caro-classical-2",
+      "opening-caro-classical-3",
+      "opening-caro-classical-4",
+      "opening-caro-classical-5",
+      "opening-caro-classical-6",
+      "opening-caro-classical-7",
+      "opening-caro-classical-8",
+      "opening-caro-classical-9",
+      "opening-caro-classical-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-panov",
+    "title": "Каро-Канн: атака Панова",
+    "aliases": [
+      "Caro-Kann Defense: Panov Attack",
+      "B14",
+      "panov",
+      "Caro-Kann Defense: Panov Attack, Fianchetto Defense"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: давление на d5 и фианкетто чёрных. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-panov-1",
+      "opening-panov-2",
+      "opening-panov-3",
+      "opening-panov-4",
+      "opening-panov-5",
+      "opening-panov-6",
+      "opening-panov-7",
+      "opening-panov-8",
+      "opening-panov-9",
+      "opening-panov-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-scandinavian",
+    "title": "Скандинавская защита",
+    "aliases": [
+      "Scandinavian Defense: Main Line, Mieses Variation",
+      "B01",
+      "scandinavian",
+      "Scandinavian Defense: Richter Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: ферзь на a5 и возврат конём. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-scandinavian-1",
+      "opening-scandinavian-2",
+      "opening-scandinavian-3",
+      "opening-scandinavian-4",
+      "opening-scandinavian-5",
+      "opening-scandinavian-6",
+      "opening-scandinavian-7",
+      "opening-scandinavian-8",
+      "opening-scandinavian-9",
+      "opening-scandinavian-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-pirc",
+    "title": "Защита Пирца",
+    "aliases": [
+      "Pirc Defense: Austrian Attack",
+      "B09",
+      "pirc",
+      "Pirc Defense: Classical Variation, Quiet System, Chigorin Line",
+      "B08"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: австрийская атака и классическая система. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-pirc-1",
+      "opening-pirc-2",
+      "opening-pirc-3",
+      "opening-pirc-4",
+      "opening-pirc-5",
+      "opening-pirc-6",
+      "opening-pirc-7",
+      "opening-pirc-8",
+      "opening-pirc-9",
+      "opening-pirc-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-modern",
+    "title": "Современная защита",
+    "aliases": [
+      "Modern Defense: Standard Defense",
+      "B06",
+      "modern",
+      "Modern Defense"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: гибкое фианкетто и спокойный переход. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-modern-1",
+      "opening-modern-2",
+      "opening-modern-3",
+      "opening-modern-4",
+      "opening-modern-5",
+      "opening-modern-6",
+      "opening-modern-7",
+      "opening-modern-8",
+      "opening-modern-9",
+      "opening-modern-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-alekhine",
+    "title": "Защита Алехина",
+    "aliases": [
+      "Alekhine Defense: Four Pawns Attack",
+      "B03",
+      "alekhine",
+      "Alekhine Defense: Exchange Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: четыре пешки и разменный центр. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-alekhine-1",
+      "opening-alekhine-2",
+      "opening-alekhine-3",
+      "opening-alekhine-4",
+      "opening-alekhine-5",
+      "opening-alekhine-6",
+      "opening-alekhine-7",
+      "opening-alekhine-8",
+      "opening-alekhine-9",
+      "opening-alekhine-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-queens-gambit-declined",
+    "title": "Отказанный ферзевый гамбит",
+    "aliases": [
+      "Queen's Gambit Declined",
+      "D53",
+      "queens-gambit-declined",
+      "Queen's Gambit Declined: Normal Defense",
+      "D35"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: классическое развитие и карлсбадская структура. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-queens-gambit-declined-1",
+      "opening-queens-gambit-declined-2",
+      "opening-queens-gambit-declined-3",
+      "opening-queens-gambit-declined-4",
+      "opening-queens-gambit-declined-5",
+      "opening-queens-gambit-declined-6",
+      "opening-queens-gambit-declined-7",
+      "opening-queens-gambit-declined-8",
+      "opening-queens-gambit-declined-9",
+      "opening-queens-gambit-declined-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-queens-gambit-accepted",
+    "title": "Принятый ферзевый гамбит",
+    "aliases": [
+      "Queen's Gambit Accepted: Classical Defense, Main Line",
+      "D27",
+      "queens-gambit-accepted",
+      "Queen's Gambit Accepted: Central Variation, McDonnell Defense",
+      "D20"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: вернуть пешку слоном и большой центр. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-queens-gambit-accepted-1",
+      "opening-queens-gambit-accepted-2",
+      "opening-queens-gambit-accepted-3",
+      "opening-queens-gambit-accepted-4",
+      "opening-queens-gambit-accepted-5",
+      "opening-queens-gambit-accepted-6",
+      "opening-queens-gambit-accepted-7",
+      "opening-queens-gambit-accepted-8",
+      "opening-queens-gambit-accepted-9",
+      "opening-queens-gambit-accepted-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-slav",
+    "title": "Славянская защита",
+    "aliases": [
+      "Slav Defense: Czech Variation, Classical System",
+      "D18",
+      "slav",
+      "Slav Defense: Exchange Variation, Symmetrical Line",
+      "D14"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: сохранить слона c8 и разменная система. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-slav-1",
+      "opening-slav-2",
+      "opening-slav-3",
+      "opening-slav-4",
+      "opening-slav-5",
+      "opening-slav-6",
+      "opening-slav-7",
+      "opening-slav-8",
+      "opening-slav-9",
+      "opening-slav-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-semi-slav",
+    "title": "Полуславянская защита",
+    "aliases": [
+      "Semi-Slav Defense",
+      "D43",
+      "semi-slav",
+      "Semi-Slav Defense: Moscow Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: меранская идея и слон вне цепи белых. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-semi-slav-1",
+      "opening-semi-slav-2",
+      "opening-semi-slav-3",
+      "opening-semi-slav-4",
+      "opening-semi-slav-5",
+      "opening-semi-slav-6",
+      "opening-semi-slav-7",
+      "opening-semi-slav-8",
+      "opening-semi-slav-9",
+      "opening-semi-slav-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-nimzo",
+    "title": "Защита Нимцовича",
+    "aliases": [
+      "Nimzo-Indian Defense: Normal Variation, Gligoric System",
+      "E53",
+      "nimzo",
+      "Nimzo-Indian Defense: Classical Variation",
+      "E32"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: система рубинштейна и ферзь на c2. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-nimzo-1",
+      "opening-nimzo-2",
+      "opening-nimzo-3",
+      "opening-nimzo-4",
+      "opening-nimzo-5",
+      "opening-nimzo-6",
+      "opening-nimzo-7",
+      "opening-nimzo-8",
+      "opening-nimzo-9",
+      "opening-nimzo-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-queens-indian",
+    "title": "Новоиндийская защита",
+    "aliases": [
+      "Queen's Indian Defense: Classical Variation",
+      "E17",
+      "queens-indian",
+      "Queen's Indian Defense: Fianchetto Variation, Check Variation, Intermezzo Line",
+      "E15"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: два фианкетто и слон на a6. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-queens-indian-1",
+      "opening-queens-indian-2",
+      "opening-queens-indian-3",
+      "opening-queens-indian-4",
+      "opening-queens-indian-5",
+      "opening-queens-indian-6",
+      "opening-queens-indian-7",
+      "opening-queens-indian-8",
+      "opening-queens-indian-9",
+      "opening-queens-indian-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-kings-indian",
+    "title": "Староиндийская защита",
+    "aliases": [
+      "King's Indian Defense: Orthodox Variation, Aronin-Taimanov Defense",
+      "E97",
+      "kings-indian",
+      "King's Indian Defense: Sämisch Variation, Sämisch Gambit",
+      "E81"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: классический центр и система земиша. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-kings-indian-1",
+      "opening-kings-indian-2",
+      "opening-kings-indian-3",
+      "opening-kings-indian-4",
+      "opening-kings-indian-5",
+      "opening-kings-indian-6",
+      "opening-kings-indian-7",
+      "opening-kings-indian-8",
+      "opening-kings-indian-9",
+      "opening-kings-indian-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-grunfeld",
+    "title": "Защита Грюнфельда",
+    "aliases": [
+      "Grünfeld Defense: Exchange Variation",
+      "D85",
+      "grunfeld",
+      "Grünfeld Defense: Three Knights Variation, Hungarian Variation",
+      "D93"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: разменный центр и развитие слона. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-grunfeld-1",
+      "opening-grunfeld-2",
+      "opening-grunfeld-3",
+      "opening-grunfeld-4",
+      "opening-grunfeld-5",
+      "opening-grunfeld-6",
+      "opening-grunfeld-7",
+      "opening-grunfeld-8",
+      "opening-grunfeld-9",
+      "opening-grunfeld-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-catalan",
+    "title": "Каталонское начало",
+    "aliases": [
+      "Catalan Opening: Open Defense, Classical Line",
+      "E05",
+      "catalan",
+      "Catalan Opening: Closed",
+      "E07"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: открытый вариант и закрытый вариант. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-catalan-1",
+      "opening-catalan-2",
+      "opening-catalan-3",
+      "opening-catalan-4",
+      "opening-catalan-5",
+      "opening-catalan-6",
+      "opening-catalan-7",
+      "opening-catalan-8",
+      "opening-catalan-9",
+      "opening-catalan-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-london",
+    "title": "Лондонская система",
+    "aliases": [
+      "Queen's Pawn Game: London System",
+      "D02",
+      "london",
+      "London System",
+      "A48"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: треугольник белых и против фианкетто. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-london-1",
+      "opening-london-2",
+      "opening-london-3",
+      "opening-london-4",
+      "opening-london-5",
+      "opening-london-6",
+      "opening-london-7",
+      "opening-london-8",
+      "opening-london-9",
+      "opening-london-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-dutch",
+    "title": "Голландская защита",
+    "aliases": [
+      "Dutch Defense: Fianchetto Attack",
+      "A81",
+      "dutch",
+      "Dutch Defense: Semi-Leningrad Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: каменная стена и ленинградская система. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-dutch-1",
+      "opening-dutch-2",
+      "opening-dutch-3",
+      "opening-dutch-4",
+      "opening-dutch-5",
+      "opening-dutch-6",
+      "opening-dutch-7",
+      "opening-dutch-8",
+      "opening-dutch-9",
+      "opening-dutch-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-english",
+    "title": "Английское начало",
+    "aliases": [
+      "English Opening: King's English Variation, Two Knights Variation, Reversed Dragon",
+      "A22",
+      "english",
+      "English Opening: Symmetrical Variation, Three Knights, Fianchetto Variation",
+      "A37"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: обратная сицилианская и симметричный вариант. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-english-1",
+      "opening-english-2",
+      "opening-english-3",
+      "opening-english-4",
+      "opening-english-5",
+      "opening-english-6",
+      "opening-english-7",
+      "opening-english-8",
+      "opening-english-9",
+      "opening-english-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opening-reti",
+    "title": "Дебют Рети",
+    "aliases": [
+      "Réti Opening",
+      "A09",
+      "reti",
+      "Réti Opening: Advance Variation"
+    ],
+    "track": "Дебютный атлас",
+    "outcome": "Разобрать два учебных продолжения: давление на центр и продвинутый центр чёрных. Понять планы обеих сторон и проверить порядок ходов на доске.",
+    "lessonIds": [
+      "opening-reti-1",
+      "opening-reti-2",
+      "opening-reti-3",
+      "opening-reti-4",
+      "opening-reti-5",
+      "opening-reti-6",
+      "opening-reti-7",
+      "opening-reti-8",
+      "opening-reti-9",
+      "opening-reti-10"
+    ],
+    "prerequisites": [
+      "opening-center",
+      "develop-pieces"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "outposts-lab",
+    "title": "Практикум: опорные пункты",
+    "track": "Позиционная игра",
+    "outcome": "Находить защищённое поле и отличать устойчивого коня от временного гостя.",
+    "lessonIds": [
+      "outposts-lab-1",
+      "outposts-lab-2",
+      "outposts-lab-3",
+      "outposts-lab-4",
+      "outposts-lab-5",
+      "outposts-lab-6"
+    ],
+    "prerequisites": [
+      "passed-pawn"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "bishop-colours-lab",
+    "title": "Слоны и цветовые комплексы",
+    "track": "Позиционная игра",
+    "outcome": "Связывать активность слона с диагоналями и доступными целями.",
+    "lessonIds": [
+      "bishop-colours-lab-1",
+      "bishop-colours-lab-2",
+      "bishop-colours-lab-3",
+      "bishop-colours-lab-4",
+      "bishop-colours-lab-5",
+      "bishop-colours-lab-6"
+    ],
+    "prerequisites": [
+      "outposts-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "bishop-trade-lab",
+    "title": "Когда менять слона",
+    "track": "Позиционная игра",
+    "outcome": "Учитывать структуру, цвет полей и конкретный результат размена.",
+    "lessonIds": [
+      "bishop-trade-lab-1",
+      "bishop-trade-lab-2",
+      "bishop-trade-lab-3",
+      "bishop-trade-lab-4",
+      "bishop-trade-lab-5",
+      "bishop-trade-lab-6"
+    ],
+    "prerequisites": [
+      "bishop-colours-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "open-file-lab",
+    "title": "Открытая линия: от доступа к вторжению",
+    "track": "Позиционная игра",
+    "outcome": "Проверять доступ к линии, точки вторжения и возможность размена.",
+    "lessonIds": [
+      "open-file-lab-1",
+      "open-file-lab-2",
+      "open-file-lab-3",
+      "open-file-lab-4",
+      "open-file-lab-5",
+      "open-file-lab-6"
+    ],
+    "prerequisites": [
+      "bishop-trade-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "seventh-rank-lab",
+    "title": "Ладья на седьмой горизонтали",
+    "track": "Позиционная игра",
+    "outcome": "Находить пешечные цели и отличать вторжение от безрезультатного захода.",
+    "lessonIds": [
+      "seventh-rank-lab-1",
+      "seventh-rank-lab-2",
+      "seventh-rank-lab-3",
+      "seventh-rank-lab-4",
+      "seventh-rank-lab-5",
+      "seventh-rank-lab-6"
+    ],
+    "prerequisites": [
+      "open-file-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "minority-lab",
+    "title": "Атака меньшинства: подготовка",
+    "track": "Пешечные структуры",
+    "outcome": "Понимать цель пешечного размена и не запускать фланговый план без подготовки.",
+    "lessonIds": [
+      "minority-lab-1",
+      "minority-lab-2",
+      "minority-lab-3",
+      "minority-lab-4",
+      "minority-lab-5",
+      "minority-lab-6"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "isolated-pawn-lab",
+    "title": "Изолятор: динамика и блокада",
+    "track": "Пешечные структуры",
+    "outcome": "Связывать изолированную пешку с активностью фигур и полем перед ней.",
+    "lessonIds": [
+      "isolated-pawn-lab-1",
+      "isolated-pawn-lab-2",
+      "isolated-pawn-lab-3",
+      "isolated-pawn-lab-4",
+      "isolated-pawn-lab-5",
+      "isolated-pawn-lab-6"
+    ],
+    "prerequisites": [
+      "minority-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "hanging-pawns-lab",
+    "title": "Висячие пешки c и d",
+    "track": "Пешечные структуры",
+    "outcome": "Различать подвижную пару и слабости после её фиксации.",
+    "lessonIds": [
+      "hanging-pawns-lab-1",
+      "hanging-pawns-lab-2",
+      "hanging-pawns-lab-3",
+      "hanging-pawns-lab-4",
+      "hanging-pawns-lab-5",
+      "hanging-pawns-lab-6"
+    ],
+    "prerequisites": [
+      "isolated-pawn-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "backward-pawn-lab",
+    "title": "Отсталая пешка и поле перед ней",
+    "track": "Пешечные структуры",
+    "outcome": "Находить объект давления и проверять возможность безопасного продвижения.",
+    "lessonIds": [
+      "backward-pawn-lab-1",
+      "backward-pawn-lab-2",
+      "backward-pawn-lab-3",
+      "backward-pawn-lab-4",
+      "backward-pawn-lab-5",
+      "backward-pawn-lab-6"
+    ],
+    "prerequisites": [
+      "hanging-pawns-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "pawn-majority-lab",
+    "title": "Пешечное большинство",
+    "track": "Пешечные структуры",
+    "outcome": "Создавать проходную через размены и считать ответное продвижение.",
+    "lessonIds": [
+      "pawn-majority-lab-1",
+      "pawn-majority-lab-2",
+      "pawn-majority-lab-3",
+      "pawn-majority-lab-4",
+      "pawn-majority-lab-5",
+      "pawn-majority-lab-6"
+    ],
+    "prerequisites": [
+      "backward-pawn-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "blockade-lab",
+    "title": "Блокада проходной",
+    "track": "Позиционная игра",
+    "outcome": "Ставить фигуру перед проходной и учитывать подрыв блокадёра.",
+    "lessonIds": [
+      "blockade-lab-1",
+      "blockade-lab-2",
+      "blockade-lab-3",
+      "blockade-lab-4",
+      "blockade-lab-5",
+      "blockade-lab-6"
+    ],
+    "prerequisites": [
+      "seventh-rank-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "king-activity-lab",
+    "title": "Король в окончании: маршруты",
+    "track": "Техника окончаний",
+    "outcome": "Вести короля к целям, проверяя безопасность каждого поля.",
+    "lessonIds": [
+      "king-activity-lab-1",
+      "king-activity-lab-2",
+      "king-activity-lab-3",
+      "king-activity-lab-4",
+      "king-activity-lab-5",
+      "king-activity-lab-6"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "opposition-lab",
+    "title": "Оппозиция: очередь хода",
+    "track": "Техника окончаний",
+    "outcome": "Понимать дистанцию королей и роль запасного пешечного темпа.",
+    "lessonIds": [
+      "opposition-lab-1",
+      "opposition-lab-2",
+      "opposition-lab-3",
+      "opposition-lab-4",
+      "opposition-lab-5",
+      "opposition-lab-6"
+    ],
+    "prerequisites": [
+      "king-activity-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "rook-behind-lab",
+    "title": "Ладья позади проходной",
+    "track": "Техника окончаний",
+    "outcome": "Различать поддержку своей проходной и давление на чужую.",
+    "lessonIds": [
+      "rook-behind-lab-1",
+      "rook-behind-lab-2",
+      "rook-behind-lab-3",
+      "rook-behind-lab-4",
+      "rook-behind-lab-5",
+      "rook-behind-lab-6"
+    ],
+    "prerequisites": [
+      "opposition-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "rook-activity-lab",
+    "title": "Активная защита ладьёй",
+    "track": "Техника окончаний",
+    "outcome": "Использовать дистанцию шахов и не прятать ладью без причины.",
+    "lessonIds": [
+      "rook-activity-lab-1",
+      "rook-activity-lab-2",
+      "rook-activity-lab-3",
+      "rook-activity-lab-4",
+      "rook-activity-lab-5",
+      "rook-activity-lab-6"
+    ],
+    "prerequisites": [
+      "rook-behind-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "minor-piece-lab",
+    "title": "Слон против коня: реальные цели",
+    "track": "Техника окончаний",
+    "outcome": "Сравнивать дальность слона, блокаду коня и расположение пешек.",
+    "lessonIds": [
+      "minor-piece-lab-1",
+      "minor-piece-lab-2",
+      "minor-piece-lab-3",
+      "minor-piece-lab-4",
+      "minor-piece-lab-5",
+      "minor-piece-lab-6"
+    ],
+    "prerequisites": [
+      "rook-activity-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "defence-lab",
+    "title": "Защита: три способа ответить на шах",
+    "track": "Защита и расчёт",
+    "outcome": "Выбирать между отходом, взятием и перекрытием по типу атаки.",
+    "lessonIds": [
+      "defence-lab-1",
+      "defence-lab-2",
+      "defence-lab-3",
+      "defence-lab-4",
+      "defence-lab-5",
+      "defence-lab-6"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "between-moves-lab",
+    "title": "Промежуточный ход: проверить порядок",
+    "track": "Защита и расчёт",
+    "outcome": "Замечать шах до ожидаемого размена и считать итог всей линии.",
+    "lessonIds": [
+      "between-moves-lab-1",
+      "between-moves-lab-2",
+      "between-moves-lab-3",
+      "between-moves-lab-4",
+      "between-moves-lab-5",
+      "between-moves-lab-6"
+    ],
+    "prerequisites": [
+      "defence-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "clearance-lab",
+    "title": "Освобождение линии",
+    "track": "Защита и расчёт",
+    "outcome": "Видеть, какую линию открывает уход своей фигуры.",
+    "lessonIds": [
+      "clearance-lab-1",
+      "clearance-lab-2",
+      "clearance-lab-3",
+      "clearance-lab-4",
+      "clearance-lab-5",
+      "clearance-lab-6"
+    ],
+    "prerequisites": [
+      "between-moves-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "deflection-lab",
+    "title": "Защитник и его обязанности",
+    "track": "Защита и расчёт",
+    "outcome": "Проверять, что меняется после ухода защитника с линии.",
+    "lessonIds": [
+      "deflection-lab-1",
+      "deflection-lab-2",
+      "deflection-lab-3",
+      "deflection-lab-4",
+      "deflection-lab-5",
+      "deflection-lab-6"
+    ],
+    "prerequisites": [
+      "clearance-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "promotion-lab",
+    "title": "Превращение: точный выбор",
+    "track": "Техника окончаний",
+    "outcome": "Отличать максимальную силу от конкретной задачи превращения.",
+    "lessonIds": [
+      "promotion-lab-1",
+      "promotion-lab-2",
+      "promotion-lab-3",
+      "promotion-lab-4",
+      "promotion-lab-5",
+      "promotion-lab-6"
+    ],
+    "prerequisites": [
+      "minor-piece-lab"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "mating-net-lab",
+    "title": "Матовая сеть: поля отхода",
+    "track": "Матовые конструкции",
+    "outcome": "Отличать шах, ограничение короля и настоящий мат.",
+    "lessonIds": [
+      "mating-net-lab-1",
+      "mating-net-lab-2",
+      "mating-net-lab-3",
+      "mating-net-lab-4",
+      "mating-net-lab-5",
+      "mating-net-lab-6"
+    ],
+    "prerequisites": []
+  },
+  {
+    "schemaVersion": 1,
+    "id": "convert-lab",
+    "title": "Реализация: размены и безопасность",
+    "track": "Позиционная игра",
+    "outcome": "Упрощать позицию с конкретной целью и сохранять активность.",
+    "lessonIds": [
+      "convert-lab-1",
+      "convert-lab-2",
+      "convert-lab-3",
+      "convert-lab-4",
+      "convert-lab-5",
+      "convert-lab-6"
+    ],
+    "prerequisites": [
+      "blockade-lab"
+    ]
   }
 ]

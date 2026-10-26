@@ -2,12 +2,16 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { material } from '../content/course-material.mjs';
 import { extensions, newCourses, transferNotes } from '../content/course-expansion.mjs';
 import { Chess } from 'chess.js';
+import { openingCourses } from '../content/opening-program.mjs';
+import { positionalCourses } from '../content/positional-program.mjs';
 const authored = [
   ...material.map((course) => ({
     ...course,
     units: [...course.units, ...(extensions[course.id] ?? [])],
   })),
   ...newCourses,
+  ...openingCourses,
+  ...positionalCourses,
 ];
 const lessonPath = new URL('../src/learning/lessons.json', import.meta.url);
 const existing = JSON.parse(await readFile(lessonPath, 'utf8'));
@@ -22,10 +26,16 @@ for (const [courseIndex, course] of authored.entries()) {
     schemaVersion: 1,
     id: course.id,
     title: course.title,
+    ...(course.aliases ? { aliases: course.aliases } : {}),
     track: course.track,
     outcome: course.outcome,
     lessonIds,
-    prerequisites: previous ? [previous] : [],
+    prerequisites:
+      course.id.startsWith('opening-') && openingCourses.some((c) => c.id === course.id)
+        ? ['opening-center', 'develop-pieces']
+        : previous
+          ? [previous]
+          : [],
   });
   lastInTrack.set(course.track, course.id);
   for (const [index, unit] of course.units.entries()) {
@@ -87,7 +97,14 @@ for (const [courseIndex, course] of authored.entries()) {
       minutes: unit.expanded ? (unit.difficulty >= 4 ? 5 : 4) : 3,
       prerequisites: index ? [lessonIds[index - 1]] : [],
       steps: [
-        { id: 'idea', kind: 'explain', title: unit.title, fen: unit.fen, body: [unit.body] },
+        {
+          id: 'idea',
+          kind: 'explain',
+          title: unit.title,
+          fen: unit.fen,
+          body: [unit.body],
+          ...(unit.demo ? { line: unit.demo } : {}),
+        },
         task,
         {
           id: 'debrief',

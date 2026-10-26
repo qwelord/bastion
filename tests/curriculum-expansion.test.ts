@@ -90,7 +90,7 @@ test('rule explanations use real pinned and en-passant constraints', () => {
   const ep = new Chess(findLesson('en-passant-rule-7')!.steps[0].fen);
   assert.throws(() => ep.move({ from: 'g5', to: 'f6' }));
 });
-test('all 402 completed lessons persist inside the bounded progress format', () => {
+test('all 1000 completed lessons persist inside the bounded progress format', () => {
   const storage = memoryStorage();
   const progress = readLearning(lessons, storage);
   for (const lesson of lessons)
@@ -99,7 +99,7 @@ test('all 402 completed lessons persist inside the bounded progress format', () 
     );
   updateLearning(lessons, (data) => Object.assign(data, progress), storage);
   const restored = readLearning(lessons, storage);
-  assert.equal(Object.keys(restored.entries).length, 402);
+  assert.equal(Object.keys(restored.entries).length, 1000);
   for (const course of courses) {
     assert.equal(courseStats(course, restored).finished, true, course.id);
     assert.equal(courseStats(course, restored).mastered, true, course.id);
