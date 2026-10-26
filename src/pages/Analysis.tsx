@@ -103,9 +103,6 @@ export function Analysis({ settings }: { settings: Settings }) {
           <h1>Разбор партии</h1>
           <p>Stockfish 19. Бесплатно, без лимита партий.</p>
         </div>
-        <a className="text-button" href="#library">
-          Библиотека <ArrowRight size={16} />
-        </a>
       </div>
       <div className="play-layout review-layout">
         <section className="board-column">

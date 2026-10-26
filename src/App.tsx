@@ -3,7 +3,6 @@ import { lazy, Suspense } from 'react';
 import { useRoute, useSettings } from './state';
 import { Play } from './pages/Play';
 import { Analysis } from './pages/Analysis';
-import { Library } from './pages/Library';
 import { Settings } from './pages/Settings';
 const Learn = lazy(() => import('./pages/Learn').then((module) => ({ default: module.Learn })));
 const Lesson = lazy(() => import('./pages/Lesson').then((module) => ({ default: module.Lesson })));
@@ -24,8 +23,6 @@ export default function App() {
         </Suspense>
       ) : route === 'analysis' ? (
         <Analysis settings={settings} />
-      ) : route === 'library' ? (
-        <Library />
       ) : (
         <Settings settings={settings} setSettings={setSettings} />
       )}

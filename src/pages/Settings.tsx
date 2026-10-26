@@ -1,4 +1,3 @@
-import { LibraryBackup } from '../components/LibraryBackup';
 import { useState } from 'react';
 import { readProfile, saveProfile } from '../data/profile';
 import { unlockSound, moveSound } from '../chess/sound';
@@ -166,7 +165,6 @@ export function Settings({
               />
             </label>
           </section>
-          <LibraryBackup />
           <p className="quiet-note">
             Настройки сохраняются в этом браузере. Классический набор Cburnett из Lichess.
           </p>

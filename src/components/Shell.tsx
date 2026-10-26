@@ -1,28 +1,18 @@
 import { useEffect, useState } from 'react';
 import { readProfile } from '../data/profile';
-import {
-  BookOpen,
-  Compass,
-  FolderOpen,
-  Settings2,
-  Swords,
-  Palette,
-  ArrowUpRight,
-} from 'lucide-react';
+import { BookOpen, Compass, Settings2, Swords, Palette, ArrowUpRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Route } from '../state';
 const nav = [
   { id: 'play', label: 'Играть', icon: Swords },
   { id: 'learn', label: 'Обучение', icon: BookOpen },
   { id: 'analysis', label: 'Анализ', icon: Compass },
-  { id: 'library', label: 'Библиотека', icon: FolderOpen },
 ];
 const titles: Record<Route, string> = {
   play: 'Шахматная комната',
   learn: 'Школа Bastion',
   lesson: 'Практика',
   analysis: 'Мастерская анализа',
-  library: 'Ваша библиотека',
   settings: 'Оформление',
 };
 export function Shell({ route, children }: { route: Route; children: ReactNode }) {

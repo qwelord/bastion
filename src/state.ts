@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-export type Route = 'play' | 'learn' | 'lesson' | 'analysis' | 'library' | 'settings';
+export type Route = 'play' | 'learn' | 'lesson' | 'analysis' | 'settings';
 export type Settings = {
   theme: 'club' | 'light' | 'evening';
   board: 'walnut' | 'slate' | 'olive';
@@ -47,9 +47,7 @@ export function useSettings() {
 export function useRoute() {
   const resolve = (): Route => {
     const r = location.hash.slice(1).split('/')[0].split('?')[0];
-    return ['play', 'learn', 'lesson', 'analysis', 'library', 'settings'].includes(r)
-      ? (r as Route)
-      : 'play';
+    return ['play', 'learn', 'lesson', 'analysis', 'settings'].includes(r) ? (r as Route) : 'play';
   };
   const [route, setRoute] = useState<Route>(resolve);
   useEffect(() => {
