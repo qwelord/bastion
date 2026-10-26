@@ -3330,3 +3330,21 @@ main {
     order: -1;
   }
 }
+
+.learning-catalog-heading label {
+  display: grid;
+  gap: 7px;
+  max-width: 100%;
+}
+.learning-catalog-heading select {
+  width: 230px;
+  max-width: 100%;
+}
+@media (max-width: 480px) {
+  .lesson-player .page-intro {
+    flex-wrap: wrap;
+  }
+  .lesson-player .page-intro > div {
+    min-width: 0;
+  }
+}

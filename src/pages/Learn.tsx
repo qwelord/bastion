@@ -105,7 +105,7 @@ function LessonCatalog({ settings }: { settings: Settings }) {
         </div>
         <span className="tag">
           <BookOpen size={14} />
-          {lessons.length} уроков доступны
+          Уроков: {lessons.length}
         </span>
       </div>
       <section className="learning-hero">
@@ -118,7 +118,7 @@ function LessonCatalog({ settings }: { settings: Settings }) {
           <div className="learning-meta">
             <span>{next.minutes} минут</span>
             <span>{next.level}</span>
-            <span>{next.steps.length} шага</span>
+            <span>Шагов: {next.steps.length}</span>
           </div>
           <a className="primary" href={lessonLink(next.id)}>
             {nextEntry?.visited ? 'Продолжить урок' : 'Начать учиться'}
