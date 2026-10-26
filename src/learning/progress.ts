@@ -22,6 +22,11 @@ export type LearningProgress = {
 };
 type StoragePort = Pick<Storage, 'getItem' | 'setItem'>;
 const key = 'bastion.learning.v1';
+export const learningStorageLimit = 2_000_000;
+const restoredEntries = new WeakMap<
+  LessonDefinition,
+  { signature: string; revision: number; steps: LessonDefinition['steps']; value: LessonProgress }
+>();
 export const emptyLessonProgress = (lesson: LessonDefinition): LessonProgress => ({
   revision: lesson.revision,
   cursor: 0,
@@ -51,7 +56,7 @@ export function readLearning(
   const result: LearningProgress = { version: 1, lastLesson: '', entries: {} };
   try {
     const raw = storage.getItem(key);
-    if (raw && raw.length > 1_000_000) return result;
+    if (raw && raw.length > learningStorageLimit) return result;
     const data = raw ? JSON.parse(raw) : null;
     if (
       data &&
@@ -64,6 +69,16 @@ export function readLearning(
     for (const lesson of catalog) {
       const entry = data?.entries[lesson.id];
       if (!entry || typeof entry !== 'object') continue;
+      const signature = JSON.stringify(entry);
+      const cached = restoredEntries.get(lesson);
+      if (
+        cached?.signature === signature &&
+        cached.revision === lesson.revision &&
+        cached.steps === lesson.steps
+      ) {
+        result.entries[lesson.id] = structuredClone(cached.value);
+        continue;
+      }
       const clean = emptyLessonProgress(lesson);
       clean.favorite = entry.favorite === true;
       clean.note = typeof entry.note === 'string' ? entry.note.slice(0, 2000) : '';
@@ -85,6 +100,12 @@ export function readLearning(
           };
         }
       }
+      restoredEntries.set(lesson, {
+        signature,
+        revision: lesson.revision,
+        steps: lesson.steps,
+        value: structuredClone(clean),
+      });
       result.entries[lesson.id] = clean;
     }
     result.lastLesson = catalog.some((l) => l.id === data?.lastLesson) ? data.lastLesson : '';
@@ -121,9 +142,10 @@ export function updateLearning(
   const existing = storage.getItem(key);
   if (existing) {
     try {
+      if (existing.length > learningStorageLimit) throw new Error();
       const data = JSON.parse(existing);
       if (
-        existing.length > 1_000_000 ||
+        existing.length > learningStorageLimit ||
         data?.version !== 1 ||
         !data.entries ||
         typeof data.entries !== 'object' ||
@@ -139,7 +161,7 @@ export function updateLearning(
   const data = readLearning(catalog, storage);
   change(data);
   const raw = JSON.stringify(data);
-  if (raw.length > 1_000_000)
+  if (raw.length > learningStorageLimit)
     throw new Error('Хранилище обучения заполнено. Прогресс этого действия пока не сохранён.');
   try {
     storage.setItem(key, raw);
@@ -148,6 +170,7 @@ export function updateLearning(
       'Не удалось сохранить прогресс. Проверьте доступ браузера к хранилищу и свободное место.',
     );
   }
+  if (typeof window !== 'undefined') window.dispatchEvent(new Event('bastion:learning'));
   return data;
 }
 export function recordStep(
